@@ -80,8 +80,8 @@ lock_option:
     LOCK [=] {DEFAULT | NONE | SHARED | EXCLUSIVE}
 ```
 
-  Drop index primary key on a table: ``` DROP INDEX PRIMARY ON table_name; ```
-  Create an index to be built on the city ?eld :
+  - Drop index primary key on a table: ``` DROP INDEX PRIMARY ON table_name; ```
+  - Create an index to be built on the city field :
 ``` ALTER TABLE 'Salesperson' ADD INDEX 'city_index' (city); ```
 
 ### Query Optimizer

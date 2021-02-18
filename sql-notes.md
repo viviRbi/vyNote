@@ -53,6 +53,9 @@ WHERE condition;
 - Support legacy code 
 
 ### Indexes
+- Indexes are **special lookup tables** that the database search engine can use to **speed up data retrieval**. Simply put, an index is a **pointer** to data in a table. An index in a database is very similar to an index in the back of a book.
+- An index helps to speed up SELECT queries and WHERE clauses, but it slows down data input, with the UPDATE and the INSERT statements
+-Basic indexes: ``` CREATE INDEX index_name ON table_name;```
 ```sql
 CREATE [UNIQUE | FULLTEXT | SPATIAL] INDEX index_name
     [index_type]
@@ -81,6 +84,7 @@ lock_option:
 ```
 
   - Drop index primary key on a table: ``` DROP INDEX PRIMARY ON table_name; ```
+  - Basic drop index: ``` DROP INDEX index_name; ```
   - Create an index to be built on the city field :
 ``` ALTER TABLE 'Salesperson' ADD INDEX 'city_index' (city); ```
 
@@ -95,5 +99,11 @@ The name of the special internal database where the query optimizer finds inform
 	``` FOREIGN KEY fk_priv (privacy) REFERENCES privacy_level (level) ON UPDATE CASCADE ON DELETE RESTRICT ```
 	**ON DELETE RESTRICT** means you can't delete a given parent row if a child row that being referenced exists.
 
-- **Default delete rule**
-- **Cascade delete rule**
+- **Default delete rule**: had ophranage record
+- **Cascade delete rule**: if a record in the parent table is deleted, then the corresponding records in the child table will automatically be deleted. 
+``` sql
+   ALTER TABLE child_table
+   ADD CONSTRAINT fk_name
+   FOREIGN KEY (child_col1, child_col2, ... child_col_n)
+   REFERENCES parent_table (parent_col1, parent_col2, ... parent_col_n)ON DELETE CASCADE;
+```

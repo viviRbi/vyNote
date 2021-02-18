@@ -11,6 +11,7 @@ Most common relationship types:
 	Ex: 
 	. A person is a parent of another person. A person can have many children. This is a **one to many** recursive relationship. 
 	. A person is married to other person is a **unary one to one** relationship
+	. -- From text book: 1 product made of many components and one component can be on many products is a many-to-many Unary relationship.
 
 	3 cases of Unary: 
 	. Mandatory-Mandatory: Each instance must fully participate in a relatonship. Ex: 1 person only married 1 person, 2 married persons must have a ring
@@ -35,18 +36,20 @@ Binary, TinyBlob
 
 ### Clone a table
 - Includes column attributes and indexes of the original table
-CREATE TABLE new LIKE original
+```sql CREATE TABLE new LIKE original ```
 - Populate the empty table with data in the original table:
-INSERT INTO new SELECT * FROM original
+```sql INSERT INTO new SELECT * FROM original ```
 
 ### VIEW
 - Hide complexity
 - Security mechanism: If you have a customer table and you want to give your sales people access to everything accept credit_card_number, you can create a view with only the columns they need to access and grant them permission to access on the view
 
+```sql
 CREATE OR REPLACE VIEW view_name AS
 SELECT column1, column2, ...
 FROM table_name
 WHERE condition;
+```
 - Support legacy code 
 
 ### Indexes

@@ -53,7 +53,7 @@ WHERE condition;
 - Support legacy code 
 
 ### Indexes
-
+```sql
 CREATE [UNIQUE | FULLTEXT | SPATIAL] INDEX index_name
     [index_type]
     ON tbl_name (key_part,...)
@@ -78,17 +78,21 @@ algorithm_option:
 
 lock_option:
     LOCK [=] {DEFAULT | NONE | SHARED | EXCLUSIVE}
+```
 
-  Drop index primary key on a table: 
+  Drop index primary key on a table: ``` DROP INDEX PRIMARY ON table_name; ```
+  Create an index to be built on the city ?eld :
+``` ALTER TABLE 'Salesperson' ADD INDEX 'city_index' (city); ```
 
 ### Query Optimizer
 The output from the optimizer is an execution plan that describes an optimum method of execution
+The name of the special internal database where the query optimizer finds information is **Relational Catalog**
 
 ### Referental Integrity Rule
 - **Set to null delete rule**:
 	sets column values in a child table to a missing value when the matching data is deleted from the parent table
 - **Restrict delete rule**:
-	FOREIGN KEY fk_priv (privacy) REFERENCES privacy_level (level) ON UPDATE CASCADE ON DELETE RESTRICT
+	``` FOREIGN KEY fk_priv (privacy) REFERENCES privacy_level (level) ON UPDATE CASCADE ON DELETE RESTRICT ```
 	**ON DELETE RESTRICT** means you can't delete a given parent row if a child row that being referenced exists.
 
 - **Default delete rule**

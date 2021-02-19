@@ -52,6 +52,15 @@ WHERE condition;
 ```
 - Support legacy code 
 
+```sql
+ALTER VIEW HumanResources.EmployeeHireDate  
+AS  
+SELECT p.FirstName, p.LastName, e.HireDate  
+FROM HumanResources.Employee AS e JOIN Person.Person AS p  
+ON e.BusinessEntityID = p.BusinessEntityID  
+WHERE HireDate < CONVERT(DATETIME,'20020101',101) ; 
+```
+
 ### Indexes
 - Indexes are **special lookup tables** that the database search engine can use to **speed up data retrieval**. Simply put, an index is a **pointer** to data in a table. An index in a database is very similar to an index in the back of a book.
 - An index helps to speed up SELECT queries and WHERE clauses, but it slows down data input, with the UPDATE and the INSERT statements

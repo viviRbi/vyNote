@@ -1,6 +1,6 @@
 # JAVA
 
-###Throws and Throw
+### Throws and Throw
 - **Throws**: If there is a **check exception**, they should be handle, otherwise we will get compiler time error like ```error: unreported exception ...```. We prevent this compile tme error either by using a **try catch** block, or a **throws clause** to postpone it then handle the exception at the place the method called. It gives an information to the programmer that there may occur an exception so it is better for the programmer to provide the exception handling code.
 - **Throw**: mainly use for throw custom exceptions. ```throw new ArithmeticException("Error")```. Instance must be a type or subclass of **throwable**. When throw, have to make sure it is the last line of code. We can re-throw the same error in a catch block.
 ```java
@@ -15,7 +15,7 @@ Followed by class (throws AbcException)| Follow by an instance (throw new AbcExc
 Used with method signature|Used within the method
 Can declare multiple exceptions|Cannot throw multiple exceptions
 
-###User define Exception
+### User define Exception
 ```java
 public class NegativeStartingBalance extends Exception{
 	public NegativeStartingBalance() 

@@ -9,6 +9,7 @@ if (age < 18) throw new ArithmeticException("Not valid");
 ``` 
 - **Throws vs Throw**
 **Throws**|**Throw**
+| :---- | :----
 Used to declare an exception|Used to explicity throw an exception 
 Check exception can be propagated (forwarded in calling chain) with throws| Check exception cannot be propagated with throw only
 Followed by class (throws AbcException)| Follow by an instance (throw new AbcException("Error"))

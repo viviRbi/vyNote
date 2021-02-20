@@ -52,6 +52,7 @@ for (int i = 0; i < numbers.length; i++){
   System.out.println("Done.");
 }
 outputFile.close();
+```
 - Create a binary input file (to read)
 ```java
 FileInputStream fstream = new FileInputStream("Numbers.dat");

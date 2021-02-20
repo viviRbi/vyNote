@@ -43,6 +43,7 @@ Binary, TinyBlob
 ### VIEW
 - Hide complexity
 - Security mechanism: If you have a customer table and you want to give your sales people access to everything accept credit_card_number, you can create a view with only the columns they need to access and grant them permission to access on the view
+- Support legacy code 
 
 ```sql
 CREATE OR REPLACE VIEW view_name AS
@@ -50,7 +51,6 @@ SELECT column1, column2, ...
 FROM table_name
 WHERE condition;
 ```
-- Support legacy code 
 
 ```sql
 ALTER VIEW HumanResources.EmployeeHireDate  

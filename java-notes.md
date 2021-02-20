@@ -9,13 +9,18 @@ if (age < 18) throw new ArithmeticException("Not valid");
 ``` 
 - **Throws vs Throw**
 | **Throws** | **Throw** |
-| :---- | :----
+| :---- | :---- |
 | Used to declare an exception | Used to explicity throw an exception |
 | Check exception can be propagated (forwarded in calling chain) with throws | Check exception cannot be propagated with throw only |
 | Followed by class (throws AbcException) | Follow by an instance (throw new AbcException("Error")) |
 | Used with method signature | Used within the method |
 | Can declare multiple exceptions | Cannot throw multiple exceptions |
 
+| Left-Aligned  | Center Aligned  | Right Aligned |
+| :------------ |:---------------:| -----:|
+| col 3 is      | some wordy text | $1600 |
+| col 2 is      | centered        |   $12 |
+| zebra stripes | are neat        |    $1 |
 ### User define Exception
 ```java
 public class NegativeStartingBalance extends Exception{

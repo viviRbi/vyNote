@@ -8,13 +8,13 @@ if (age < 18) throw new ArithmeticException("Not valid");
 //Output: Exception in thread main java.lang.ArithmeticException:not valid
 ``` 
 - **Throws vs Throw**
-**Throws**|**Throw**
+| **Throws** | **Throw** |
 | :---- | :----
-Used to declare an exception|Used to explicity throw an exception 
-Check exception can be propagated (forwarded in calling chain) with throws| Check exception cannot be propagated with throw only
-Followed by class (throws AbcException)| Follow by an instance (throw new AbcException("Error"))
-Used with method signature|Used within the method
-Can declare multiple exceptions|Cannot throw multiple exceptions
+| Used to declare an exception | Used to explicity throw an exception |
+| Check exception can be propagated (forwarded in calling chain) with throws | Check exception cannot be propagated with throw only |
+| Followed by class (throws AbcException) | Follow by an instance (throw new AbcException("Error")) |
+| Used with method signature | Used within the method |
+| Can declare multiple exceptions | Cannot throw multiple exceptions |
 
 ### User define Exception
 ```java

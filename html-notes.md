@@ -16,7 +16,7 @@ Contains info/content that will be displayed to the user when rendered by the br
 - Some of the html tags: h1->h6, div, img, a hr, br, input
 
 ### White space in HTML
-HTML does not care about white space, we use <br/> to make a line break and escape character &nbsp; for space
+HTML does not care about white space, we use ```<br/>``` to make a line break and escape character ```\&nbsp;``` for space
 
 ### Escape characters
 Escape characters are Microsoft specific, and are reserved for control characters. In HTML, they are undefined and in XHTML, they are invalid. To use them, we need to use their escape character equivalents.

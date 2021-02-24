@@ -3,7 +3,7 @@
 ### Definition
 HTML stands for HyperText Markup Language. It is used to structure content on a webpage.
 
-### <DOCTYPE html>
+### DOCTYPE html
 - Doctype is not a tag. It is an instruction (directive) to the browser about what version of HTML the page is written in.
 - It must be the very first non-comment line declared within our Html documents.
 
@@ -48,8 +48,8 @@ There are 3 diferent type of lists:
 
 	<!-- And so on with defination lists -->
 </dl>
-
-### <img>
+```
+### img
 - Use to add an image to a web page. It is a self-closing tag. - 
 - It is an inline element
 - Its attribute: 
@@ -59,7 +59,7 @@ There are 3 diferent type of lists:
 	- width, height, align (desprecate, hurts SEO) 
 - <img> cross site scripting: ```<img src="fakelink-sdhgjksdhfjk.com" onerror="console.log('You have been hacked.  Please pay me 1 BTC');">```
 
-### <iframe>
+### iframe
 - iFrame is short for inline frame
 - An iFrame is like a little window places on webpage. The term is short for inline frame
 - Ex: ```<iframe src="https://www.google.com/maps/embed?pb=!1m18!!5m2!1sen!2sus" width="600" height="450" style="border: 6px;" allowfullscreen="" loading="lazy"></iframe>```

@@ -116,3 +116,20 @@ The name of the special internal database where the query optimizer finds inform
    FOREIGN KEY (child_col1, child_col2, ... child_col_n)
    REFERENCES parent_table (parent_col1, parent_col2, ... parent_col_n)ON DELETE CASCADE;
 ```
+
+### Types of Variable: Local, Global
+| Local Variable | Global Variable |
+| :------------ |:--------------- | 
+| A user declares the local variable | The system maintains the global variable. A user cannot declare them |
+| By default, a local variable starts with @ | The global variable starts with @@ |
+| Every local variable scope has restriction to the current batch or procedure | It stores session related information |
+
+** To DECLARE a variable **
+DECLARE {@LOCAL_VARIABLE[AS] data_type [ = value ] }
+DECLARE @COURSE_NAME VARCHAR(10);
+DECLARE @COURSE_ID AS INT, @COURSE_NAME VARCHAR(10);
+PRINT @COURSE_ID;
+SET @COURSE_NAME = "ABC";
+SET @COURSE_NAME = (SELECT courseName from Student where id = 2);
+SELECT @COURSE_NAME = "ABC"; (select is similar to set, use to assign the value)
+SELECT @COURSE_ID = 5, @COURSE_NAME = 'UNIX' (Unlike Set, Select can be used to assign to multiple variables, separate by the comma)

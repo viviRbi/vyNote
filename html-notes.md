@@ -35,8 +35,8 @@ Escape characters are Microsoft specific, and are reserved for control character
 
 ### Lists 
 There are 3 diferent type of lists:
-- **Order list <ol>** : lists where each item numbered. Ex: 1 2 3, A B C, I II III, i ii iii
-- **Unordered lists <ul>**: Lists where each item had some bullet points
+- **Order list <ol>** : lists where each item numbered. Ex: 1 2 3, A B C, I II III, i ii iii.
+- **Unordered lists <ul>**: Lists where each item had some bullet points.
 - **Defination lists**: Lists made up of terms <dt> and defination <dd>. Ex:
 ``` html
 <dl>

@@ -31,7 +31,7 @@ Escape characters are Microsoft specific, and are reserved for control character
 ### Structural vs Sematic markup
 - **Structural Markup** are used to present the content itself with no extra information. Ex: div, p, ul li, br, sub, i, strong (subscribtion)
 - **Semantic Markup** provide extra information, which means the name of the tag indicate where to use the content. Ex: h1, blockquote, q, abbr (abbreviations), s (strike-through text), section, main, code, em, dfn (use for definition of a word)
-- Ex of abbr: ``` <abbr title="Cascading Style Sheet">CSS</abbr>
+- Ex of abbr: ``` <abbr title="Cascading Style Sheet">CSS</abbr> ```
 
 ### Lists 
 There are 3 diferent type of lists:

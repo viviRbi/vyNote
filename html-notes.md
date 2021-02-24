@@ -22,11 +22,11 @@ HTML does not care about white space, we use <br/> to make a line break and esca
 Escape characters are Microsoft specific, and are reserved for control characters. In HTML, they are undefined and in XHTML, they are invalid. To use them, we need to use their escape character equivalents.
 | Escape character | Their eqivalents | Their meaning |
 | :------------ |:--------------- | :--------------- | 
-| < | &lt; | less than |
-| > | &gt; | more than |
-| & | &amp; | ampersand |
-| " | &quot; | quote |
-|   |  &nbsp;| Space |
+| < | \&lt; | less than |
+| > | \&gt; | more than |
+| & | \&amp; | ampersand |
+| " | \&quot; | quote |
+|   | \&nbsp;| Space |
 
 ### Structural vs Sematic markup
 - **Structural Markup** are used to present the content itself with no extra information. Ex: div, p, ul li, br, sub, i, strong (subscribtion)
@@ -35,8 +35,8 @@ Escape characters are Microsoft specific, and are reserved for control character
 
 ### Lists 
 There are 3 diferent type of lists:
-- **Order list <ol>** : lists where each item numbered. Ex: 1 2 3, A B C, I II III, i ii iii.
-- **Unordered lists <ul>**: Lists where each item had some bullet points.
+- **Order list ol** : lists where each item numbered. Ex: 1 2 3, A B C, I II III, i ii iii.
+- **Unordered lists ul**: Lists where each item had some bullet points.
 - **Defination lists**: Lists made up of terms <dt> and defination <dd>. Ex:
 ``` html
 <dl>
@@ -62,8 +62,8 @@ There are 3 diferent type of lists:
 ### iframe
 - iFrame is short for inline frame
 - An iFrame is like a little window places on webpage. The term is short for inline frame
-- Ex: ```<iframe src="https://www.google.com/maps/embed?pb=!1m18!!5m2!1sen!2sus" width="600" height="450" style="border: 6px;" allowfullscreen="" loading="lazy"></iframe>```
-- Ex: <iframe width="800" height="315" src="https://www.youtube.com/embed/t2ByLmLnYJ8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+- Ex of google map: ```<iframe src="https://www.google.com/maps/embed?pb=!1m18!!5m2!1sen!2sus" width="600" height="450" style="border: 6px;" allowfullscreen="" loading="lazy"></iframe>```
+- Ex of youtube clip: ```<iframe width="800" height="315" src="https://www.youtube.com/embed/t2ByLmLnYJ8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>```
 
 ### Table
 ```html
@@ -86,9 +86,15 @@ There are 3 diferent type of lists:
 	</tr>
 </tbody>
 </table>
-
+```
 ### Form
 - The form will take input from visitors then post it to the backend application
 - Action attribute: Make a request to this website. Ex: ``` <form action="http:///www.example.com">```
-- Method: type of the request (Get, Post). Ex: ``` <form action="http:///www.example.com" method="GET">```
+- Method: type of the request (Get, Post). Ex: 
+``` html
+<form action="http:///www.example.com" method="GET">
+	<input placeholder='search for keyword'/> 
+	<input type='submit'/>
+</form>
+```
 - Elements that used in form: form, fieldset, legend, label, input (type=radio, type=checkbox, type=hidden, type=submit), select - option, textarea 

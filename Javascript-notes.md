@@ -41,10 +41,13 @@ An array in Javascript is a special type of Object. It's a list-like Object whos
 - Syntax: curly bracket with key value pairs (the keys are string)
 
 ### What is JSON? Is it different from JS objects?
-
 Unlike JavaScript Object, a JSON Object has to be fed into a variable as a String and then parsed into JavaScript. A framework like jQuery can be very helpful when doing parsing.
 
 ### What are some ways you can use functions in JS?
+- Invoke the function using ()
+- Use as a variable value
+
+#### Declare a function
 4 main ways to declare function in Js:
 - Function Declaration
 ``` function divide(a,b){ return a/b}; ```
@@ -57,8 +60,8 @@ Unlike JavaScript Object, a JSON Object has to be fed into a variable as a Strin
 
 ### What are the different scopes of variables in JS?
 - Global scope: variable declared here are accessible from ANYWHERE. 
-- Functional scope: variable declared within a function's block {}
-- Lexical/Block scoping: variable declare in a nested function or in a block of code inside a function only accesible there
+- Functional scope: variable declared and accessible within a that function's block {}
+- Lexical/Block scoping: variable only accessible within that nested function or that a block of code
 
 ### What are the different ways to declare global variables?
 - Declare a variable outside a function

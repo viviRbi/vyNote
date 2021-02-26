@@ -95,11 +95,11 @@ console.log(hello);
 hello = "Hi"
 // output: Hi
 ```
-	- Because of hoisting, y had been declared before it is used. But because initialization are not hoisted, the value of y is undefined
-```
+``` javascript
 console.log(y)
 var y = 7
 ```
+- Because of hoisting, y had been declared before it is used. But because initialization are not hoisted, the value of y is undefined
 
 ### What is the global object in client-side JavaScript? - What are some built-in functions (methods on the global object)?
 - The global obj in Javascript provides variable and functions that are available everywhere. In the browser, it is named window

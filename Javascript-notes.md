@@ -107,9 +107,9 @@ function Counter(){
 	function Increase() { return counter += 1 }
 	return Increase
 }
-var counter = Counter()
-alert(counter()) // 1
-alert(counter()) // 2 
+var counterApp = Counter()
+alert(counterApp()) // 1
+alert(counterApp()) // 2 
 ```
 - Closure is an attempt at encapsulation. It can be use when we want to create some public functions that can access private function and variable
 

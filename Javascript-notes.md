@@ -41,14 +41,18 @@ An array in Javascript is a special type of Object. It's a list-like Object whos
 - Syntax: curly bracket with key value pairs (the keys are string)
 
 ### What is JSON? Is it different from JS objects?
-Unlike JavaScript Object, a JSON Object has to be fed into a variable as a String and then parsed into JavaScript. A framework like jQuery can be very helpful when doing parsing.
+- JSON(JavaScript Object Notation) is a lightweight data-interchange format. It is a way to pass structured information between languages. JSON is built on 2 structures: a collection of key/value pairs and an order list of values
+- Different:
+ 	- Unlike JavaScript Object, a JSON Object has to be fed into a variable as a String and then parsed into a JavaScript Object. 	
+	- JSON cannot represent funtions or Date()
+	- JSON keys must be quoted while Js key doesn't need to
 
 ### What are some ways you can use functions in JS?
 - Invoke the function using ()
 - Use as a variable value
 
 #### Declare a function
-4 main ways to declare function in Js:
+4 ways to declare function in Js:
 - Function Declaration
 ``` function divide(a,b){ return a/b}; ```
 - Function expression

@@ -50,7 +50,7 @@ Unlike JavaScript Object, a JSON Object has to be fed into a variable as a Strin
 - Function expression
 ```const divide2 = function (a,b) {return a/b}; ```
 - Arrow function Expression
-``` const divide3 = (a,b) => {return a/b}
+``` const divide3 = (a,b) => {return a/b}```
 - Arrow function Expression - Concise
 ```const divide4 = (a,b) => a/b;```
 

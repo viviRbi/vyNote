@@ -1,8 +1,9 @@
 # JavaScript
 
 ### What is JavaScript? 
-- Javascript is the **Programming Language** to make web page interactive. 
-- It designed to intergrate into HTML. All major web browsers support Javascript
+- Javascript is the **Programming Language** to make web page interactive. It allows you to implement complex features on web pages
+- It is the third layer of the layer cake of standard web technologies, two of which (HTML and CSS) 
+- Js designed to intergrate into HTML. All major web browsers support Javascript
 
 ### What do we use it for?
 - We use it to update and change both HTML and CSS

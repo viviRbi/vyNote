@@ -1,7 +1,7 @@
 # JavaScript
 
 ### What is JavaScript? 
-- Javascript is the **Programming Language** to make web page interactive. It allows you to implement complex features on web pages
+- Javascript is the **Programming Language** to make web page interactive. It allows use to implement complex features on web pages
 - It is the third layer of the layer cake of standard web technologies, together with HTML and CSS 
 - Js designed to intergrate into HTML. All major web browsers support Javascript
 
@@ -72,10 +72,15 @@ An array in Javascript is a special type of Object. It's a list-like Object whos
 - Define a variable anywhere but do not write var, let, const before an assigment
 
 ### Is it a best practice to use global variables? Why or why not?
+It is not a best practice to use global variable because:
+- Global variable take longer to find than local variables
+- It easy to forget where we declare a global variable.
+- It can be overwritten by coworkers or ourself. This get even worse when we declare it by forgot the var/let/const keyword
+- Affect security, specifically on the web where user had access to the window (or global) object and able to modify it
 
 ### What is function and variable hoisting?
 - **Function hoisting**:
-	- Function declaration was moved to the top of the scope. Because of that, you can call it before it was declare
+	- Function declaration was moved to the top of the scope. Because of that, we can call it before it was declare
 ``` javascript
 sayHi()
 function sayHi() {console.log('Hi')}

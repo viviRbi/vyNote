@@ -70,6 +70,7 @@ An array in Javascript is a special type of Object. It's a list-like Object whos
 ### What are the different ways to declare global variables?
 - Declare a variable outside a function
 - Define a variable anywhere but do not write var, let, const before an assigment
+- Declare it using window.variableName or this.variableName
 
 ### Is it a best practice to use global variables? Why or why not?
 It is not a best practice to use global variable because:

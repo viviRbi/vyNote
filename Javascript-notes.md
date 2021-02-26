@@ -81,7 +81,7 @@ It is not a best practice to use global variable because:
 
 ### What is function and variable hoisting?
 - **Function hoisting**:
-	- Function declaration was moved to the top of the scope. Because of that, we can call it before it was declare
+	- Function declaration was moved to the top of the scope. Because of that, we can call it before it was declare. Unlike variable hoisting, function hoisting hoist the function name and its declaration
 ``` javascript
 sayHi()
 function sayHi() {console.log('Hi')}
@@ -137,7 +137,7 @@ alert(counterApp()) // 2
 
 ### What are arrays in JS? can you change their size?
 
-### Explain what ìstrict modeî does
+### Explain what ‚Äústrict mode‚Äù does
 
 ### Explain how inheritance works in JS
 

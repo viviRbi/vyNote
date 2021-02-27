@@ -241,6 +241,12 @@ The class keyword was introduced in ES2015, but it is syntactical sugar. Javascr
 ## Events and DOM
 
 ### What is the DOM? How is it represented as a data structure? What object in a browser environment allows us to interact with the DOM?
+***Dom***
+- The Document Object Model (DOM) is a cross-platform and language-independent interface that treats an XML or HTML document as a tree structure wherein each node is an object representing a part of the document. 
+- DOM methods allow programmatic access to the tree; with them one can change the structure, style or content of a document. 
+- Nodes can have event handlers attached to them. Once an event is triggered, the event handlers get executed
+***How the Dome represent Data Structure**
+
 
 ### List some ways of querying the DOM for elements
 

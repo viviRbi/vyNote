@@ -16,6 +16,10 @@ Depend on what the language is implemented for, it can also run on a server. Nod
 
 JavaScript is a prototype-based, multi-paradigm scripting language that is dynamic, and supports object-oriented, imperative, and functional programming styles.
 
+- Prototype-based is a programming model that works on the concept of object cloning and prototyping. It utilizes object inheritance, where one object can be reused by another object without the need for creating any class. Behaviour reuse is performed by cloning existing objects that serve as prototypes
+
+-
+
 ### What are the data types in JS?
 - Primitive data type (single value, no behavior): Strings, Numbers (NaN is Number), Bool, Undefined, Null
 - Reference data type (a group of states): Object, Function
@@ -190,6 +194,28 @@ var random = {
 - Strict mode changes semantics. Relying on those changes will cause mistakes and errors in browsers which don't implement strict mode
 
 ### Explain how inheritance works in JS
+- By default, every obj had a prototype. This property is empty by default. We can add property and method to it. If we create an obj from object x whose prototype had some properties and methods, this new obj will inherit those property and methods, as well as inherit properties and methods of that prototype's protoype and so on until it reached null which is the final
+``` javascript
+// Every function expression in Js is a constructor
+var x = function(j){
+		this.j = j
+		this.getJ = function () {return this.j}
+	}
+var x1 = new x(1)
+console.log(x1.getJ()) // 1
+
+var x = function(j){
+		this.j = j
+	}
+x.prototype.getJ = function () {return this.j}
+var x1 = new x(1)
+console.log(x1.getJ()) // 1 -> behave the same aside from getJ() is now belong to x prototype
+
+```
+(- In order to inherit from a function, we need to use the call() function inside the Child to inherit all method and properties of the parent (like a super keyword).  (Parent.call(this, name, size))
+- Then, we have to inherit the prototype of parent (by set the prototype of the child equal to Object.create of the parent's prototype Child.prototype = Object.create(Parent.prtotype). 
+- And set the constructor of the child by set its prototype constructor to itself (Child.prototype.constructor = Child)
+)
 
 ### What does the this keyword refer to?
 
@@ -205,6 +231,7 @@ var random = {
 - Var can be declared after used (```x=5; var x;```) but let and const will throw a ReferenceError (var, let and cost are hoisted to the top of the current scope, but let and const is in a temporal dead zone until it is declared)
 
 ### Does JS have classes? If so, when were they introduced?
+The class keyword was introduced in ES2015, but it is syntactical sugar. Javascript remains prototype base
 
 ## Events and DOM
 

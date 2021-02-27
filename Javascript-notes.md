@@ -38,7 +38,7 @@ An array in Javascript is a special type of Object. It's a list-like Object whos
 
 ### What are JS objects? what is the syntax?
 - Js Objects represents one of Js data types. It used to stored various keyed collections and more complex entities
-- Syntax: curly bracket with key value pairs (the keys are string)
+- Syntax: comma-separated list of name-value pairs wrapped in curly braces (optional comma if there is only 1 key value pair)
 
 ### What is JSON? Is it different from JS objects?
 - JSON(JavaScript Object Notation) is a lightweight data-interchange format. It is a way to pass structured information between languages. JSON is built on 2 structures: a collection of key/value pairs and an order list of values
@@ -113,6 +113,8 @@ var y = 7
 function startup(){console.log("Starting")}
 window.onload = startup()
 ```
+- Self-invoking functions are function that invoke immediately after define. They are nameless most of the time
+
 ### What is closure and when should you use it?
 Closure means an inner function always has access to the variables of its outer function. It preversed the scope chain of the outer function by the time the outer function executed
 ``` javascript
@@ -128,16 +130,64 @@ alert(counterApp()) // 2
 - Closure is an attempt at encapsulation. It can be use when we want to create some public functions that can access private function and variable
 
 ### Use the object literal syntax to create an object with some properties
+(- A JavaScript object literal is a comma-separated list of name-value pairs wrapped in curly braces
+- Object literals are defined using the following syntax rules:
+	- A colon separates property name[1] from value
+	- A comma separates each name-value pair from the next
+	- A comma after the last name-value pair is optional)
+- Create an object:
+``` javascript
+var random = {
+    images: ["smile.gif", "grim.gif", "frown.gif", "bomb.gif"],
+    pos: { 
+        x: 40,
+        y: 300
+    },
+    sumValue: function(a,b) {
+        return a+b
+    }
+};
+```
 
 ### What is a truthy or falsy value? List the falsy values.
+- Js use type conversion to coerce(force) any value to a Boolean in context that require it
+- A **falsy** value is a value that is considered false when encountered in a Boolean context. Ex: 0, '', null, undefined, NaN. (In && operator, if the obj is falsy, it returns that obj. Ex: ```0 && 'dog'``` -> 0)
+- A truthly value is a value that is considered true when encounter in a Boolean context. All value are truthly unles defined as falsy (false, 0, 0n, '', null, undefined, NaN). Ex: {}, [], new Date(), Infinity, etc
 
 ### What is the difference between == and ===? Which one allows for type coercion?
+- Loosly equal used to compareing 2 variables but ignores their datatype whereas Strickly equal compare both value and data type
+- Loosely equal == allows type coercion while strictly equal does not
+
+### Coercion
+- There is only 3 type of conversion in Js: to String, to Number, to Boolean
+- 2 types of coersion Implicit and explicit
+- Implicit: 'true' == true, 12/'6', [1]>null, ['x'] = 'x', new Date(0) - 0, 123 + '' (turn to a string)
+- Explicit: String(123) -> '123', String(true) -> 'true', Boolean({})->true (because it is not in the conversion list & not null/underfined/NaN), Boolean(null)->false, Boolean(2)->true, Number(true) -> 1, Number(null)->0
 
 ### Explain the template literal syntax
+(- **Template literal** are string literals allowing embedded expressions. We can use multi-line strings and string interpolation features with them
+- Replacement of placeholders with values inside of a string literal is called string interpolation)
+- Template literals are enclosed by the backtick (``) character. They can contain placeholders, represented by the dollar sign and curly braces, with the expression in the curry bracket treated as Javascript (${expression}) 
 
-### What are arrays in JS? can you change their size?
+### Explain what a strict mode� does (```'use strict'```)
+- Strict mode is a new feature in ECMAScript5 that allow us to place a program or function in a 'strict' operating context.
 
-### Explain what “strict mode” does
+- **Converting mistake into error**
+	- Strict mode makes it **impossible to accidentally create a global variables** (Reference Error)
+	- Make an assigment which should have **silently fail** to **throw an exception**. Ex: ```var NaN = 2``` (Type Error) or write on a read only obj
+	- It makes attempt to **delete undeletable properties** throw an error (Type Error)
+	- It **forbids** a 0 prefixed **octal** literal (0644 === 420) or octal escape sequence ('\45' === '%')
+	- It **forbid setting properties on primitive values** (throw a Type error). Without strict mode, it will be ignored
+	- Some **reverse word cannot be used as a variable **(ex: argument)
+
+- **Simplify variable use**
+	- Duplicating a parameter name or an obj property is not allowed (Syntax Error)
+
+-  strict mode **fixes mistakes that make it difficult for JavaScript engines to perform optimizations.**
+
+- **Secure Js** by set this keyword to undefined
+
+- Strict mode changes semantics. Relying on those changes will cause mistakes and errors in browsers which don't implement strict mode
 
 ### Explain how inheritance works in JS
 

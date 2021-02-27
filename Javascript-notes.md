@@ -194,7 +194,7 @@ var random = {
 - Strict mode changes semantics. Relying on those changes will cause mistakes and errors in browsers which don't implement strict mode
 
 ### Explain how inheritance works in JS
-- By default, every obj had a prototype. This property is empty by default. We can add property and method to it. If we create an obj from object x whose prototype had some properties and methods, this new obj will inherit those property and methods, as well as inherit properties and methods of that prototype's protoype and so on until it reached null which is the final
+- By default, every obj had a prototype. This property is empty by default. We can add property and method to it. If we create a child obj from a parent object whose prototype had some properties and methods, this child obj will inherit those property and methods, as well as inherit properties and methods of that prototype's protoype and so on until it reached null which is the final chain
 ``` javascript
 // Every function expression in Js is a constructor
 var x = function(j){

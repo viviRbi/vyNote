@@ -120,7 +120,8 @@ window.onload = startup()
 - Self-invoking functions are function that invoke immediately after define. They are nameless most of the time
 
 ### What is closure and when should you use it?
-Closure means an inner function always has access to the variables of its outer function. It preversed the scope chain of the outer function by the time the outer function executed
+- A closure is the combination of a function and the lexical scope within which that function was declared
+- Closure means an inner function always has access to the variables of its outer function. It preversed the scope chain of the outer function by the time the outer function executed
 ``` javascript
 function Counter(){
 	var counter = 0
@@ -173,7 +174,7 @@ var random = {
 - Replacement of placeholders with values inside of a string literal is called string interpolation)
 - Template literals are enclosed by the backtick (``) character. They can contain placeholders, represented by the dollar sign and curly braces, with the expression in the curry bracket treated as Javascript (${expression}) 
 
-### Explain what a strict modeù does (```'use strict'```)
+### Explain what a strict mode¬ù does (```'use strict'```)
 - Strict mode is a new feature in ECMAScript5 that allow us to place a program or function in a 'strict' operating context.
 
 - **Converting mistake into error**

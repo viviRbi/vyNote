@@ -230,6 +230,7 @@ console.log(x1.getJ()) // 1 -> behave the same aside from getJ() is now belong t
 
 ### What is the difference between var, let, and const keywords?
 - Var can be declared after used (```x=5; var x;```) but let and const will throw a ReferenceError (var, let and cost are hoisted to the top of the current scope, but let and const is in a temporal dead zone until it is declared)
+- let keyword is a block scope variable while var key word is not. Once a var keyword declared inside an if or a loop statement, it moves to the top of that function scope and gives us undefined value when we try to access outside our if or loop statement
 
 ### Does JS have classes? If so, when were they introduced?
 The class keyword was introduced in ES2015, but it is syntactical sugar. Javascript remains prototype base

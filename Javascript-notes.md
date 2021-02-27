@@ -72,7 +72,7 @@ An array in Javascript is a special type of Object. It's a list-like Object whos
 - Lexical/Block scoping: variable only accessible within that nested function or that a block of code
 
 ### What are the different ways to declare global variables?
-- Declare a variable outside a function
+- Declare a variable outside a function (if use var, that variable becomes a part of the global object and can be access through window.varNAM)
 - Define a variable anywhere but do not write var, let, const before an assigment
 - Declare it using window.variableName or this.variableName
 

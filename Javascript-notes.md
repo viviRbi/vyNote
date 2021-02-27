@@ -122,6 +122,7 @@ window.onload = startup()
 ### What is closure and when should you use it?
 - A closure is the combination of a function and the lexical scope within which that function was declared
 - Closure means an inner function always has access to the variables of its outer function. It preversed the scope chain of the outer function by the time the outer function executed
+- (It is unwise to unnecessarily create functions within other functions if closures are not needed for a particular task, as it will negatively affect script performance both in terms of processing speed and memory consumption.)
 ``` javascript
 function Counter(){
 	var counter = 0

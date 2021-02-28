@@ -67,9 +67,12 @@ An array in Javascript is a special type of Object. It's a list-like Object whos
 ```const divide4 = (a,b) => a/b;```
 
 ### What are the different scopes of variables in JS?
+**Old school**:
 - Global scope: variable declared here are accessible from ANYWHERE. 
-- Functional scope: variable declared and accessible within a that function's block {}
-- Lexical/Block scoping: variable only accessible within that nested function or that a block of code
+- Functional/ local scope: variable declared and accessible within a that function's block {} \n
+
+**Modern**:
+- Lexical/Block scoping: variable only know fron the top of the scope they are declared within. Can only use let and const to have achive a lexical/block scope (var will be hoisted to the very first outer function)
 
 ### What are the different ways to declare global variables?
 - Declare a variable outside a function (if use var, that variable becomes a part of the global object and can be access through window.varNAM)
@@ -120,8 +123,9 @@ window.onload = startup()
 - Self-invoking functions are function that invoke immediately after define. They are nameless most of the time
 
 ### What is closure and when should you use it?
-- A closure is the combination of a function and the lexical scope within which that function was declared
-- Closure means an inner function always has access to the variables of its outer function. It preversed the scope chain of the outer function by the time the outer function executed
+- Closure is a feature in Js that is very powerful
+- It makes sure that the inner function always have access to the outer function even if the outer function had finished running and pop off the stack
+- It preversed the scope chain of the outer function by the time the outer function executed
 - (It is unwise to unnecessarily create functions within other functions if closures are not needed for a particular task, as it will negatively affect script performance both in terms of processing speed and memory consumption.)
 ``` javascript
 function Counter(){
@@ -221,22 +225,65 @@ console.log(x1.getJ()) // 1 -> behave the same aside from getJ() is now belong t
 )
 
 ### What does the this keyword refer to?
+- This keyword always refer to an object. It is a confused keyword because it different each time depend on where it is and how it is called
+- Basically, it refers to the object that invokes the function where it is used
+- Outside a function, and inside a function define in global scope, this refer to the global obj. 
+- In cases where this inside a method attracted to an object, this become that object because the method it belong to will be invoked by that obj
+- If we had an obj with a method inside, and we pass that method to an eventListener of a button, this keyword will no longer refer to that obj but refer to where the method is executed, which is the button object, which will throw us a property undefined error. The solution for this case is to bind the obj
+```$('button').click(user.clickHandler.bind(user))```
+- If a method in an object had a closure, this refered to the window obj. To avoid this problem, we should set this to a variable
+
+### What is scope in Js?
+- Scope in Js defines the accessibility of variables, objects and functions
 
 ### Explain the concept of lexical scope
+- Lexical Scoping defines how variable names are resolved in nested functions: inner functions contain the scope of parent functions even if the parent function has returned.
 
 ### What will happen when I try to run this code: console.log(0.1+0.2==0.3) ?
+- The result will be false because Javascript use a double-precision floating point number (IEEE 754, binary64) which represent as binary, and most decimal fractions cannot be represnted exactly as binary fractions, so the floating-point arithmetic is not 100% accurate
+- To avoid this problems, we should use integer as much as possible or use library as that provide an alternative to Javascript numbers
 
 ## ES6+
 
 ### What new features did ES6 introduce?
+- let and const keyword with block scope
+- Arrow function: short and concise
+- A couple of new method to string prototype (startsWith, endsWith, includes, repeats)
+- Template literal
+- New Array and Array prototype method (Array.from to create an array of NodeList from querySeletor), Array.of(2,4) to initalize array values, find, findIndex, fill
+- Couple of Math method (Math.sign to return sign of the number as 1 for positive,-1 as negative,0), Math.trunc(3.1) to return the number without fractional digits, Math.cbrt to retur nthe cube root of a number ex: 64 return 4)
+- Spread Operator: takes an array or object and expands it (merge obj/array, clone obj/array, add new obj properties, array values)
+``` javascript
+const obj1 = {a:'a',b:'b'}
+const obj2 = {c:'c', ...obj1}
+```
+- Destruturing: extract data from object or arrays
+```javascript
+let obj = {x:1, y:2};
+let {x} = obj;
+```
+- Rest Parameter: collect array or object properties togetther
+```javascript
+const user = {name:'a', age: 2,address:'sd'}
+const {age, ...rest} = user
+console.log(age, rest)
+```
+Module (import, export)
+``` javascript
+export defult function (){}
+import {sum, pi} from "lib/math";
+import * as math from "lib/math"
+```
+- Class: which is basically a syntatic sugar for setting up prototype chains that provides cleaner inheritance. Js does not hoist class definition
 
 ### What is the difference between var, let, and const keywords?
-- Var can be declared after used (```x=5; var x;```) but let and const will throw a ReferenceError (var, let and cost are hoisted to the top of the current scope, but let and const is in a temporal dead zone until it is declared)
-- let and const keyword is a block scope variable while var key word is function scope. Once a var keyword declared inside an if or a loop statement, it moves to the top of the outer function and gives us undefined value when we try to access outside our if or loop statement
-- Redeclaring a variable using the let and const keyword will result in an error:
+- **Var** can be declared after used (```x=5; var x;```) but **let** and **const** will throw a ReferenceError (var, let and cost are hoisted to the top of the current scope, but let and const is in a temporal dead zone until it is declared)
+- **let and const** keyword is a **block scope** variable while **var** keyword is **function scope**. Once a var keyword declared inside an if or a loop statement, it moves to the top of the outer function and gives us undefined value when we try to access outside our if or loop statement
+- Redeclaring a variable using the let and const keyword will result in an error.
+- If you try to change **const** variable or if you don’t a set a value immediately, you’ll get an error
 
 ### Does JS have classes? If so, when were they introduced?
-The class keyword was introduced in ES2015, but it is syntactical sugar. Javascript remains prototype base
+The class keyword and other oop-like keyword like constructor, super, static, getter, setterwas introduced in ES2015, but it is syntactical sugar. Javascript remains prototype base
 
 ## Events and DOM
 

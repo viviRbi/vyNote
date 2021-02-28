@@ -241,7 +241,7 @@ console.log(x1.getJ()) // 1 -> behave the same aside from getJ() is now belong t
 
 ### What will happen when I try to run this code: console.log(0.1+0.2==0.3) ?
 - The result will be false because Javascript use a double-precision floating point number (IEEE 754, binary64) which represent as binary, and most decimal fractions cannot be represnted exactly as binary fractions, so the floating-point arithmetic is not 100% accurate
-- To avoid this problems, we should use integer as much as possible or use library as that provide an alternative to Javascript numbers
+- To avoid this problems, we should use integer as much as possible or use a library that provide an alternative to Javascript numbers
 
 ## ES6+
 

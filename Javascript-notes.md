@@ -31,8 +31,8 @@ JavaScript is a prototype-based, multi-paradigm scripting language that is dynam
 	- Abstraction: we can create abstraction in JS by throw new Error that prevent users from instantiate a new object. That obj now can only be use for inheritance 
 
 ### What are the data types in JS?
-- Primitive data type (single value, no behavior): Strings, Numbers (NaN is Number), Bool, Undefined, Null
-- Reference data type (a group of states): Object, Function
+- Primitive data type group (single value, no behavior): Strings, Numbers (NaN is Number), Bool, Undefined, Null
+- Reference data type group(a group of states): Object, Function
 
 ### What is the type of NaN? What is the isNaN function?
 - Type of NaN is number. Some array methods like indexOf and findIndex cannot find NaN
@@ -63,7 +63,7 @@ An array in Javascript is a special type of Object. It's a list-like Object whos
 
 ### What are some ways you can use functions in JS?
 - Invoke an anonymous function right after written using ()
-- Use as a variable value
+- Use as a variable value, or an object
 - Use as a callback function
 
 #### Declare a function
@@ -83,7 +83,7 @@ An array in Javascript is a special type of Object. It's a list-like Object whos
 - Functional/ local scope: variable declared inside a function and cannot be access from global scope \n
 
 **Modern**:
-- Lexical/Block scoping: variable only know fron the top of the scope they are declared within. Can only use let and const to have achive a lexical/block scope (var will be hoisted to the very first outer function)
+- Lexical/Block scoping: variable only accessible inside the scope they are declared within. Can only use let and const to have achive a lexical/block scope (var will be hoisted to the very first outer function)
 
 ### What are the different ways to declare global variables?
 - Declare a variable outside a function (if use var, that variable becomes a part of the global object and can be access through window.varNAM)

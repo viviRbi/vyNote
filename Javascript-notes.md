@@ -2,7 +2,7 @@
 
 ### What is JavaScript? 
 - Javascript is the **Programming Language** to make web page interactive. It allows use to implement complex features on web pages
-- It is the third layer of the layer cake of standard web technologies, together with HTML and CSS 
+- It was originally created as small scripting language that could interact with the DOM.
 - Js designed to intergrate into HTML. All major web browsers support Javascript
 
 ### What do we use it for?
@@ -10,7 +10,7 @@
 - It can also calculate, manipulate and validate data
 
 ### Can we run JavaScript in a web browser, on a server, or both?
-Depend on what the language is implemented for, it can also run on a server. Nodejs is a perfect example
+Depend on what the language is implemented for, it can also run on a server. Nodejs and Demo is a perfect example
 
 ### What programming paradigm(s) does JS support?
 
@@ -248,10 +248,11 @@ console.log(x1.getJ()) // 1 -> behave the same aside from getJ() is now belong t
 ### What new features did ES6 introduce?
 - let and const keyword with block scope
 - Arrow function: short and concise
-- A couple of new method to string prototype (startsWith, endsWith, includes, repeats)
+- New method for String prototype, array, array prototype, Math
+	- A couple of new method to string prototype (startsWith, endsWith, includes, repeats)
+	- New Array and Array prototype method (Array.from to create an array of NodeList from querySeletor), Array.of(2,4) to initalize array values, find, findIndex, fill
+	- Couple of Math method (Math.sign to return sign of the number as 1 for positive,-1 as negative,0), Math.trunc(3.1) to return the number without fractional digits, Math.cbrt to retur nthe cube root of a number ex: 64 return 4)
 - Template literal
-- New Array and Array prototype method (Array.from to create an array of NodeList from querySeletor), Array.of(2,4) to initalize array values, find, findIndex, fill
-- Couple of Math method (Math.sign to return sign of the number as 1 for positive,-1 as negative,0), Math.trunc(3.1) to return the number without fractional digits, Math.cbrt to retur nthe cube root of a number ex: 64 return 4)
 - Spread Operator: takes an array or object and expands it (merge obj/array, clone obj/array, add new obj properties, array values)
 ``` javascript
 const obj1 = {a:'a',b:'b'}
@@ -289,18 +290,45 @@ The class keyword and other oop-like keyword like constructor, super, static, ge
 
 ### What is the DOM? How is it represented as a data structure? What object in a browser environment allows us to interact with the DOM?
 ***Dom***
-- The Document Object Model (DOM) is a cross-platform and language-independent interface that treats an XML or HTML document as a tree structure wherein each node is an object representing a part of the document. 
-- DOM methods allow programmatic access to the tree; with them one can change the structure, style or content of a document. 
-- Nodes can have event handlers attached to them. Once an event is triggered, the event handlers get executed
-***How the Dome represent Data Structure**
+- The Document Object Model (DOM) is a application programming interface(API) for HTML and XML documents. It defines the logical structure of documents and the way a document is accessed and manipulated.
+(- DOM methods allow programmatic access to its tree-like structure; so you can change the structure, style or content of a document. 
+- Nodes can have event handlers attached to them. Once an event is triggered, the event handlers get executed)
+- .html to DOM: Bytes -> Characters -> Tokens -> Node -> DOM
 
+***How the Dom represent Data Structure**
+- The DOM represents a document with a logical tree. Each branch ends in a node, each noe contains obj.
+- It is not a set of data structures, it is an object model that specifies interfaces. Although the document contains diagrams showing parent/child relationships, these are **logical relationships** defined by the **programming interfaces**, not representations of any particular internal data structures
+- Their nodes are also not represent data structure, they **represent object**, which have function and identity
+
+**What object in a browser environment allows us to interact with the DOM**
+- Developer tool or The DOM Inspector? they are tool, not obj though
+- window.document.all or window.document.querySelector(...) ?
+
+### What is an API?
+- Application Programming Interface
+- It's like a restaurant menu. I have dishes with description. After we select a dish, the cooker do the work. We don't need to know how it was made
 
 ### List some ways of querying the DOM for elements
 
 ### How would you insert a new element into the DOM?
+var a = document.createElement("div")
+body.appendChild(a)
+body.insertBefore(a, some old div a will be inserted before)
+body.insertAfter(a, reference element)
 
 ### What are event listeners? What are some events we can listen for? What are some different ways of setting event listeners?
+EventListener 
+- Event Listener is a function that wait for an event to occured
+- Some event we can listen for is onChange, onClick, onFocus
+- Different way:
+	- With a callback function ```el.addEventListener("click", modifyText, false);```
+	- With an anonymous function ```l.addEventListener("click", function(){modifyText("four")}, false);```
+	- With an arrow function ```el.addEventListener("click", () => { modifyText("four"); }, false);```
 
 ### What are some methods on the event object and what do they do?
+- **stopPropagation**: prevent the bubbling or capturing events by stop all of the outer or inner events.
+- **preventDefault**: cancel the default event (if it cancelable), like cancel the event of the submit btn
 
-### Default even listener? Bubling (false)
+### Default event listener? 
+- **Bubbling**: the event handled by the innermost element then move up
+- **Capturing**: the event handle by the outermost element then go down

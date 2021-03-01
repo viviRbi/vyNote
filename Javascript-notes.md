@@ -318,8 +318,7 @@ body.insertBefore(a, some old div a will be inserted before)
 body.insertAfter(a, reference element)
 
 ### What are event listeners? What are some events we can listen for? What are some different ways of setting event listeners?
-EventListener 
-- Event Listener is a function that wait for an event to occured
+- Event Listener represents an object that can handle an event dispatched by an EventTarget object.
 - Some event we can listen for is onChange, onClick, onFocus
 - Different way:
 	- With a callback function ```el.addEventListener("click", modifyText, false);```

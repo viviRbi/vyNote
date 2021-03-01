@@ -238,7 +238,7 @@ console.log(x1.getJ()) // 1 -> behave the same aside from getJ() is now belong t
 - Scope in Js defines the accessibility of variables, objects and functions
 
 ### Explain the concept of lexical scope
-- Lexical scope means that in a nested group of functions, the inner functions have access to the variables and other resources of their parent scope
+- Lexical scoping means variables declared within a specific scope only accessible within that region
 
 ### What will happen when I try to run this code: console.log(0.1+0.2==0.3) ?
 - The result will be false because Javascript use a double-precision floating point number (IEEE 754, binary64) which represent as binary, and most decimal fractions cannot be represnted exactly as binary fractions, so the floating-point arithmetic is not 100% accurate

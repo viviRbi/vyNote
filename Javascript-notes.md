@@ -179,7 +179,7 @@ var random = {
 - Replacement of placeholders with values inside of a string literal is called string interpolation)
 - Template literals are enclosed by the backtick (``) character. They can contain placeholders, represented by the dollar sign and curly braces, with the expression in the curry bracket treated as Javascript (${expression}) 
 
-### Explain what a strict mode does (```'use strict'```)
+### Explain what a strict modeÂ does (```'use strict'```)
 - Strict mode is a new feature in ECMAScript5 that allow us to place a program or function in a 'strict' operating context.
 
 - **Converting mistake into error**
@@ -281,7 +281,7 @@ import * as math from "lib/math"
 - **Var** can be declared after used (```x=5; var x;```) but **let** and **const** will throw a ReferenceError (var, let and cost are hoisted to the top of the current scope, but let and const is in a temporal dead zone until it is declared)
 - **let and const** keyword is a **block scope** variable while **var** keyword is **function scope**. Once a var keyword declared inside an if or a loop statement, it moves to the top of the outer function and gives us undefined value when we try to access outside our if or loop statement
 - Redeclaring a variable using the let and const keyword will result in an error.
-- If you try to change **const** variable or if you don�t a set a value immediately, you�ll get an error
+- If you try to change **const** variable or if you dont a set a value immediately, youll get an error
 
 ### Does JS have classes? If so, when were they introduced?
 The class keyword and other oop-like keyword like constructor, super, static, getter, setterwas introduced in ES2015, but it is syntactical sugar. Javascript remains prototype base
@@ -293,7 +293,7 @@ The class keyword and other oop-like keyword like constructor, super, static, ge
 - The Document Object Model (DOM) is a application programming interface(API) for HTML and XML documents. It defines the logical structure of documents and the way a document is accessed and manipulated.
 (- DOM methods allow programmatic access to its tree-like structure; so you can change the structure, style or content of a document. 
 - Nodes can have event handlers attached to them. Once an event is triggered, the event handlers get executed)
-- .html to DOM: Bytes -> Characters -> Tokens -> Node -> DOM
+- .html to DOM (to be render in web browser): Bytes -> Characters -> Tokens -> Node -> DOM
 
 ***How the Dom represent Data Structure**
 - The DOM represents a document with a logical tree. Each branch ends in a node, each noe contains obj.

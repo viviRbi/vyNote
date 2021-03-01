@@ -70,7 +70,7 @@ An array in Javascript is a special type of Object. It's a list-like Object whos
 ### What are the different scopes of variables in JS?
 **Old school**:
 - Global scope: variable declared here are accessible from ANYWHERE. 
-- Functional/ local scope: variable declared and accessible within a that function's block {} \n
+- Functional/ local scope: variable declared inside a function and cannot be access from global scope \n
 
 **Modern**:
 - Lexical/Block scoping: variable only know fron the top of the scope they are declared within. Can only use let and const to have achive a lexical/block scope (var will be hoisted to the very first outer function)

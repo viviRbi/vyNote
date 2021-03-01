@@ -1,7 +1,7 @@
 # JavaScript
 
 ### What is JavaScript? 
-- Javascript is the **Programming Language** to make web page interactive. It allows use to implement complex features on web pages
+- Javascript is the **Programming Language** to make web page interactive, we can implement complex features on web pages
 - It was originally created as small scripting language that could interact with the DOM.
 - Js designed to intergrate into HTML. All major web browsers support Javascript
 

@@ -330,5 +330,6 @@ body.insertAfter(a, reference element)
 - **preventDefault**: cancel the default event (if it cancelable), like cancel the event of the submit btn
 
 ### Default event listener? 
+``` element.addEventListener(eventName, eventHandler, useCapture -> default is false aka bubbling)```
 - **Bubbling**: the event handled by the innermost element then move up
 - **Capturing**: the event handle by the outermost element then go down

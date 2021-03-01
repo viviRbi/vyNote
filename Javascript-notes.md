@@ -136,7 +136,7 @@ window.onload = startup()
 ### What is closure and when should you use it?
 - Closure is a feature in Js that is very powerful
 - It makes sure that the inner function always have access to the outer function even if the outer function had finished running and pop off the stack
-- It preversed the scope chain of the outer function by the time the outer function executed
+- In other word, it preversed the scope chain of the outer function by the time the outer function executed
 - (It is unwise to unnecessarily create functions within other functions if closures are not needed for a particular task, as it will negatively affect script performance both in terms of processing speed and memory consumption.)
 ``` javascript
 function Counter(){
@@ -248,7 +248,7 @@ console.log(x1.getJ()) // 1 -> behave the same aside from getJ() is now belong t
 - Scope in Js defines the accessibility of variables, objects and functions
 
 ### Explain the concept of lexical scope
-- Lexical scoping means variables declared within a specific scope only accessible within that region
+- Lexical scoping means variables declared within an inner function only accessible within that region
 
 ### What will happen when I try to run this code: console.log(0.1+0.2==0.3) ?
 - The result will be false because Javascript use a double-precision floating point number (IEEE 754, binary64) which represent as binary, and most decimal fractions cannot be represnted exactly as binary fractions, so the floating-point arithmetic is not 100% accurate

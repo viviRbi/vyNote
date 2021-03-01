@@ -326,7 +326,7 @@ EventListener
 	- With an arrow function ```el.addEventListener("click", () => { modifyText("four"); }, false);```
 
 ### What are some methods on the event object and what do they do?
-- **stopPropagation**: prevent the bubbling or capturing events by stop all of the outer or inner events.
+- **stopPropagation**: prevent the bubbling or capturing events by stop all of the events of outer or inner html tag.
 - **preventDefault**: cancel the default event (if it cancelable), like cancel the event of the submit btn
 
 ### Default event listener? 

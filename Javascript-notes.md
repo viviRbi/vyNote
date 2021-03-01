@@ -18,7 +18,17 @@ JavaScript is a prototype-based, multi-paradigm scripting language that is dynam
 
 - Prototype-based is a programming model that works on the concept of object cloning and prototyping. It utilizes object inheritance, where one object can be reused by another object without the need for creating any class. Behaviour reuse is performed by cloning existing objects that serve as prototypes
 
--
+- Dynamic: It allows us to declare a value before knowing the data type, and we can switch the data type without causing error
+
+- Fuctional: support first class function, which means functions in Js are treated like other variables
+
+- Imperative: means command in Latin. It made up of clearly-defined sequence of instructions
+
+- Object oriented: Javascript had all 4 of the 4 pillars of obj oriented:
+	- Encapsulation: closure
+	- Inheritance: each obj have a prototype obj the inherit methods and properties from other obj, and that obj also had a prototype that inherit from other obj, and so on until reached null, the end of the prototype chain
+	- Polymorphism: 2 children object can overload a parent method
+	- Abstraction: we can create abstraction in JS by throw new Error that prevent users from instantiate a new object. That obj now can only be use for inheritance 
 
 ### What are the data types in JS?
 - Primitive data type (single value, no behavior): Strings, Numbers (NaN is Number), Bool, Undefined, Null
@@ -200,8 +210,8 @@ var random = {
 
 - Strict mode changes semantics. Relying on those changes will cause mistakes and errors in browsers which don't implement strict mode
 
-### Explain how inheritance works in JS
-- When it comes to inheritance, JavaScript only has one construct: objects. Each object has a private property which holds a link to another object called its prototype.
+### Explain how inheritance works in J
+- When it comes to inheritance, JavaScript only has one construct: objects since it's a prototype based language. Each object has a private property which holds a link to another object called its prototype.
 - Prototype is empty by default. We can add property and method to it. If we create a child obj from a parent object whose prototype had some properties and methods, this child obj will inherit those property and methods, as well as inherit properties and methods of that prototype's protoype and so on until it reached null which is the final link of the prototype chain
 ``` javascript
 // Every function expression in Js is a constructor

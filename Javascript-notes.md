@@ -52,8 +52,9 @@ An array in Javascript is a special type of Object. It's a list-like Object whos
 	- JSON keys must be quoted while Js key doesn't need to
 
 ### What are some ways you can use functions in JS?
-- Invoke the function using ()
+- Invoke an anonymous function right after declared using ()
 - Use as a variable value
+- Use as a callback function
 
 #### Declare a function
 4 ways to declare function in Js:

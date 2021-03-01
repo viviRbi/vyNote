@@ -320,7 +320,7 @@ body.insertAfter(a, reference element)
 ### What are event listeners? What are some events we can listen for? What are some different ways of setting event listeners?
 - Event Listener represents an object that can handle an event dispatched by an EventTarget object.
 - Some event we can listen for is onChange, onClick, onFocus
-- Different way:
+- We can add EventListener using:
 	- With a callback function ```el.addEventListener("click", modifyText, false);```
 	- With an anonymous function ```l.addEventListener("click", function(){modifyText("four")}, false);```
 	- With an arrow function ```el.addEventListener("click", () => { modifyText("four"); }, false);```

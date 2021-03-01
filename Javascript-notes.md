@@ -180,7 +180,7 @@ var random = {
 - Replacement of placeholders with values inside of a string literal is called string interpolation)
 - Template literals are enclosed by the backtick (``) character. They can contain placeholders, represented by the dollar sign and curly braces, with the expression in the curry bracket treated as Javascript (${expression}) 
 
-### Explain what a strict modeÂ does (```'use strict'```)
+### Explain what a strict mode does(```'use strict'```)
 - Strict mode is a new feature in ECMAScript5 that allow us to place a program or function in a 'strict' operating context.
 
 - **Converting mistake into error**
@@ -238,7 +238,7 @@ console.log(x1.getJ()) // 1 -> behave the same aside from getJ() is now belong t
 - Scope in Js defines the accessibility of variables, objects and functions
 
 ### Explain the concept of lexical scope
-- Lexical Scoping defines how variable names are resolved in nested functions: inner functions contain the scope of parent functions even if the parent function has returned.
+- Lexical scope means that in a nested group of functions, the inner functions have access to the variables and other resources of their parent scope
 
 ### What will happen when I try to run this code: console.log(0.1+0.2==0.3) ?
 - The result will be false because Javascript use a double-precision floating point number (IEEE 754, binary64) which represent as binary, and most decimal fractions cannot be represnted exactly as binary fractions, so the floating-point arithmetic is not 100% accurate

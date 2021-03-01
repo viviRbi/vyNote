@@ -293,8 +293,8 @@ The class keyword and other oop-like keyword like constructor, super, static, ge
 ***Dom***
 - The Document Object Model (DOM) is a application programming interface(API) for HTML and XML documents. It defines the logical structure of documents and the way a document is accessed and manipulated.
 (- DOM methods allow programmatic access to its tree-like structure; so you can change the structure, style or content of a document. 
-- Nodes can have event handlers attached to them. Once an event is triggered, the event handlers get executed)
-- html file convert raw byte code to DOM and the browser render it.(html to DOM (to be render in web browser): Bytes -> Characters -> Tokens -> Node -> DOM)
+- Nodes can have event handlers attached to them. Once an event is triggered, the event handlers get executed
+- Web browser uses the DOM to render webpage .(html to DOM (to be render in web browser): Bytes -> Characters -> Tokens -> Node -> DOM)
 
 ***How the Dom represent Data Structure**
 - The DOM represents a document with a logical tree. Each branch ends in a node, each noe contains obj.

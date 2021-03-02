@@ -301,7 +301,7 @@ The class keyword and other oop-like keyword like constructor, super, static, ge
 
 ### What is the DOM? How is it represented as a data structure? What object in a browser environment allows us to interact with the DOM?
 ***Dom***
-- The Document Object Model (DOM) is a application programming interface(API) for HTML and XML documents. It defines the logical structure of documents and the way a document is accessed and manipulated.
+- The Document Object Model (DOM) is a application programming interface(API) for HTML and XML documents. It defines the logical structure of documents and allow programs to read and manipulate the page’s content, structure, and styles.
 (- DOM methods allow programmatic access to its tree-like structure; so you can change the structure, style or content of a document. 
 - Nodes can have event handlers attached to them. Once an event is triggered, the event handlers get executed
 - Web browser uses the DOM to render webpage .(html to DOM (to be render in web browser): Bytes -> Characters -> Tokens -> Node -> DOM)
@@ -328,7 +328,7 @@ body.insertBefore(a, some old div a will be inserted before)
 body.insertAfter(a, reference element)
 
 ### What are event listeners? What are some events we can listen for? What are some different ways of setting event listeners?
-- Event Listener represents an object that can handle an event dispatched by an EventTarget object.
+- An event listener is a procedure in JavaScript that waits for an event to occur
 - Some event we can listen for is onChange, onClick, onFocus
 - We can add EventListener using:
 	- With a callback function ```el.addEventListener("click", modifyText, false);```

@@ -2,7 +2,7 @@
 
 ### Definition
 - HTML stands for HyperText Markup Language. It is used to structure content on a webpage.
-- CSS stands for Cascading Style Sheets. It is a style sheet language used for describing the presentation of a document written in a markup language such as HTML
+- CSS stands for Cascading Style Sheets. It is a style sheet language used for describing the presentation of a document written in a markup language such as HTML (or XML)
 ### DOCTYPE html
 - Doctype is not a tag. It is an instruction (directive) to the browser about what version of HTML the page is written in.
 - It must be the very first non-comment line declared within our Html documents.

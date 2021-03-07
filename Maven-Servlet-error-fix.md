@@ -9,5 +9,8 @@
 - Maybe you need to install it 2 times
 
 ## Fixing Maven general error
-- Maven -> clean
+- Run as -> Maven clean
 - R-click on project -> Update Maven
+
+## Fixed but server saved the cache
+- R-click -> clean

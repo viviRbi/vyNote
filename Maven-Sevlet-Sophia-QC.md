@@ -1,24 +1,17 @@
-# Week 2: Servlets, HTTP & REST
-*The following is an overview of the topics to be covered in Week 2.* <br>
-*You will be asked to answer the questions at the **bottom** in QC and your 1-on-1's with me.*
+# Servlets, HTTP & REST
 
-## HTTP Study Guide:
+## HTTP:
 - Hyper Text Transfer Protocol
 - Primary networking protocol used for client-server communication
   - The internet (world-wide-web) 
 - This is also specifically used for RESTful web services
-
-- For now, it's important to understand the differences between different
-  HTTP verbs (methods), such as <code>GET</code> and <code>POST</code> as well as HTTP status codes
-
-- All HTTP messages are composed of a **header** and a **body** which contains different
-  pieces of information.. 
+- All HTTP messages are composed of a **header** and a **body** which contains different pieces of information.. 
     - The header normally represents the metadata about the request. 
     - The body represents the data in the message, or the message itself.
     -
 - **GET vs POST**
-  - **GET** Usually used to retrieve data. Data pass to url as ```google.com?search=flower```. Parameter remain in browser history
-  - **POST** is generally used to send/update information on the url/endpoint. 
+  - **GET** Usually used to retrieve data. Data pass to url as ```google.com?search=flower```. Doesn't have a body, only url parameter. And the Parameters remain in browser history. Get request limited in lenght
+  - **POST** is generally used to send/update information on the url/endpoint. Data stored in the request body so the url is clean. Post request can store unlimited data
 - HTTP responses have a status code that represent the status of the request such as 200 OK, and 201 CREATED
 
 - **HTTP request contents**

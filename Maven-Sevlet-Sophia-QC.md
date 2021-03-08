@@ -4,10 +4,8 @@
 
 ## HTTP Study Guide:
 - Hyper Text Transfer Protocol
-
 - Primary networking protocol used for client-server communication
   - The internet (world-wide-web) 
-
 - This is also specifically used for RESTful web services
 
 - For now, it's important to understand the differences between different
@@ -19,17 +17,9 @@
     - The body represents the data in the message, or the message itself.
     -
 - **GET vs POST**
-  - **GET** is utilized to retrieve data. We're retrieving data from some url, or endpoint,
-    and normally clients and servers are not expecting these messages to contain content
-    within the body. (Although, you definitely still can)
-  - **POST** is generally used to send/update information on the url/endpoint, which means
-    that the server os expecting the message to have information in the body.
-
-- HTTP responses have a status code that represent the status of the request. We'll talk
-  more about them in a moment, but we have seen examples such as 200 OK, and 201 CREATED *see the **HTTP Status Codes** listed below***
-
-- HTTP responses can also have a body. If a GET request was performed, generally,the response is stored in the body.
-
+  - **GET** Usually used to retrieve data. Data pass to url as ```google.com?search=flower```. Parameter remain in browser history
+  - **POST** is generally used to send/update information on the url/endpoint. 
+- HTTP responses have a status code that represent the status of the request such as 200 OK, and 201 CREATED
 
 - **HTTP request contents**
   - HTTP version
@@ -74,7 +64,7 @@
     - 503: Service unavailable
 
 ## Client/Server Architecture
-- A Client and a Server establish a connection according to a set of rules called a protocol. 
+- A Client and a Server establish a connection according to a set of rules called a **protocol**. 
 - [**HTTP**](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview) is a protocol which allows the fetching of resources, such as HTML documents. 
     - It is the foundation of any data exchange on the Web and it is a **client-server protocol**, which means requests are initiated by the recipient, usually the Web browser (client).
 - *Describe the difference between **2 Tier**, **3 Tier**, **n-Tier** architecture*
@@ -99,19 +89,25 @@ A RESTful Web Service is a lightweight, maintainable, and scalable service that 
 ## What is REST?
 * REST stands for **RE**presentational **S**tate **T**ransfer.
 * REST is a way to access resources which lie in a particular environment.
-* [Overview of REST](https://restfulapi.net/rest-architectural-constraints/)
+*  It is an architecture style for designing loosely coupled applications over HTTP.
 
 >  For example, you could have a server that could be hosting important documents or pictures or videos. All of these are an example of resources. If a client, say a web browser needs any of these resources, it has to send a request to the server to access these resources. Now REST services defines a way on how these resources can be accessed.
 
-### 6 REST Constraints (*know these and google what they mean!*) :star:
+### 6 REST Constraints:
 There are six architectural constraints which makes any web service are listed below:<br>
 
   :one: Uniform Interface<br>
+There should be a uniform way to interacting with different type of application. It had some guidlines: Identifying the resource, resource representation, self-descriptive message, Hypermedia as the Engine Application state (include links for each response so clients can discorverd other resources easily),
   :two: Stateless<br>
+The server must not hold anything related to the sesion. "No client context shall be stored on the server between requests". 
   :three: Cacheable<br>
+Support caching
   :four: Client-Server<br>
+Deparate cliet and server site
   :five: Layered System<br>
+Ex: deploy the API on server A, store data on server B, authenticate request on server C
   :six: Code on Demand (optional)<br>
+Allow some customer to run some code on demand. Thus different customer can behave in specific way 
 
 ## What is SOAP?
 - Simple Object Access Protocol: used to "expose" and "consume" webservices
@@ -261,5 +257,3 @@ There are six architectural constraints which makes any web service are listed b
 - The ServletConfig is unique to each individual servlet
   - No other servlet can access another's config
 - The ServletContext is shared across all servlets
-
-# :interrobang: Servlet QC Questions

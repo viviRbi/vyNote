@@ -9,10 +9,16 @@
 - Servlet Classinheritance hierachy:
 	- Interfaces: Servlet, ServletConfig, Serializable
 	- Build-in class: GenericServlet(implements those 3 interfaces), HttpServlet extends from GenericServlet
-User define methods which are http specific
+	- User define methods which are http specific
+- Method in each class:
+	- Servlet interface: init, service, destroy, getServerConfig, getServlet
+	- Servlet Config Interface: getServletName, getServletContext, getInitParameter, getInitParameterNames
+	- Serializable: from java.io.Seralizable
+	- GenericServlet: getServletContext, getServletInfo, getServletName, abstract method service (force to override if extends)
+	- HttpServlet: doHead, doPut, doDelete, doGet, doPost, service
 
 ## How would you create your own servlet?
-- Create a Marven project Project
+- Create a Marven Project
 - Add java.servlet dependency to pom.xml
 - Create the Deployment Descriptor
 - Extends a class from HttpServlet and override the doPost, doGet method or extends from a GenericServlet and ovveride service method
@@ -31,12 +37,21 @@ User define methods which are http specific
 - **init**: the servlet container (like Tomcat) call init method exactly once after instantiating the servlet. The servlet container cannot place the servlet into service if the init method throws a ServletException or not return within a time period defined by the web browser
 - **service**: called after init method completed successfull, by the servlet container to allow servlet to responsd to a request
 - **destroy**: Called by the servlet container to indicate to a servlet that the servlet is being taken out of service. It clean up any resources that are being held (memory, file handlers, threads)
+
 ## Is eager or lazy loading of servlets the default? How would you change this?
-- Lazy loading was servlet default. It only initialized when the client sends a request
-- EagerLoading is initialized through configuration in xml
+- Lazy loading was servlet default. It only initialized when the client sends a request. Ex: photo do not load until user scroll down where the next photo are 
+- EagerLoading is initialized through configuration in xml, it load all your resources as once. Good if your pafe light weight
+- Add load-on-start-up to servlet tag in web.xml
+```java
+<servlet>
+	<servlet-name>Abv<servlet-name>
+	<servlet-class>com.java.AbvServlet</servlet>
+	<load-on-startup>0</load-on-startup>
+</servlet>
+```
 
 ## What are some tags you would find in the web.xml file?
-<servlet>,<display-name>,<welcome-file-list>,<welcome-file><error-page><location>,<servlet>,<servlet-mapping>,<serlet-name>,<url-pattern>
+servlet,display-name,welcome-file-list,welcome-file,error-page,location,servlet,servlet-mapping,serlet-name,url-pattern
 
 ## What is the difference between the ServletConfig and ServletContext objects? How do you retrieve these in your servlet?
 - **ServletConfig** contains initialization and startup parameters for a single servlet. Web container will create 1 ServletConfig instance for each servlet. Properties remain the same for users invoking the servlet. Can be used for a single servlet
@@ -81,6 +96,22 @@ response.addCookie
 	- Front end receive the data as Json, turn it to an obj and use querySelector to update html
 
 ## What is the difference between getParameter() and getAttribute() methods?
+- getParameter used to retieve data from client page submit form. It returns a string
+```html
+<form>
+	<input name="number" value = 2>
+</form
+```
+```java
+	class GetNum extends HttpServlet(...req, ...res) throws..{
+		String a = req.getParameter("number"); // 2
+		PrintWriter pw = res.getWriter();
+		res.setContentType("text/html")
+		pw.println(a + 6) //Send to frontend
+		pw.close()
+	}
+```
+- request.getAttribute() use to pass data to JSP/Serlet (server-side usageW, inside only 1 application). It can return object
 
 ## Explain the front controller design pattern
 - All requests that come from a resource in an application will be handle by a single handler then dispatched to the appropriate handler for that type of request
@@ -89,8 +120,8 @@ response.addCookie
 - Static: non-interractive that provide generic info
 - Dynamic: runs on a web container, generate page on the fly by contacting database
 
-## Generic vs HttpServlet
-- Generic: Can be used with any protocol, service() is abstract method and should be overridden
+## GenericServlet vs HttpServlet
+- Generic Servlet: Can be used with any protocol, service() is abstract method and should be overridden
 - Http servlet: HTTP protocol only, service() need not be overidden and it can be replace with doGet, doPost
 
 ## Http error code

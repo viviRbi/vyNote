@@ -77,7 +77,7 @@ public class SuperPrison {
 ##  What are the interfaces of Hibernate?
 Core Interface | What it does
 ---- | -----
-Session | The persistence manager that manages the interaction to DB and execute CRUD (create, read, update, delete). It is not meant to be keep long since it is not thread-safe plus its instances are lightweight and inexpensive to create and destroy. It created in every DAO method and known as persistence obj. It had 3 life cycle: trasient (just instanciated), persistent (had a repesentation in the database and an identifier value, in the scope of a session). Detached: (detached instance had been persistent, but its session had close)
+Session | The persistence manager that manages the interaction to DB and execute CRUD (create, read, update, delete). It is not meant to be keep long since it is not thread-safe plus its instances are lightweight and inexpensive to create and destroy. It created in every DAO method and known as persistence obj. 
 Configuration | gather information from ``hibernate.cfg.xml`` or ``hibernate.properties`` file. Loads mapping and configuration file into memory and makes them available to hibernate engine. It act as factory to create the SessionFactory | 
 Session Fatory | Deliver session objects to hibernate application. Intance of it is not lightweight and usually there is only one instance for the whole application unless there is multiple database (need one per database)
 Transaction | An optional interface. Define the unit of works. In hibernate, it is better to rollback the transaction if any exception occurs so the resources can be free
@@ -108,21 +108,145 @@ cr.add(Restrictions.eq("salary", 2000));
 List results = cr.list();
  ```
 
+## Session life cycle. Transient, Persistent and Detache Obj
+It had 3 life cycle: 
+- Trasient: A New instance of  a persistent class which is not associated with a Session, has no representation in the database and no identifier value
+```java
+UserDetail user = new UserDetail();
+user.setUserName("Dinesh Rajput");
+// user is in a transient state
+```
+- Persistent: A persistent instance has a representation in the database , identifier value assigned to it, and is associated with a Session. (It is in the session scope). You can make a transient instance persistent by associating it with a Session: 
+```java
+session.save(user);
+// user is now in a persistent state
+```
+- Detached:  if we close the Hibernate Session, the persistent instance will become a detached instance: it isn’t attached to a Session anymore and no longer in the session scope (but can still be modified and reattached to a new Session later).
+```java
+session.close();
+//user in detached state
+```
 ##  Tell me how you set up hibernate? What files are you editing, what goes in them, etc.
-- Create a maven project and add Hibernate dependency
-- Add Hibernate configuration: In resources folder, create hibernate.cfg.xml with JDBC properties name ="hibernate.connection.username", "..password", "..url", driver properties:"...driver_class", "..dialect", "...pool_size", hibernate.hbm2ddl.auto,
-- Create org.hibernate.SessionFactory obj
-- Make hibernate API call on seesion obj
+- Create a maven project and add Hibernate, database dependency
+- Add Hibernate configuration: In resources folder, create hibernate.cfg.xml with  DOCTYPE directive and hibernate-configuration tag. Then add session-factory tag. Inside it is:
+  - JDBC properties (propety name ="hibernate.connection.username", the same for password, url)
+  - driver properties ("property name hibernate.connection.driver_class", the same with dialect, pool_size")
+  - hibernate.hbm2ddl.auto (set to validate, create, update, none) (create means everytime it runs, if the table exist it'll drop the table then create a new one)
+  - mapping tag to map the class
+```xml
+<property name="hibernate.connection.username">postgres</property>
+<property name="hibernate.connection.password">postgres</property>
+<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/postgres</property>
+
+<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+<property name="hibernate.connection.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+
+<property name="hibernate.connection.pool_size">10</property>
+<property name="hibernate.hbm2ddl.auto">validate</property>
+
+<mapping class="com.revature.models.Crime" />
+<mapping class="com.revature.models.SuperVillain" />
+```
+- Create the HibernateUtilclass that handle startup and access Hibernate's session factory using Session, Configuration, SessionFactory
+```java
+public class HibernateUtil{
+  private static Session ses;
+  private static SessionFactory sf = new Configuration().configure("hibernate.cfx.xml").buildSessionFactory();
+
+  public static Session getSession(){
+    if(ses == null){
+      ses = sf.openSession();
+    }
+    return ses;
+  }
+  public static void closeSes(){
+    ses.close();
+    sf.close();
+  }
+}
+```
+## What is POJO
+- Java classes whose objects or instances will be stored in database are called persistent classes in Hibernate. It works best if the object follow some simple rules, known as POJO (Plain Old Java Object)
+- The rules are: 
+  - Need a default constructor
+  - Contain an id field
+  - All attributes should be declare private and have getter and setter methods (getXX, setXX)
 ##  What ways are available to you to map an object to database entities in Hibernate?
+  - Annotation (it uses POJO class, anotation and hibernate.cfg.xml file instead of hibernate mapping file): 
+      - Save ```<mapping class="com.revature.models.Crime" />``` in hibernate.cfg.xml
+      - Create some annotation in POJO class, like: 
+        - @Entity declare it is an Entity, that class is a table
+        - @Table, hibernate will use the class name as table by default
+  - XML mapping metadata (old): 
+    - Create className.hbm.xml file with ?xml and DOCTYPE directive and hibernate-mapping root element, follow by a class tag and id, property tag for id column and other columns
+    - Usually the file stays together with POJO, but we can provide the path if it is not.
+```xml
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name = "Employee" table = "EMPLOYEE">
+      <meta attribute = "class-description">
+         This class contains the employee detail. 
+      </meta>
+      <id name = "id" type = "int" column = "id">
+         <generator class="native"/>
+      </id>
+      <property name = "firstName" column = "first_name" type = "string"/> 
+   </class>
+</hibernate-mapping>
+```
+## In the session interface, what is the difference between save and persist methods? get and load methods? Update vs merge methods?
+### Save vs Persist: Insert obj to database
+session.save(obj) | session.persit(obj)
+------ | -------
+form Hibernate | from JPA
+The return type is the new indentifier id value ```Serializable id = session.save(student)// return id of 1``` | The return type is void
+Can be use inside or outside of the transaction boundary | Can only be use inside the boundary of the transaction
+Make transient obj become persistent, value assign to that persistent obj immediately | Make transient obj become persistent, but doesn't guarantee that the identifier value assigned immediately (might happen at flush time)
+throws an exception if an entity already exists in database | throws an exception if an entity already exists in database
+Create a new row in the table for detached object | Throw a persistance exception for detached obj  
+### Get vs Load: fetch data from database
+Get | Load
+------ | -------  
+Load data as soon as it called | returns a proxy object without hitting the database and loads data only when required (support lazy loading)
+Use to make sure if data exist, return null if not exist | throw exception when data not found so we should only use if we know data exists
+```java
+Employee emp = session.get(Employee.class, 1);
+          //  className of the obj ^       ^ primary key
+```
+### Update vs Merge: Change the state of an obj (transfer an obj from detached state to persistent state)
+Update | Merge
+------ | -------  
+throw an exception if the session had a persistent obj with the same primary key | automatically update the database after change an obj from detached to persitent
+Used to save obj in database | Main aim is to update the change made by the persitent obj
+##  What are the different session methods?
     
-7.  In the session interface, what is the difference between save and persist methods? get and load methods? Update vs merge methods?
-    
-8.  What are the different session methods?
-    
-9.  What is the difference between Eager and Lazy fetching and how to setup either?
-    
-10.  Under what circumstances would your program throw a LazyInitializationException?
-    
+##  What is the difference between Eager and Lazy fetching and how to setup either?
+
+### Lazy: load on demand
+- @OneToMany and @ManyToMany are default to LAZY loading
+- For ex: we have hundred of employees in a Boss entity
+```java
+@Id 
+@Column(name = "bossId")
+@GeneratedValue(stragegy=GenerationType.AUTO)
+private String userId;
+
+@OneToMany (targetEntity = Employee.class, fetch = fetchType.LAZY, cascade = CascadeType.ALL)
+@JoinColumn(name="boss_id", referenedColumnName = "bossId") // join or not doesn't effect how Lazy boss instance  behave on lazy fetching
+private Set<Employee> employees;
+
+public void getEmployees(){return this.employees}
+```
+- Because we set employees' field to lazy fetch type, when fetch the boss and print its instance, we doesn't see that employees field. However, if we call getEmployees method, all will be fetch
+### Eager: load all
+- @ManyToOne and @OneToOne are default to Eager Loading
+
+##  Under what circumstances would your program throw a LazyInitializationException?
+   When it outside of session scope 
 11.  What are the 4 ways to make a query using Hibernate?
     
 12.  What is HQL? What makes it different from SQL?
@@ -163,7 +287,7 @@ List results = cr.list();
 20.  What are the different object states in Hibernate? What methods move objects to different states?
     
 21.  What is a proxy? When does the proxy resolve to the real object?
-
+- Proxy is dymanic subclass of the session obj(User class, User Proxy class)
 <hr>
 
 # Hibernate Study Guide

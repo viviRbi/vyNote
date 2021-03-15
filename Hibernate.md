@@ -288,6 +288,9 @@ Concern about relationship between 2 tables | concerned about relation between o
 13.  What is the Criteria API? Can you perform all DDL and DML commands with it? How do Restrictions and Projections work within this API?
     
 14.  What is caching? What is the difference between L1 and L2 cache?
+- Normally, the data we need for any process resides in the main memory. However, it is transferred to the cache memory temporarily if it is used frequently enough. 
+- The process of storing and accessing data from a cache is known as **caching**.
+(- Cache is a type of memory that is used to increase the speed of data access.)
 - Level 1
   - Session scope
   - Enabled by default (no config)

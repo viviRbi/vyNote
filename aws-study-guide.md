@@ -1,9 +1,19 @@
 # ⁉️ AWS & Cloud Computing QC Questions
 *The following are questions that you may be asked about Amazon Web Services and Cloud Computing Models.*
 
-1. What is cloud computing?
-2. What are the 3 models of cloud computing? *(Explain IaaS, PaaS, SaaS).*
+## What is cloud computing?
+- It is the **delivery** of computing services over the internet
+- Including servers, storage, databases, networking, software, analytics, and intelligence—over the Internet (“the cloud”)
+- Offer faster innovation, flexible resources, and economies of scale
+## What are the 3 models of cloud computing? *(Explain IaaS, PaaS, SaaS).*
+- IaaS: the most basic - servers, virtual machines, networks, operating system. Ex: AWS, Microsoft Azure
+- PaaS: supply on an on-demand enviroment for developing, testing, delivering and managing software app without worrying about setting up or managing the infrastructure. Ex: AWS Elastic Beanstalk, Window Azure, Heroku
+- SaaS: Cloud providers host and manage the software application and infractructure + handle the mantenance like softare upgrade and security patching. Ex: Dropbox, Saleforce, slack, docusign
 3. List 3 advantages of cloud computing over the traditional on-premises model.
+Cloud-Computing | On-premises
+--- | ---
+No upfront cost | Enormous upfront cost, no sucribtion fee
+Have a team of global cybersecurity experts safegruard all the time | Responsible for creating your own security system
 4. What is AWS?
 5. What is Amazon RDS?
 6. What types of RDBMS Vendors does Amazon RDS support?

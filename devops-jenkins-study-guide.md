@@ -1,6 +1,13 @@
 # :interrobang: DevOps, Jenkins and CI/CD QC Questions 
 1. What is DevOps? What is the goal of various DevOps processes?
-   > The term DevOps was formed by combining the words “development” and “operations” and signifies a cultural shift that bridges the gap between development and operation team. It aims to shorten the systems development life cycle and provide continuous delivery with high software quality.
+   > DevOps is a set of practices that combines software development and IT operations. It aims to shorten the systems development life cycle and provide continuous delivery with high software quality.
+	> DevOps process: 
+		> Continous Development: a proces of developing software to be delivered to customers (involved continuous intergration, continuous testing, continuous delivery, continuous deployment). It faster delivery of new products features that are higher quality and lower risk
+		> Cotinuous intergration: Developers update and merge their code changes into a shared repository where those updates are automatically tested
+		> Continuous testing: a verification process that allows developer to ensure the code actually works the way it was intended to in a live environment
+		> Continuous monitering and feedback: allows IT operations to identify issues and notify developer in real time
+		> Continuos delivery: the next logical step from CI. CD automate the release process so that new build can be release at a click button
+		> Continous deployment: for seasonal DevOps organizzation, continuos developement can be betten than C.Delivery. It is the fully automatic version of CD with no human
 
 2. Explain CI/CD. (Continuous Integration/Continuous Delivery)
 

@@ -223,12 +223,16 @@ Update | Merge
 throw an exception if the session had a persistent obj with the same primary key | automatically update the database after change an obj from detached to persitent
 Used to save obj in database | Main aim is to update the change made by the persitent obj
 ##  What are the different session methods?
-    
+    save, persist, update, merge, get, load, saveOrUpdate, delete, beginTransaction, , createQuery, flush (force our statement to execute in dataabase but not commit. usefull when we have no idea when the session executed like when use persit or update becasue of caching. After session.commit, changes saved in database)
 ##  What is the difference between Eager and Lazy fetching and how to setup either?
 
-### Lazy: load on demand
-- @OneToMany and @ManyToMany are default to LAZY loading
-- For ex: we have hundred of employees in a Boss entity
+Lazy: fetch on demand.The associate of the obj will not be populated until the property/ collection is accessed in code | Eager: fetch all, inlude the associations
+--- | -----
+@OneToMany and @ManyToMany are default to LAZY loading | @ManyToOne and @OneToOne are default to Eager Loading
+often get LazyInitializationException | avoid the exception but have perfomance pproblem for huge database
+Lazy association exposed via proxy | --
+
+For ex: we have hundred of employees in a Boss entity
 ```java
 @Id 
 @Column(name = "bossId")
@@ -236,20 +240,50 @@ Used to save obj in database | Main aim is to update the change made by the pers
 private String userId;
 
 @OneToMany (targetEntity = Employee.class, fetch = fetchType.LAZY, cascade = CascadeType.ALL)
-@JoinColumn(name="boss_id", referenedColumnName = "bossId") // join or not doesn't effect how Lazy boss instance  behave on lazy fetching
+@JoinColumn(name="boss_id", referenedColumnName = "bossId") // join or not doesn't effect how boss instance behave on lazy fetching
 private Set<Employee> employees;
 
 public void getEmployees(){return this.employees}
 ```
-- Because we set employees' field to lazy fetch type, when fetch the boss and print its instance, we doesn't see that employees field. However, if we call getEmployees method, all will be fetch
-### Eager: load all
-- @ManyToOne and @OneToOne are default to Eager Loading
+Because we set employees' field to lazy fetch type, when fetch the boss and print its instance, we doesn't see that employees field. However, if we call bossInstance.getEmployees() method, all will be fetch
 
 ##  Under what circumstances would your program throw a LazyInitializationException?
-   When it outside of session scope 
+- LazyInitializationException is the most common exception in Hibernate
+- It happens when we need to initialize a lazy fetch assocation while the session had close. 
+- Usually because we retrieve the return object in Dao layer from service layer and trying to access the associate there.
+- To fix: join fetch, use @NameEntityGraph / EnityGraphAPI or use DTO projection
+- Join Fetch: ```session.createQuery("--")``` and perform a left join, or ```@joinColumn(name="--")```
+- Entity Graph API or anotation 
+```java
+EntityGraph<Author> graph = em.createEntityGraph(Author.class);
+graph.addAttributeNodes(Author_.books);
+//.......
+```
+- DTO project: better perfoment if only use for read operation
+```java
+session.getTransaction().begin()
+TypedQuery<AuthorDto> q = session.createQuery("SELECT new org.thoughts.on.java.model.BookPublisherValue(b.title, p.name) FROM Book b JOIN b.publisher p WHERE b.id = :id", BookPublisherValue.class);
+q.setHint(QueryHints.CACHEABLE, true); // if want to cache
+BookPublisherValue value = q.getSingleResult();
+```
+- 
 11.  What are the 4 ways to make a query using Hibernate?
-    
+- HQL syntax (session.createQuery)
+```java
+String hql = "FROM Employee";
+Query query = session.createQuery(hql);
+List results = query.list();
+```
+- SQL syntax (session.createSQLQuery)
+- Criteria API  (session.createCriteria) 
+- session method like save, persist, update ?
 12.  What is HQL? What makes it different from SQL?
+- HQL stands for Hibernate Query language, it is similar to SQL. However, HQL is fully Object Oriented and understands notions like inheritance, polimorphism
+SQL | HQL
+--- | ---
+Based on relational database | Combine OOP with relational database
+Manipulate data, columns and rows in tables | concern about object and properties
+Concern about relationship between 2 tables | concerned about relation between object
     
 13.  What is the Criteria API? Can you perform all DDL and DML commands with it? How do Restrictions and Projections work within this API?
     

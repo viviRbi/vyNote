@@ -306,8 +306,44 @@ Concern about relationship between 2 tables | concerned about relation between o
     - Read_Write – for objects to be updated, only aware of changes through hibernate
     
 15.  How do you enable second level caching?
-    
+- We can use Cachable anotation to enable it at table level, and use Chache anotation to set its usuage type
+```java
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+``` 
 16.  Tell me about NamedQueries.
+- Name query  is way to use any query by some meaningful name
+- session.getNamedQuery is a method to used the named query and return an instance of it
+```java
+Employee.java
+@NamedQueries(  
+    {  
+        @NamedQuery(  
+        name = "findEmployeeByName",  
+        query = "from Employee e where e.name = :name"  
+        )  
+    }  
+)  
+  
+@Entity  
+@Table(name="em")  
+public class Employee {  
+    public String toString(){return id}  
+    @Id  
+    @GeneratedValue(strategy=GenerationType.AUTO)  
+    int id;   
+       
+    //getters and se
+}
+FetchData.java
+public class Fetch {
+  public static void main(String[] args){
+    TypeQuery = session.getNameQuery("findEmployeeByName");
+    query.setParameter("name","amit");
+     List<Employee> employees=query.getResultList();   
+  }
+}
+```
     
 17.  Can you write native SQL with Hibernate? Is this a good idea?
     

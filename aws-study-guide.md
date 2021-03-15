@@ -16,8 +16,10 @@ No upfront cost | Enormous upfront cost, no sucribtion fee
 Have a team of global cybersecurity experts safegruard all the time | Responsible for creating your own security system
 ## What is AWS?
 AWS (Amazon Web Services) is a PaaS (Platform as a Service) which offers many SaaS (Software as a Service) and IaaS (Infrastructure as a Service) IT solutions on the cloud (i.e. hosted remotely on their many server farms). Amazon offers many services at various price points and dominates the cloud IT market today.
-5. What is Amazon RDS?
-6. What types of RDBMS Vendors does Amazon RDS support?
+## What is Amazon RDS?
+- Amazon RDS is Amazon Relational Database Service (Amazon RDS) which makes it easy to set up, operate, and scale a relational database in the cloud.
+## What types of RDBMS Vendors does Amazon RDS support?
+MySQL, MariaDB, Postgresql, Oracle
 7. What are security groups?
 8. How do you connect to an Amazon RDS?
 ## What is Amazon EC2?
@@ -26,7 +28,8 @@ EC2, Elastic Cloud Compute, is a web service providing flexible computing power 
 11. How does Amzon EC2 differ from Amazon RDS?
 12. Name 2 ways to connect to an Linux EC2 Instance. *Hint: Check out AWS documentation [here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html).  We connected using **one** of these methods in class.*
 ## What is an AMI (Amazon Machine Image)? How is it used in relation to and EC2?
-An AMI (Amazon Machine Image) is a snapshot of a preconfigured operating system ready to be flashed onto a new EC2 instance. Amazon offers many Linux and Windows AMIs, including its own Linux distribution 'Amazon Linux', all of which come with pre-installed tools and services as well as proper security settings and user account configurations.
+- An AMI (Amazon Machine Image) is a snapshot of a preconfigured operating system ready to be flashed onto a new EC2 instance. Amazon offers many Linux and Windows AMIs, including its own Linux distribution 'Amazon Linux', all of which come with pre-installed tools and services as well as proper security settings and user account configurations.
+- AMI are templates from which it is possible to create a virtual machine. It can be flash into an EC2 instance
 
 <hr/>
 

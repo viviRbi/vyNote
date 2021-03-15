@@ -353,7 +353,8 @@ public class Fetch {
     
 *  What data must be specified for the SessionFactory?
     
-*  What is hbm2ddl?
+## What is hbm2ddl?
+hbm2ddl.auto is a hibernate configuration property. It is used to validate and exports schema Data Defintion Language to the database when the SessionFactory is created.
     
 19.  How would you configure Hibernate to print to the console all SQL statements run?
     

@@ -24,7 +24,7 @@
 
 ## What are some features of the Angular framework?
 - Two-way data binding (ngModel) establish a connection between the user interface and business logic. When we input something, it will linked to a field in its Component class. We then can iterpolate that field in its html template
-- Directives: instruction we provide to the DOM for rendering a template. ngModel for data binding is one of , ng-repeat="x int names", *ng-if, *ng-for, @Component is also a directive
+- Directives: instruction we provide to the DOM for rendering a template. ngModel for data binding is one of them, ng-repeat="x int names", *ng-if, *ng-for, @Component is also a directive
 - Create user interface template in HTML rather than javascript
 - Angular use Jasmine testing framework
 - Also, Angular CLI is a pretty powerful tool
@@ -41,7 +41,7 @@ Use the Anglar CLI: ng new projectName
 
 ## What is a component? How would you create one? List some other commands using the Angular CLI
 - A component is the main building block of the application. It is a special kind of directive that uses a simpler configuration
-- Each component control their own View and Data unless @input and @output decorator involed
+- Each component control their own View and Data
 - Each component had its own life cycle
 - It inludes a component decorator( which contains template like html template link and metadata like selector, styleUrl) and an exported class
 ```angular

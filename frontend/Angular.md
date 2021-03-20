@@ -9,7 +9,7 @@
 
 **Server side (backend end) rendering**:
 - The server get the data, use their programing language to **render** a webpage into plain HTML then send it to client.
- (ex: <h1>Hi <?php echo $username; ?> !</h1> // Hi Don)
+ (ex: ```<h1>Hi <?php echo $username; ?> !</h1> // Hi Don```)
 - It's a burden on memory and processing power on the Server
 - Force user to wait while the page begin process and re-created. Good for SEO
 - Faster at first time load

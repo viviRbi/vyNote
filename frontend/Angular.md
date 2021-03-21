@@ -43,7 +43,7 @@ Use the Anglar CLI: ng new projectName
 - A component is the main building block of the application. It is a special kind of directive that uses a simpler configuration
 - Each component control their own View and Data
 - Each component had its own life cycle
-- It inludes a component decorator( which contains template like html template link and metadata like selector, styleUrl) and an exported class
+- A component ts file inludes a component decorator( which contains template like html template link and metadata like selector, styleUrl) and an exported class
 ```angular
 ng generate component componentName
 ng g c componentName

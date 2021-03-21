@@ -52,7 +52,7 @@ ng g c componentName --flat
 
 
 ## What files make up a component? What is the “spec” file used for?
-- A component make up of .html, .css, .ts, .spect.ts and they have to be declared in a module to be used
+- A component make up of .html, .css, .ts, .spect.ts and the component have to be declared in a module to be used
 - spec file use for testing
 
 ## Explain the relevance of npm to Angular projects. Which file does npm use to track dependencies?

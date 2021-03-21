@@ -1,6 +1,6 @@
 # Angular
 
-## What makes a ìsingle page applicationî (SPA) different from a normal web page?
+## What makes a ‚Äúsingle page application‚Äù (SPA) different from a normal web page?
 - **Single Page Application** means there is only 1 true html file (usually index.html), and all components live there. We manage the layout(aka which component got displayed) by routing which copy html file style url 
 - **Normal web page** in the other hand have multiple html file and each url represent 1 html file. 
 - For first time load, normal webpage is faster but from the second time, single page application is faster
@@ -34,7 +34,7 @@
 - TypeScript comes as a bridge to Javascript for developer with OOP background that support static typing, interfaces, classes. It compiles to pretty straightforward Javascript
 
 ## List the data types of TypeScript
-- number, boolean, string, void (used on function return type), null, undefined, any
+- number, boolean, string, void (used on function return type), null, undefined, any. Anything else is object type (array, enum, class, interfaces,...)
 
 ## How would you create a new Angular project?
 Use the Anglar CLI: ng new projectName
@@ -51,7 +51,7 @@ ng g c componentName --flat
 ```
 
 
-## What files make up a component? What is the ìspecî file used for?
+## What files make up a component? What is the ‚Äúspec‚Äù file used for?
 - A component make up of .html, .css, .ts, .spect.ts and they have to be declared in a module to be used
 - spec file use for testing
 
@@ -96,13 +96,13 @@ How does dependency injection work in Angular?
 
 What is an Angular module? What properties should you set inside it?
 
-Whatís the difference between a JavaScript module and Angular module? What are some common Angular modules?
+What‚Äôs the difference between a JavaScript module and Angular module? What are some common Angular modules?
 
 How would you lazy load a module?
 
 How have you used the HttpClient? What methods does it have and what do they return?
 
-What is an Observable? Whatís the difference between it and a Promise?
+What is an Observable? What‚Äôs the difference between it and a Promise?
 
 What forms of data binding does Angular support? Explain the syntax for each
 
@@ -112,6 +112,6 @@ How would you implement routing in your project?
 
 What is an EventEmitter and when would you use one?
 
-Whatís the difference between using reactive and template-driven forms? How would you setup each?
+What‚Äôs the difference between using reactive and template-driven forms? How would you setup each?
 
 How would you run your unit tests for an Angular project?

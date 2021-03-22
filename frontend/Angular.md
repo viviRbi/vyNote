@@ -82,7 +82,7 @@ ng g c componentName --flat
 ## What is a directive and what are the different types? How to tell these directives apart with syntax?
 - A directive is instructions for rendering a template
 - 3 diferent types:
-	- Component: also know as Directives with templates, a special kind of Directive
+	- Component: also know as Directives with templates, The @component directive is a special type of directive that inherits from the @Directive decorator
 	- Attribute Directives: change apperance or behavior of an element. Ex: 
 ```angular
 <h1 [ngStyle]="aComponentField"></h1>

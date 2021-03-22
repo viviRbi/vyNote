@@ -125,14 +125,15 @@ How would you lazy load a module?
 - Then, in its own component, or in its owned route module.
 - In the parent route module or app module, use loadChildren: es6 arrow function expression to import path to that module, then use .then to call that module class 
 
-How have you used the HttpClient? What methods does it have and what do they return?
+## How have you used the HttpClient? What methods does it have and what do they return?
 - Yes. HttpClient is a wrapper over the JavaScript XMLHttpRequest API
 - Methods: get, post, 
 
-What is an Observable? What’s the difference between it and a Promise?
-- Observables are just 1 way to work with async in JavaScript. It is not belong to Angular alone but resides in a Js library called RxJs
-- It is a wrapper around a stream of value (datasource). It called the subscribe method which have 3 functions to handle, 1 is success - a must have and 2 optional functions for error and complete
-- An observable can only be accessed by a consumer who subscribes to it
+## What is an Observable? What’s the difference between it and a Promise?
+ Observables are just 1 way to work with async in JavaScript. It is not belong to Angular alone but resides in a Js library called RxJs
+ It is a wrapper around a stream of value (datasource). It called the subscribe method which have 3 functions to handle, 1 is success - a must have and 2 optional functions for error and complete
+An observable can only be accessed by a consumer who subscribes to it
+
 oservable | promise
 ----- | -------
 Aren't native to Javascript, it needs RxJs library | Doesn't need a third party

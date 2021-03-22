@@ -83,35 +83,116 @@ ng g c componentName --flat
 - A directive is instructions for rendering a template
 - 3 diferent types:
 	- Component: also know as Directives with templates, a special kind of Directive
-	- Attribute Directives: change apperance or behavior of an element. Ex: <h1 [ngStyle]="aComponentField"></h1>
+	- Attribute Directives: change apperance or behavior of an element. Ex: 
+```angular
+<h1 [ngStyle]="aComponentField"></h1>
+<button [attr.aria-label]="closeLabel"
+```
 	- Structural Directive (* asterisk): DOM structure/layout manipulation. Ex: *ngIf, *ngFor, *ngSwitch - *ngSwitchCase
 
-What is the benefit of using a directive like NgClass over the class attribute, or even property binding to the class attribute?
+## What is the benefit of using a directive like NgClass over the class attribute, or even property binding to the class attribute?
+- With ngClass, we can pass multiple attributes. With class attribute, it's per attribute
+- Property binding is more secure since Angular does not allow HTML with script tags.
 
 What is a pipe? A service?
+- A pile will transform a property before they are displayed. It seperated with a property by a vertical bar {{title | uppercase}}
+- A service is a class with a focused purpose. It is used for features that are independent from any particular component and shared data or logic across components (or encapsulate external interactions)
 
 How would you create a custom pipe? What about a service?
+- To create a custom pipe:
+	- ng generate pipe pipeName
+	- @Pipe decorator to set pipe name
+	- Implement PipeTransfrom interface
+	- Use transform method with at least a parameter
+	- Add it to any module need it
 
-How does dependency injection work in Angular?
+## How does dependency injection work in Angular?
+- To have dependenct injection, we specify the dependency as paramenter with accessor keyword, follow by a name we made, then a semi colon, and its type (class name). Then we can use it by calling that name anywhere in the class
+- It is a shortcut for declare the dependency field, pass it in construtor then set that field equal to it
 
 What is an Angular module? What properties should you set inside it?
+- It is a class with an NgModule decorator. Its purpose is to organize the pieces of our application and arrange them into blocks. It also allow us to sellectively adding classes from other module and re-export
+- Properties we should set insided it (imports) is modules. Ex: RouteModule, BrowserModule, Form Module
 
 What’s the difference between a JavaScript module and Angular module? What are some common Angular modules?
+Js module | Angular module
+-------- | --------
+Each file is a module | A combination of diferent features, building blocks (component, directive, service, pipe)
+Organize code | Organize application
 
 How would you lazy load a module?
+- First we must seperate some components to a features module. No app module should import this module or it'll eager load
+- Then, in its own component, or in its owned route module.
+- In the parent route module or app module, use loadChildren: es6 arrow function expression to import path to that module, then use .then to call that module class 
 
 How have you used the HttpClient? What methods does it have and what do they return?
+- Yes. HttpClient is a wrapper over the JavaScript XMLHttpRequest API
+- Methods: get, post, 
 
 What is an Observable? What’s the difference between it and a Promise?
+- Observables are just 1 way to work with async in JavaScript. It is not belong to Angular alone but resides in a Js library called RxJs
+- It is a wrapper around a stream of value (datasource). It called the subscribe method which have 3 functions to handle, 1 is success - a must have and 2 optional functions for error and complete
+- An observable can only be accessed by a consumer who subscribes to it
+oservable | promise
+----- | -------
+Aren't native to Javascript, it needs RxJs library | Doesn't need a third party
+Able to cancel by unsubscribing | Cannot be cancel
+Stream multiple events from the same API | Handle a signle event 
 
-What forms of data binding does Angular support? Explain the syntax for each
+## What forms of data binding does Angular support? Explain the syntax for each
+- 2 form: 2 way binding and 1 way binding. Using Form Module
+- 1 way binding: 
+	- (ngModel), for update the data to the component
+	- Or [ng-model] or {{data.name}} is to display the existing data from component
+- 2 way binding: [(ngModel)]="aComponentField"
 
-What does Webpack do for your ng project?
+## What does Webpack do for your ng project?
+- Webpack is a Javascript module bundler. Angular cli uses it to pack and build the Angular app.
+- It was embedding into Angular CLI. All of it complexicity was hidden. We can switch to native approach using ng eject to look at the webpack config file. But there's no way back
+- A bundle is a JavaScript file that incorporates assets that belong together and should be served to the client in a response to a single file request. A bundle can include JavaScript, CSS, HTML, and almost any other kind of file.
 
-How would you implement routing in your project?
+## How would you implement routing in your project?
+- Import RouterModule, Routes from @angluar/router
+- Create a variable with Routes type, the minimum each object in the array must have is a path and a pointer to specify which component linked to that path
+- In the import array in ngModule directive, add RouterModule.forRoot or forChild
 
-What is an EventEmitter and when would you use one?
+## What is an EventEmitter and when would you use one?
+EventEmitter used for a child to comunicate with its parent. It used with output decorative
+```java
+// child Component
+@Output() propertyChange = new EventEmitter()
+<button (click)= "propertyChange()"></button>
+propertyChange(){this.propertyChange.emit("abc")}
 
-What’s the difference between using reactive and template-driven forms? How would you setup each?
+// Parent Component
+<child-component propertyChange="handleChildData($event)"></child-component>
 
-How would you run your unit tests for an Angular project?
+handleChildData(data){
+	console.log(data)
+}
+```
+
+## What’s the difference between using reactive and template-driven forms? How would you setup each?
+- Angular had 2 techniques to create forms: template-driven and reactive forms
+template-driven | reactive
+----- | -----
+Build form completly in Html template | Build form and put logic in component
+Cannot do unit test, validation handle by html input attr, error can also be display using html with ngIf, follow by inputName.error.required (or .minlength) | Able to do unit test
+Make use of Forms module | Base on Reactive Forms Module
+Mostly Asynchronus | Mostly Synchronous
+Logic driven from template | Logic resides in component
+- To setup templete driven, we import Form Module and use [(ngModel)] for every property followed by name attribute
+```
+<form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)">
+	<em *ngIf="loginForm.controls.password?.invalid && loginForm.controls.password?.touch"></em>
+	<input (ngModel)="password" name="password" required id="password" />
+</form
+
+login(data){console.log(data)}
+```
+- **To setup reactive driven form**, we have to import ReactiveFormComponent in the module
+- Then, we import {form-group, formControl} from '@angular/forms'
+- Set a field and make their type FormGroup (temp name: profileForm)
+- use ngOnInit to set that profileForm to a new FormGroup which each input field is equal to new FormControl()
+- In html template, set [formGroup]="formName", formControlName="inputFieldName"
+## How would you run your unit tests for an Angular project? ng test

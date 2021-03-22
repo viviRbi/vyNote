@@ -107,7 +107,7 @@ How would you create a custom pipe? What about a service?
 	- Add it to any module need it
 
 ## How does dependency injection work in Angular?
-- To have dependenct injection, we specify the dependency as paramenter with accessor keyword, follow by a name we made, then a semi colon, and its type (class name). Then we can use it by calling that name anywhere in the class
+- To have dependenct injection, we specify the dependency as paramenter with accessor keyword, follow by a name we made, then a colon follow by its type (class name). Then we can use it by calling that name anywhere in the class
 - It is a shortcut for declare the dependency field, pass it in construtor then set that field equal to it
 
 What is an Angular module? What properties should you set inside it?

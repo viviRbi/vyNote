@@ -1,6 +1,6 @@
 # Angular
 
-## What makes a ìsingle page applicationî (SPA) different from a normal web page?
+## What makes a ‚Äúsingle page application‚Äù (SPA) different from a normal web page?
 - **Single Page Application** means there is only 1 true html file (usually index.html), and all components live there. We manage the layout(aka which component got displayed) by routing which copy html file style url 
 - **Normal web page** in the other hand have multiple html file and each url represent 1 html file. 
 - For first time load, normal webpage is faster but from the second time, single page application is faster
@@ -51,7 +51,7 @@ ng g c componentName --flat
 ```
 
 
-## What files make up a component? What is the ìspecî file used for?
+## What files make up a component? What is the ‚Äúspec‚Äù file used for?
 - A component make up of .html, .css, .ts, .spect.ts and they have to be declared in a module to be used
 - spec file use for testing
 
@@ -114,7 +114,7 @@ What is an Angular module? What properties should you set inside it?
 - It is a class with an NgModule decorator. Its purpose is to organize the pieces of our application and arrange them into blocks. It also allow us to sellectively adding classes from other module and re-export
 - Properties we should set insided it (imports) is modules. Ex: RouteModule, BrowserModule, Form Module
 
-Whatís the difference between a JavaScript module and Angular module? What are some common Angular modules?
+What‚Äôs the difference between a JavaScript module and Angular module? What are some common Angular modules?
 Js module | Angular module
 -------- | --------
 Each file is a module | A combination of diferent features, building blocks (component, directive, service, pipe)
@@ -129,7 +129,7 @@ How have you used the HttpClient? What methods does it have and what do they ret
 - Yes. HttpClient is a wrapper over the JavaScript XMLHttpRequest API
 - Methods: get, post, 
 
-What is an Observable? Whatís the difference between it and a Promise?
+What is an Observable? What‚Äôs the difference between it and a Promise?
 - Observables are just 1 way to work with async in JavaScript. It is not belong to Angular alone but resides in a Js library called RxJs
 - It is a wrapper around a stream of value (datasource). It called the subscribe method which have 3 functions to handle, 1 is success - a must have and 2 optional functions for error and complete
 - An observable can only be accessed by a consumer who subscribes to it
@@ -172,8 +172,8 @@ handleChildData(data){
 }
 ```
 
-## Whatís the difference between using reactive and template-driven forms? How would you setup each?
-- Angular had 2 techniques to create forms: template-driven and reactive forms
+## What‚Äôs the difference between using reactive and template-driven forms? How would you setup each?
+Angular had 2 techniques to create forms: template-driven and reactive forms
 template-driven | reactive
 ----- | -----
 Build form completly in Html template | Build form and put logic in component

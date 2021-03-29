@@ -1,6 +1,6 @@
 # Angular
 
-## What makes a ìsingle page applicationî (SPA) different from a normal web page?
+## What makes a ‚Äúsingle page application‚Äù (SPA) different from a normal web page?
 - **Single Page Application** means there is only 1 true html file (usually index.html), and all components live there. We manage the layout(aka which component got displayed) by routing which copy html file style url 
 - **Normal web page** in the other hand have multiple html file and each url represent 1 html file. 
 - For first time load, normal webpage is faster but from the second time, single page application is faster
@@ -51,7 +51,7 @@ ng g c componentName --flat
 ```
 
 
-## What files make up a component? What is the ìspecî file used for?
+## What files make up a component? What is the ‚Äúspec‚Äù file used for?
 - A component make up of .html, .css, .ts, .spect.ts and they have to be declared in a module to be used
 - spec file use for testing
 
@@ -82,7 +82,7 @@ ng g c componentName --flat
 ## What is a directive and what are the different types? How to tell these directives apart with syntax?
 - A directive is instructions for rendering a template
 - 3 diferent types:
-	- Component: also know as Directives with templates, a special kind of Directive
+	- Component: also know as Directives with templates, The @component directive is a special type of directive that inherits from the @Directive decorator
 	- Attribute Directives: change apperance or behavior of an element. Ex: 
 ```angular
 <h1 [ngStyle]="aComponentField"></h1>
@@ -94,11 +94,11 @@ ng g c componentName --flat
 - With ngClass, we can pass multiple attributes. With class attribute, it's per attribute
 - Property binding is more secure since Angular does not allow HTML with script tags.
 
-What is a pipe? A service?
+## What is a pipe? A service?
 - A pile will transform a property before they are displayed. It seperated with a property by a vertical bar {{title | uppercase}}
 - A service is a class with a focused purpose. It is used for features that are independent from any particular component and shared data or logic across components (or encapsulate external interactions)
 
-How would you create a custom pipe? What about a service?
+## How would you create a custom pipe? What about a service?
 - To create a custom pipe:
 	- ng generate pipe pipeName
 	- @Pipe decorator to set pipe name
@@ -110,29 +110,30 @@ How would you create a custom pipe? What about a service?
 - To have dependenct injection, we specify the dependency as paramenter with accessor keyword, follow by a name we made, then a colon follow by its type (class name). Then we can use it by calling that name anywhere in the class
 - It is a shortcut for declare the dependency field, pass it in construtor then set that field equal to it
 
-What is an Angular module? What properties should you set inside it?
+## What is an Angular module? What properties should you set inside it?
 - It is a class with an NgModule decorator. Its purpose is to organize the pieces of our application and arrange them into blocks. It also allow us to sellectively adding classes from other module and re-export
 - Properties we should set insided it (imports) is modules. Ex: RouteModule, BrowserModule, Form Module
 
-Whatís the difference between a JavaScript module and Angular module? What are some common Angular modules?
+## What‚Äôs the difference between a JavaScript module and Angular module? What are some common Angular modules?
 Js module | Angular module
 -------- | --------
 Each file is a module | A combination of diferent features, building blocks (component, directive, service, pipe)
 Organize code | Organize application
 
-How would you lazy load a module?
+## How would you lazy load a module?
 - First we must seperate some components to a features module. No app module should import this module or it'll eager load
 - Then, in its own component, or in its owned route module.
 - In the parent route module or app module, use loadChildren: es6 arrow function expression to import path to that module, then use .then to call that module class 
 
-How have you used the HttpClient? What methods does it have and what do they return?
+## How have you used the HttpClient? What methods does it have and what do they return?
 - Yes. HttpClient is a wrapper over the JavaScript XMLHttpRequest API
-- Methods: get, post, 
+- Methods: get, post, update, delete
 
-What is an Observable? Whatís the difference between it and a Promise?
-- Observables are just 1 way to work with async in JavaScript. It is not belong to Angular alone but resides in a Js library called RxJs
-- It is a wrapper around a stream of value (datasource). It called the subscribe method which have 3 functions to handle, 1 is success - a must have and 2 optional functions for error and complete
-- An observable can only be accessed by a consumer who subscribes to it
+## What is an Observable? What‚Äôs the difference between it and a Promise?
+ Observables are just 1 way to work with async in JavaScript. It is not belong to Angular alone but resides in a Js library called RxJs <br/>
+ It is a wrapper around a stream of value (datasource). It called the subscribe method which have 3 functions to handle, 1 is success - a must have and 2 optional functions for error and complete <br/>
+An observable can only be accessed by a consumer who subscribes to it <br/>
+
 oservable | promise
 ----- | -------
 Aren't native to Javascript, it needs RxJs library | Doesn't need a third party
@@ -172,8 +173,8 @@ handleChildData(data){
 }
 ```
 
-## Whatís the difference between using reactive and template-driven forms? How would you setup each?
-- Angular had 2 techniques to create forms: template-driven and reactive forms
+## What‚Äôs the difference between using reactive and template-driven forms? How would you setup each?
+Angular had 2 techniques to create forms: template-driven and reactive forms
 template-driven | reactive
 ----- | -----
 Build form completly in Html template | Build form and put logic in component
@@ -195,4 +196,5 @@ login(data){console.log(data)}
 - Set a field and make their type FormGroup (temp name: profileForm)
 - use ngOnInit to set that profileForm to a new FormGroup which each input field is equal to new FormControl()
 - In html template, set [formGroup]="formName", formControlName="inputFieldName"
-## How would you run your unit tests for an Angular project? ng test
+## How would you run your unit tests for an Angular project?
+ng test

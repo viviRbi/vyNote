@@ -1,7 +1,7 @@
 # Spring
 ## What is Spring?
 - Spring an umbrella term for a family of frameworks which can be utilized to rapidly create loosely coupled Java applications (lossly coupled = low or weak coupling. When two or more hardware and software components are attached or linked together to provide two services that are not dependent on one another)
-- Spring start out as an **inversion of control container** for Java(IoC Container)(which often refer as dependency injection DI) (- IoC, or DI is the D- Dependency Inversion in SOLID ) 
+- Spring start out as an **inversion of control container** for Java(IoC Container) (- IoC, or DI is the D- Dependency Inversion in SOLID ) 
 - Spring enables developers to build java applications utilizing a POJO design pattern, and applying enterprises services, as needed.
 
 ## What is POJO?
@@ -47,16 +47,18 @@ https://springtutorials.com/spring-ecosystem/
 	- Framwork: IoC Container
 
 ##  What is dependency injection and what are some of the benefits of using dependency injection?
-- Dependency injection is a design pattern which implements the IoC principle to invert the creation of dependent objects
-- It uses one object to suplies the dependencies of other object
+- Dependency injection is a design pattern which implements the IoC principle to invert the creation of dependent objects. It sharing one single object across the application
 
-- **Types** the injector class injects the service (dependency) to the client (dependent). The injector class injects dependencies broadly in three ways: through a constructor, through a property, or through a method:
+- **Types** the injector class injects the service (dependency) to the client (dependent) in 3 way:
 
 	- Constructor Injection: In the constructor injection, the injector supplies the service (dependency) through the client class constructor.
 
 	- Property Injection: In the property injection (aka the Setter Injection), the injector supplies the dependency through a public property of the client class.
 
 	- Method Injection: the dependency provides an injector method that will inject the dependency into any client passed to it. Clients must implement an interface that exposes a setter method that accepts the dependency.
+- **Spring injjection type** - 2 types:
+	- Inject by Constructor
+	- Inject by Setter method
 
     
 ##  What types of dependency injection does Spring support?
@@ -66,7 +68,7 @@ https://springtutorials.com/spring-ecosystem/
 ##  What are some differences between BeanFactory and ApplicationContext? Which one eagerly instantiates your beans?
 BeanFactory | ApplicationContext
 ------ | -------
-Loads on demand (lazy loading) | Load on Startup (Lazy loading)
+Loads on demand (lazy loading) | Load on Startup (Eager loading)
 Considered a lightweight Container | Considered a heavy Container
 Interface, older | Interface extends from BeanFactory Interface
 Only support Singleton and prototype | More features. Provide several suitable features for enterprise applications. Preferable in complex enterprise application. Suport all 5 type of bean scopes (Singleton,Prototype, Request, Session, Global)
@@ -195,7 +197,13 @@ public class Employee {
 ```
     
 ##  What are the scopes of Spring beans? Which is default?
-- Spring bean had 5 scopes: singleton, prototype, request, session, global-session
+- Spring bean had 5 scopes: 
+	- singleton: Spring IoC container define only 1 instance  of the object
+	- prototype: return different instance everytime request comes from IoC Container 
+- Create though Http call. Only available in web aware context:
+	- request: new instance for every http request and destroy when the call ends 
+	- session: return new instance for every session
+	- global-session: the instance shared accross our web app, every call receive the same bean instance. It is similar to singleton
 - Singleton is the default
 ```java
 <!-- A bean definition with singleton scope -->
@@ -203,16 +211,50 @@ public class Employee {
    <!-- collaborators and configuration for this bean go here -->
 </bean>
 ```
-10.  What is the concept of component scanning and how would you set it up?
+##  What is the concept of component scanning and how would you set it up?
+- Fundamental functionality of a Spring Framework is injection. To know where the bean is and inject it, we need Component Scan.
+- Either use @Component Scan or XML Configuration
+```
+<context:component-scan base-package="com.abc.p1.repository"/>
+@ComponentScan(basePackages = {"com.abc.p1.service"})
+```
+ - As soon as we add @SpringBootApplication, it automatically does the component scan in that class package
+ 
+##  What are the benefits and limitations of Java configuration?
+- Java configuration is the @Configuration that indicate that class can be used by the Spring IoC Container as a source of bean definition
+- Benefits: using Java rather than XML, simplier to search, easier to understand, compiler time checking (able to fix typo immediately), easier to manage
+- Limitations: it's long
     
-11.  What are the benefits and limitations of Java configuration?
+##  What does the @Configuration and @Bean annotations do?
+- @Configuration that indicate that class can be used by the Spring IoC Container as a source of bean definition
+- @Bean is a method-level annotation and a direct analog of the XML <bean/> element. The annotation supports most of the attributes offered by <bean/>, such as: init-method, destroy-method, autowiring, lazy-init, dependency-check, depends-on and scope.
+```java
+@Configuration
+public class AppConfig {
+    @Bean
+    public Foo foo() {
+        return new Foo(bar());
+    }
+
+    @Bean
+    public Bar bar() {
+        return new Bar();
+    }
+}
+```
+
+##  What is @Value used for?
+- Spring @Value annotation is used to assign default values to variables and method arguments. We can read spring environment variables as well as system variables using @Value annotation.
+```
+@Value("string value")
+private String stringValue;
+```
     
-12.  What does the @Configuration and @Bean annotations do?
-    
-13.  What is @Value used for?
-    
-14.  What is Spring Expression Language? What can you reference using SpEL? What is the difference between $ and # in @value expressions?
-    
+##  What is Spring Expression Language? What can you reference using SpEL? What is the difference between $ and # in @value expressions?
+- Spring Expression Language is a powerful expression language that supports querying dynamically at runtime. It can be use with XML or annotation base Spring config. It had servaral operators: boolean and relational operators, relational operators, ternary operator, conditiona loperator, regex operator, etc. We can also use it to inject value into Map and List
+- We can reference to other beans, properties, static content in .properties files
+- # is use for Spring Expresion language
+- $ is use to map with a value in application.properties
 <br>
 
 # Spring MVC
@@ -238,8 +280,7 @@ public class Employee {
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
 			value="org.postgresql.Driver" /
-		<property name="url"
-			value="jdbc:postgresql://localhost:5432/postgres" />
+		<property name="url" 		value="jdbc:postgresql://localhost:5432/postgres" />
 		<property name="username" value="" />
 		<property name="password" value="" />
 	</bean>
@@ -364,29 +405,38 @@ public class SpringRestClient {
 }
 ```
     
-## What are the advantages of using RestTemplate?
-    
-<br>
+## What are the advantages of using RestTemplate? 
+- Rest template provides higher level methods that correspond to each of the six main HTTP methods. We can easilly make a request and receive a reponse from other Restful API
 
 # Spring AOP
 
-28.  What is aspect-oriented programmingù? Define an aspect.
+##  What is aspect-oriented programmingù? Define an aspect.
+- **Aspect Oriented Programming** is a programming paradigm that used for **separating crosscutting concerns** (like logging) into **single units** called **aspects**
+- The key unit of modularity in OOP is the class, whereas in AOP the unit of modularity is the aspect.
+- Aspects can be a normal class configured through Spring XML configuration or @Aspect annotation.
+- An aspect is a class that implements enterprise application concerns that cut across multiple classes, such as transaction management
     
-29.  Give an example of a cross-cutting concern you could use AOP to address
+##  Give an example of a cross-cutting concern you could use AOP to address. We need to log before and after a method run
     
-30.  Define the following:
-    
-
-*  Join point
-    
-*  Pointcut
-    
-*  Advice
+##  Define the following:
     
 
-31.  What are the different types of advice? What is special about the @Around advice? How is the ProceedingJoinPoint used?
+-  Join point: a point in a program like exception handling, changing obj variable. In Spring, join point is always the execution of method. At the join point, an aspect is injected.
     
-33.  Explain the pointcut expression syntax
+-  Pointcut: an expression language that matched a join point
+```java
+@Before("execution(public String getName())")
+```
+    
+-  Advice: A method that execute when a certain join point meet a matching pointcut. Type of advice: Before Advice, After Advice, After Retuning Advice, Around Advice
+    
+
+##  What are the different types of advice? What is special about the @Around advice? How is the ProceedingJoinPoint used?
+- An around advice is a special advice that can control when and if a method (or other join point) is executed. This is true for around advices only, so they require an argument of type ProceedingJoinPoint
+- It used by passing a ProceedingJoinPoint to the method under @Around(""execution(* com.j.c.model.Emp.getName())"") and use proceedingJoinPoint.proceed() to get the valua (name of the employee)
+    
+##  Explain the pointcut expression syntax
+- Join point type, class location start at com., class method
     
 34.  What visibility must Spring bean methods have to be proxied using Spring AOP?
         
@@ -462,7 +512,15 @@ public class TransctionPersistenceContextUserService {
     
 42.  How are Spring repositories implemented by Spring at runtime?
     
-43.  What is @Query used for?
+##  What is @Query used for?
+- @Query is a Spring Data JPA annotation. We can either use JPQL or native SQL (by set nativeQuery = true)
+- @Query annotation annotate the method. The result of the query will be return by the method under it
+```
+@Query(
+  value = "SELECT * FROM USERS u WHERE u.status = 1", 
+  nativeQuery = true)
+Collection<User> findAllActiveUsersNative();
+```
     
 <br>
 

@@ -422,9 +422,12 @@ try(BufferedReader br = new BufferedReader(new FileReader("test.txt"))) {
 
 # Exceptions
 ## What is the difference between final, .finalize(), and finally?
+- final 
 - finally is a block of code that goes together with the try block. It'll executed despite of exception is catch or not
 
-2. Explain throw vs throws vs Throwable
+## Explain throw vs throws vs Throwable
+- throws used to throw multiple exceptions at the method level to the calling method. It is used to force programmer handle it
+- throw used to create the exception obj of our own to throw our own customised exception with our customised message
 
 3. Do you need a catch block? Can you have more than 1? Is there an order to follow?
 

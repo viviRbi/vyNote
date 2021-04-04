@@ -18,7 +18,7 @@ Java:
 	- Java convert code into Java Bytecode and sent to Java Virtual mechine which resides in the RAM of any operating system. JMV recognizes its platform and convert that bytecode into that platform native machine code 
 - Java comes up with garbage collected by default:
 	- In C and C++, programmer is responsible for both the creation and destruction of objects. If programmer forget, the application suffer from memory leaks. Method like free() in C and delete() in C++ will perform garbage collector
-	- In Java, Gabarge colloector happens automatically. Over the life time of a Java application, some objects will no longer needed. At that time the heap memory consist of 2 object types: Live & Dead. The Garbage Collector find these unused obj and free up the memory
+	- In Java, Gabarge collector happens automatically. Over the life time of a Java application, some objects will no longer needed, . At that time the heap memory consist of 2 object types: Live & Dead. The Garbage Collector find these unused obj and free up the memory
 - Java has the 2nd fastest compiler (JIT - Just in Time)
 - Java support multithreaded (parallel programming) which makes the program runs faster which is more preferable in the market. 
 	- By default all Java thread is single threaded. To enable multi-thread, we have 2 ways:
@@ -67,7 +67,7 @@ class GuruThread2 implements Runnable {..}
 - That's why Java Virtual Machine divide memory between Stack Memory and Heap Space
 - **Heap space**: Create by the JVM when it starts and the memory used as long as the app running.
 	- When an obj created, it is always created in the Heap. Java Runtime use it to allocate memory to bject. It had a global access to be reference everywhere in the app
-	- The Garbage collector also look at the heap space to clear un-used object
+	- The main objective of a Garbage collector is to free the heap space by clear un-used object
 - **Stack Memory**: Only use for the method that are currently running. When the method return, everything discard. This is the temporary memory where variables are stored when their methods are invokes. After the method finished, the memory contain those value is cleared.
 	 - If a new instance of an object is created. The pointer to that object in the heap stored in the stack
 
@@ -75,8 +75,8 @@ class GuruThread2 implements Runnable {..}
 - If a new instance of an object is created. The pointer to that object in the heap stored in the stack
 
 ## What is a stack frame? When are these created?
-- It is a frame of data that push to the stack
-- When a function called, a stack frame created. And then all the data put onto the stack frame. It act like a container
+- It is a frame of data of a function that haven't return that was pushed to the stack
+- When a function called, a stack frame created. And then all the data put onto the stack frame. When the function return, the current stack frame deleted from the stack
 
 ## What are annotations?
 - Provide the extra information of a method source code
@@ -84,17 +84,26 @@ class GuruThread2 implements Runnable {..}
 
 ## What is a POJO vs a bean?
 - Plain old Java Object: ordinary Java obj 
-- The only difference between both the classes is Java make java beans objects serialized so that the state of a bean class could be preserved in case required.So due to this a Java Bean class must either implements Serializable or Externalizable interface.
+- The only difference between both the classes is Java make java beans objects serialized so that the state of a bean class could be preserved in case required. So due to this a Java Bean class must either implements Serializable or Externalizable interface.
 
 ## Can you force garbage collection in Java? When is an object eligible for GC?
-- System.gc()
-- Developers can call System.gc() anywhere in their code to instruct the JVM to prioritize garbage collection
+- System.gc() Runtime.gc() but should be avoid since there is no way to predict when garbage collectior will occur at runtime (non-deterministic)
+- Force garbage collector best practice is to set flags on the JVM, a flag can adjust when a garbage collector will be use like set the initial and maximum size of the heap, the size of the heap sections (Young genration, old generation - younf one that lives long enough) (set flag using the CMD -command prompt)
 
 ## Why are strings immutable in java? How would you make your own objects immutable?
-- Because String is an Object, not a primitive type. 
-- 
+- Because String class was made final. 
+- Performent: String pool is possible only because String is immutatable in Java. It saves a lot of heap space because different String variable can refer to the same String variable in the pool.
+- Security: It will impact security for ex: dabase username and password are pass as String. If it were mutable, hacker could change the reference to cause security issues
+- Multithread: String are safe for multithread because it's immutable
+- To made our own object immutable, we declared our class as final
 
 ## What is the difference between String, StringBuilder, and StringBuffer?
+String | String Buffer | String Buider
+----- | ----- | ------
+a final class(thread safe)| synchronized(thread safe) | non-synchonized (not thread-safe)
+immutable | mutable | mutable
+use new keyword or = sign to create | new keyword to create an obj only| new keyword to create an obj only
+-- | less efficent than String Builder | More efficent than String Buffer, faster
 
 ## What are the different variable scopes in Java?
 1. Static Scope
@@ -111,7 +120,7 @@ class GuruThread2 implements Runnable {..}
 
 
 ## What are the access modifiers in Java? Explain them.
-- 4: 
+- 
 
 15. What are the non-access modifiers in Java?
 
@@ -208,6 +217,7 @@ methods?
 
 
 # Collections / Generics
+## Look at if it's a class or an interface first, then look at which interface it implements from
 ## What are collections in Java?
 - All collections are part of java.util package
 - A wide variable type of collection, each have their own specialize
@@ -252,15 +262,16 @@ ArrayList | Vector
 Not thread safe (inconsitent result in multithreading, an use ```Collections.synchronizedList(new ArrayList(arrayList1));```  to archive threadsafe) | Thread safe (in Multithreading, when work on the same data, a thread will prevent another thread perform on that data -> thread safe)
 by default 10 memory location. Once filled, new capacity =(current capacity*3)/2+1 | by default 10 memory locations once it is filled it will give 10 more
 contiguous (meaning data stored with no discontinuities and no padding between them. If memory is so little that only smaller pieces are free, this memory allocation cannot be sastisfy. Faster execution) | not contiguous (allocates separate blocks of memory, fit into small free sapce, reduce waste of memory, slower in excecution)
+newer | older
 
 ## What is the difference between TreeSet and HashSet?
 TreeSet | HashedSet
 ------ | ------
 implements Set, SortedSet, NavigableSet | implements Set
 
-maintain data in sorted order. Compare them by implement Comparable interface inside the object class and use compareTo method. If it's just Integer or String, asc by default. It had decendingSet and decendingIterator method to reverse the sort | unorder
+maintain data in sorted order. Compare them by implement Comparable interface inside the object class and use compareTo method. If it's just Integer or String, asc by default. It had decendingSet and decendingIterator method to reverse the sort | un-order
 
-no null allow (since it use a Comparator, If something compare to null, a NullPointException will be throw) | allow one null
+no null allow (since it use a Comparator, If something compare to null, a NullPointException will be throw) | allow one null (since hashedSet use hashedMap internally and null value added as a key with a dummy empty value, hashedMap check for null key and doesn't hashed the null key)
 not thread safe | not thread safe
 slower | faster
 internally use TreeMap to stored alement. | internally use HashMap to store element. It instatiate HashMap in the constructor, pass it to a variable name map. When we use hashSet.add("123"), internally, it call map.("123",with a dummy value call PRESENT) and then added to the HashMap instance. The dummy PRESENT is just a ```public static final Object PRESENT = new Object();```
@@ -273,7 +284,7 @@ HashTable | HashMap
 Thread safe, synchronized | Not thread safe, not synchronized
 Doesn't allow null key or value (since the key obj had to implement hashcode method and equals, and if the value null then it'll throw NullPointerException)| allow one null key and multiple null value
 old | advance version of HashTable
-doesn't maintain order of insertion | doesn't maintain order of insertion
+doesn't maintain order of insertion | doesn't maintain order of insertion but have a subclass HashLinkedList which is ordered
 
 ``` Everthing named Listed is either have index or mantain order. List interface had indexes. Other mantains value```
 ## LinkedHashMap<K,V> class
@@ -350,7 +361,8 @@ There are 2 ways of create a thread in Java:
 ## List the methods in the Thread class and Runnable interface
 - Runnable interface: run
 - Thread class: getName (name of thread), start, run, sleep, yield, join, isAlive
-4. Explain the lifecycle of a thread
+## Explain the lifecycle of a thread
+- A thread, acording to Sun, have 4 states: new, runable, non-runable, terminated
 5. What is deadlock?
 6. What is the synchronized keyword?
 
@@ -362,7 +374,8 @@ There are 2 ways of create a thread in Java:
 When we serialize an obj in Java, we convert the data into byte streams that then later convert back into the copy of the original data
 
 ## How do you serialize / deserialize an object in Java?
-- To serialize an obj in Java, we implement Serializable interface. transient is a keyword we use to avoid being save
+- To serialize an obj in Java, we implement Serializable interface.
+- JVM skips transient variables during the serialization process. That means the value of the age variable is not stored when the object is being serialized.
 - Create file output stream, object output stream and use its write object methode then close all stream
 ```java
 Student st = new Student("ABC","HighSchool");
@@ -385,7 +398,7 @@ fileOutStr.close();
 - Ex: Serializable interface. It is used to mark that an object is eligiable for saving its state inside a file.
 
 ## What are transient variables?
-- A variable with trasient keyword will not be saved when serialize. It can be use to avoid storing user passord
+- JVM skips transient variables during the serialization process. That means the value of the trainsient variable is not stored when the object is being serialized.
 
 ## Difference between FileReader and BufferedReader?
 File Reader and BufferedReader ar eused to read data from a given character stream
@@ -429,18 +442,38 @@ try(BufferedReader br = new BufferedReader(new FileReader("test.txt"))) {
 - throws used to throw multiple exceptions at the method level to the calling method. It is used to force programmer handle it
 - throw used to create the exception obj of our own to throw our own customised exception with our customised message
 
-3. Do you need a catch block? Can you have more than 1? Is there an order to follow?
+## Do you need a catch block? Can you have more than 1? Is there an order to follow?
+- If we have a try block and didn't want to have a finally block, there must be a catch block
+- Able to catch multiple block
+- The order of a catch block is whatever matches first, gets executed 
 
 4. What is base class of all exceptions? What interface do they all implement?
+- Throwable is the base class of all exceptions (Exception, Error class extends from it) (RuntimeException and OtherException extends from it)
+- They all implements Serializable interface (so that we can serialize the exception object and save it into a file?)
 
-5. List some checked and unchecked exceptions?
+## List some checked and unchecked exceptions?
+- Checked exception (java.lang.Exception) forces programmer to handle it. Until it is handled, the compiler won't allow to run. Some of the Checked exceptions are: FileNotFoundException, SQLException, ClassNotFoundException, FileNotFoundException, et
+- Unchecked exceptions are part of RuntimeException 
 
-6. Multi-catch block - can you catch more than one exception in a single catch block?
+## Multi-catch block - can you catch more than one exception in a single catch block?
+- Yes, from Java 7 to newer, we can by using or | symbol
 
 
 
 # Reflections API
-1. What is Reflection API?
+## What is Reflection API?
+- Java Reflection is a process of examining or modifying the run time behavior of a class at run time.
+```java
+Test abc = new Test();
+  
+Class cls = abc.getClass();
+System.out.println(
+	cls.getName();
+	cls.getConstructor().getName();
+	
+);
+Method[] method = cls.getMethods();
+```
 	
 2. What can you do with the Reflections API that you can’t do in normal code?
 	
@@ -466,32 +499,114 @@ try(BufferedReader br = new BufferedReader(new FileReader("test.txt"))) {
 
 4. What is the difference between Statement and PreparedStatement?
 
-5. Steps to executing an SQL query using JDBC?
+## Steps to executing an SQL query using JDBC?
+- Create an sql string
+- Create a Statement or preparedStatement
+- If it's a prepareStament, set parameter for each ?
+- If it's a select or have a returning clause, executeUpdate() the Prepare Statement and and save the result in a ResultSet obj, then use if statement with resultObj.next() to get each value in each column. If there's an array of result, use while statement with result object.next()
 
-6. How to execute stored procedures using JDBC?
+## How to execute stored procedures using JDBC?
 
 7. Which interface is responsible for transaction management?
 
 
 
 # JUnit
-1. What is Junit?
+## What is Junit?
+- Junit is a testing framework for Java
 
-2. What is TDD?
+## What is TDD?
+- Test driven development is a software development process relying on software development being converted to test cases before software is fully developed
 
-3. What are the annotations in JUnit? Order of execution?
+## What are the annotations in JUnit? Order of execution?
+- @FixMethodOrder(MethodSorters.NAME_ASCENDING): sort all test method inside a class by name. It's a class annotation
+- Life cycle annotations:
+- @BeforeClass: execute some statement before all test cases. It execute before the first test method
+- @BeforeEach: precondition before each test case. Exceute before the @test under it
+- @Test: the void method which it attached too is a test case. Execute the test case
+- @AfterEach
+- @AfterAll
 
-4. Give an example of a test case
 
-5. How would you prevent a test from being run without commenting it out?
+## Give an example of a test case
+```java
+public class JunitExampleTest {				
+
+    private ArrayList<String> list;	
+	
+	@BeforeClass
+	pubic static void beforeAll(){
+		System.out.println("Junit example test class")
+	}	
+
+	@BeforeEach
+	public void createAnEmptyArrayList(){
+		list = new ArrayList<String>();
+	}
+
+	@Test
+	public void testListSize(){
+		list.add("testing");
+		assertFalse(list.isEmpty());
+		assertEquals(1, list.size());
+	}
+
+	@AfterEach
+	public void clear list(){
+		list.clear();
+	}
+	@BeforeEach
+	public beforeTest2(){System.out.println("Before test 2")}
+	@test 
+	public test2(){...}
+}
+
+// Junit example test case
+// array list instanciate
+// testListSize result true true
+// Before test 2
+// test2 result				
+```
+
+## How would you prevent a test from being run without commenting it out?
+- @Disabled, @Ignore annotation
+- @Disable let we write some message for the disabled test
+0 We can also delete the @test annotation too. But it is not a good pratice as it not searchable or maintainable
 
 # Log4j
 1. What are the advantages to using a logging library?
+- Logging is a powerful aid for understanding and debugging program's run-time behavior. Logs capture and persist the important data and make it available for analysis at any point in time.
+- Loging libraries are popular because they run together with our application and they are portable (able to change file location) and easy to use
 
-2. What is log4j?
+## What is log4j?
+- log4j is a popular logging library for Java
+```private static final Logger LOGGER = Logger.getLogger(ExampleLog4j.class);```
 
-3. What are the logging levels of log4j?
+## What are the logging levels of log4j?
+- Info, debug, warn, error, fatal
+- Still in research: multiple logs files 
+```
+log4j.rootLogger=ALL,STDOUT,debugLog  
+log4j.logger.reportsLogger=INFO,reportsLog 
 
+-- All messages except report message
+log4j.appender.debugLog=org.apache.log4j.RollingFileAppender  
+log4j.appender.debugLog.File="/Users/test/debuglog.log"  
+log4j.appender.debugLog.layout=org.apache.log4j.PatternLayout  
+log4j.appender.debugLog.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} %-5p %C:%L - %m%n
+
+-- report messages
+log4j.appender.reportsLog=org.apache.log4j.RollingFileAppender  
+log4j.appender.reportsLog.File="/Users/test/reportslog.log"  
+log4j.appender.reportsLog.layout=org.apache.log4j.PatternLayout  
+log4j.appender.reportsLog.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} %-5p %C:%L - %m%n  
+
+private static Log log= LogFactory.getLog("debugLogger");  
+private static Log reportsLog= LogFactory.getLog("reportsLogger"); 
+  
+log.debug("debug log message");  
+reportsLog.debug("reports debug message");  
+``` 
 
 # Maven
 1. What is Maven?
@@ -522,14 +637,16 @@ feature?
 
 7. If 2 interfaces have the same variable names and you implement both, what happens?
 
-8. Why does HashTable not take null key?
+## Why does HashTable not take null key?
+- Because HashTable serilize the key, if it takes null, it'll throw a null pointer exception
 
 9. What new syntax for creating variables was introduced with Java 10?
 
 10. Is there an interactive REPL tool for Java like there is for languages like Python?
 
 11. What are collection factory methods?
-SQL
+
+## SQL
 1. Explain what SQL is. What are some SQL databases?
 
 2. Draw a simple ERD for modelling Students and Classes
@@ -893,8 +1010,8 @@ you setup each?
 # DevOps
 1. What is DevOps? What is the goal of various DevOps processes?
 
-2. Explain CI/CD. What is the difference between Continuous Deployment and Continuous
-Delivery?
+2. Explain CI/CD. What is the difference between Continuous Deployment and Continuous Delivery?
+
 3. What tools have you used to achieve CI/CD? Explain how you’ve setup and used them
 
 4. What is a DevOps pipeline? Explain the steps to setting one up
@@ -962,8 +1079,7 @@ command line?
 
 
 # AWS
-23. How would you describe AWS? What is “the cloud” or “cloud computing” and why is it so
-popular now?
+23. How would you describe AWS? What is “the cloud” or “cloud computing” and why is it so popular now?
 
 24. Define Infrastructure, Platform, and Software as a Service
 

@@ -248,6 +248,9 @@ public class AppConfig {
 ```
 @Value("string value")
 private String stringValue;
+
+@Value("${rate}")
+String rate;
 ```
     
 ##  What is Spring Expression Language? What can you reference using SpEL? What is the difference between $ and # in @value expressions?
@@ -502,13 +505,15 @@ public class TransctionPersistenceContextUserService {
 }
 ```
     
-38.  Explain how to integrate Spring and Hibernate using ContextualSession
+##  Explain how to integrate Spring and Hibernate using ContextualSession
+- sessionFactory.getCurrentSession()
     
 39.  What interfaces are available in Spring Data JPA?
     
 40.  What is the difference between JPARepository and CrudRepository?
     
-41.  What is the naming conventions for methods in Spring Data repositories?
+##  What is the naming conventions for methods in Spring Data repositories?
+- Lowercase on the 1 word connect to other word by underscore
     
 42.  How are Spring repositories implemented by Spring at runtime?
     

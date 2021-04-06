@@ -16,6 +16,10 @@
   - Support different database management system
 - **Hibernate Internal API**: JTA, JDBC, JNDI
 ---
+
+## Create Session Factory
+``` private static SessionFactory sf = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();```
+
 ##  What is the benefit of using Hibernate over JDBC?
 JDBC (SQL) | Hibernate (ORM)
 ---------- | ----------

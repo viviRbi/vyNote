@@ -317,9 +317,9 @@ String rate;
 - Basically it takes the view name from the controler and prepare the view in the browser without use to hardcode the view location (ex: in class ABC controller, return "/WEB-INF/view/Cricket.jsp"). It'll take the view, add a prefix which is /WEB-INF/view and the suffix which is ".jsp" and add the view name in between
     
 ##  List some stereotype annotations. What are the differences between these?
-- Some stereotype annotations are @Component, @Repository, @Service and @Controller
+- Some stereotype annotations are @Component, @Repository, @Service and @Controller. Component scanner will look and scan/ mangae the life cycle of the classes with these annotation. So we don't have to create a new instance of them evrytime we use
 - Diferent:
-	- @Component: Generic stereotype for any Spring-managed component. Should be used when our class doesn't fall into Controller, Service, or Dao
+	- @Component: Generic stereotype for any Spring-managed component. Should be used when our class doesn't fall into Controller, Service, or Dao. It shouldn't be use for static class like Model
 	- @Repository: indicates that this class provides a mechanism for CRUD operations of this particular object
 	- @Service: stereotype for service layer
 	- @Controller: stereotype for presentation layer (for view and controller in spring mvc). If you add the @Controller annotation to a class then you can use handler mapping annotation i.e. @RequestMapping

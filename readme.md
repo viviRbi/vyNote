@@ -1453,6 +1453,7 @@ access common data store | each microservice has its own data repository (self-c
 # SOAP
 ## What does the acronym SOAP stand for?
 - Simple Object Access Protocol
+- lightweight, XML-based protocol for exchanging information in a decentralized, distributed environment.
 
 ## What protocols and data format do SOAP services use?
 - SOAP itself is a protocol Simple Object Access Protocol
@@ -1460,7 +1461,7 @@ access common data store | each microservice has its own data repository (self-c
 
 14. What is the contract for a SOAP service?
 
-15. Whats the structure of a SOAP message?
+15. Whats the structure of a SOAP message? Envelope (hold everything, require), Header , Body (requir), Fault
 
 16. What are the SOAP messaging modes? Messaging Exchange Patterns?
 

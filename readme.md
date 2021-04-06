@@ -1468,7 +1468,8 @@ access common data store | each microservice has its own data repository (self-c
 17. Are SOAP messages delivered with GET or POST requests?
 - yes, it can if it binds to Http protocol
 
-
+## Soap vs Xml
+- XML is a markup language that is used to transfer data between driver hardware, operating systems and applications with little human intervention, while SOAP is a protocol based on XML that is used to communicate between applications through internet
 
 
 
@@ -1609,6 +1610,10 @@ containers are lightweight because they do not require an extra load of a hyperv
 Faster | Requires entire OS to be loaded before starting
 more secure | less sercure
 complex usage mechanism | simplier to work with
+
+## Docker Daemon
+- Docker Daemon is a server
+- When you use docker run command to start up a container, your docker client will translate that command into http API call, sends it to docker daemon
 
 ## What is a Docker image? Container?
 ```

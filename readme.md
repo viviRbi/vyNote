@@ -1602,7 +1602,7 @@ maintaining statelessness?
 - The physical server and single instance of the operating system is virtualized into multiple isolated partitions, where each partition replicates a real server
 
 ## How are containers different from virtual machines?
-- Containers are often compared to Virtual Machines (VMs), since both of them allow multiple types of software to be run in contained environments
+Containers are often compared to Virtual Machines (VMs), since both of them allow multiple types of software to be run in contained environments
 Container | Virtual machine
 ----- | -----
 abstraction of application layer | abstraction of hardware layer

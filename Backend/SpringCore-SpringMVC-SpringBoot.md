@@ -213,6 +213,7 @@ public class Employee {
 ```
 ##  What is the concept of component scanning and how would you set it up?
 - Fundamental functionality of a Spring Framework is injection. To know where the bean is and inject it, we need Component Scan.
+- whenever Spring container the read the XML configuration, it will scan all the package that you defined in <context:component-scan base-package="org.websparrow.beans" /> and automatically creates the objects of all beans where you annotated by @Component, or its special case (@Service, @Repository which added with PersistenceExceptionTranslationPostProcessor in application context).
 - Either use @Component Scan or XML Configuration
 ```
 <context:component-scan base-package="com.abc.p1.repository"/>
@@ -413,7 +414,7 @@ public class SpringRestClient {
 
 # Spring AOP
 
-##  What is aspect-oriented programmingù? Define an aspect.
+##  What is aspect-oriented programming¬ù? Define an aspect.
 - **Aspect Oriented Programming** is a programming paradigm that used for **separating crosscutting concerns** (like logging) into **single units** called **aspects**
 - The key unit of modularity in OOP is the class, whereas in AOP the unit of modularity is the aspect.
 - Aspects can be a normal class configured through Spring XML configuration or @Aspect annotation.
@@ -539,7 +540,7 @@ Collection<User> findAllActiveUsersNative();
 - **Unlike Spring**, Spring Boot requires only 1 dependency to get a web application running. That is the spring-boot-starter-web from org.springframework.boot
 - **Spring Boot opinionate** because it follows the opinionated default configuration that reduces developer efforts to configure the application
     
-##  What does convention over configurationù mean?
+##  What does convention over configuration¬ù mean?
 - Convention over configuration is a software design paradigm which is used by many modern software frameworks that attempts to decrease the number of decisions that a developer can made without necessarily losing flexibility
 - It takes a lot of burden away from developers
     

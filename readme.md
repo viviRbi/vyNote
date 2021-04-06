@@ -741,11 +741,16 @@ Map<Integer, String> map = Map.of(1,"A", 2,"B", 3,"C");
 
 14. What is normalization? What are the levels?
 
-15. What are the properties a transaction must follow?
+## What are the properties a transaction must follow?
+-  Atomic, Consistent, Isolated, and Durable
 
-16. Explain the different isolation levels. What read phenomena do each prevent?
+## Explain the different isolation levels. What read phenomena do each prevent?
+- Isolation level: Read uncommited, Read Commited, Repeated Read, Serialization
+- Phenomenal: Dirty Read, Unrepeapted Read, Phantom Read 
 
-17. What is the difference between joins and set operators?
+## What is the difference between joins and set operators?
+- Join: horizontaly, add more colum
+- Set: add more row, some colum, add verticaly
 
 18. What are the types of joins? Explain the differences.
 

@@ -436,6 +436,23 @@ public class SpringRestClient {
 -  Pointcut: an expression language that matched a join point
 ```java
 @Before("execution(public String getName())")
+
+<aop:config>
+    <aop:pointcut id="anyDaoMethod" 
+      expression="@target(org.springframework.stereotype.Repository)"/>
+</aop:config>
+
+whatever you specify inside @Before or @After is a pointcut expression. This can be extracted out into a separate method using @Pointcut annotation
+ @Pointcut("@annotation(org.springframework.web.bind.annotation.RequestMapping)")
+    public void requestMapping() {}
+
+    @Pointcut("within(blah.blah.controller.*) || within(blah.blah.aspect.*)")
+    public void myController() {}
+
+    @Around("requestMapping() && myController()")
+    public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
+      ...............
+   } 
 ```
     
 -  Advice: A method that execute when a certain join point meet a matching pointcut. Type of advice: Before Advice, After Advice, After Retuning Advice, Around Advice

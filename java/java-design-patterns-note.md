@@ -41,7 +41,7 @@
 ### Types of Design Patterns: 
 There are 26 design patterns which can be classified in 3 categories: Creational, Structural, Behavioral Patterns. Another category is J2EE patterns
 	- **Creational Patterns**: designed for class instantiation
-	- **Structural Patterns**: designed with regard to a class's structure and coposition 
+	- **Structural Patterns**: designed with regard to a class's structure and composition 
 	- **Behavioral Patterns**: designed depend on how one class communicate with one another
 	- **J2EE Patterns**: concerned with the presentation tier. These patterns are identified by Sun Java Center
 

@@ -282,7 +282,7 @@ HashMap and HashTable both implement Map. They stored key/value pairs in a hashT
 HashTable | HashMap
 ----- | ------
 Thread safe, synchronized | Not thread safe, not synchronized
-Doesn't allow null key or value (since the key obj had to implement hashcode method and equals, and if the value null then it'll throw NullPointerException)| allow one null key and multiple null value
+Doesn't allow null key or value (since the key obj had to implement hashcode method and equals, and if the value null then the put method'll throw NullPointerException)| allow one null key and multiple null value
 old | advance version of HashTable
 doesn't maintain order of insertion | doesn't maintain order of insertion but have a subclass HashLinkedList which is ordered
 
@@ -325,7 +325,17 @@ doesn't maintain order of insertion | doesn't maintain order of insertion but ha
 ## What is the difference between the Comparable and Comparator interfaces?
 - Java provide 2 interfaces to sort objects using data members of the class: Camparable and Comparator
 - Comparable implemented by a class. It had a compareTo(Obj obj2) method. Used when there is only 1 way to sort the object
-- Comparator doesn't afftect the original class. It is compare() method. Used when you want to sort the objects in multiple way
+- Comparator doesn't afftect the original class. It is compare() method. Used when you want to sort the objects in multiple ways
+```java
+class Sortbyroll implements Comparator<Student> {
+    // Used for sorting in ascending order of
+    // roll number
+    public int compare(Student a, Student b)
+    {
+        return a.rollno - b.rollno;
+    }
+}
+```
 
 ## What are generics? What is the diamond operator (<>)? 
 - Generics allow the author of a class to use type parameters, which are symbols that can be substituted for any concrete type. Ex: Map<K,V>, List <T>. Or we can create our own Generic type which is Triple <K, V, I>
@@ -463,6 +473,10 @@ try(BufferedReader br = new BufferedReader(new FileReader("test.txt"))) {
 # Reflections API
 ## What is Reflection API?
 - Java Reflection is a process of examining or modifying the run time behavior of a class at run time.
+- It is a very powerful concept
+- It had little use in normal programming but it's the backbone for most Java frameworks. Some of the framework uses reflection are Junit, Spring, Tomcat, Eclipse, Hibernate
+- We should not use it in normal programming when we already had access to the classes and interfaces
+- java.lang.Class is the entry point of all the reflection operators
 ```java
 Test abc = new Test();
   
@@ -475,9 +489,16 @@ System.out.println(
 Method[] method = cls.getMethods();
 ```
 	
-2. What can you do with the Reflections API that you can’t do in normal code?
+## What can you do with the Reflections API that you can’t do in normal code?
+- Check if a class had a certain method. IDE like Eclipse able to giving us a list of methods in a class, auto complete the field because of the reflection API
+- Dependency injection in Java depend heavily on reflection
+
 	
-3. List some classes and methods of the Reflections API
+## List some classes and methods of the Reflections API
+- getClass(), getMethods(). getName(), get
+
+## Example of using Reflection API
+JDBC API uses Java Reflection API to achieve loose coupling between java programs and JDBC Drivers
 	
 
 # Design patterns
@@ -491,13 +512,34 @@ Method[] method = cls.getMethods();
 
 # JDBC
 ## What is JDBC?
-- Java database connection
+JDBC stands for Java Database Connectivity. It is a relatively low-level API used to write Java code that interacts with relational databases via SQL.
 
-2. What are the core interfaces / classes in JDBC?
 
-3. What is a stored procedure and how would you call it in Java?
+## What are the core interfaces / classes in JDBC?
+- `DriverManager` class: used to register a database driver
+- `DataSource` interface: used to retrieve connections as an alternative to `DriverManager`
+- `Connection` interface: represents the actual physical connection with the database
+- `SQLException` class: this is the general exception that is thrown when something goes wrong when accessing the database
+- `Statement` interface: used in order to execute SQL statements
+- `PreparedStatement` interface: represents pre-compiled SQL statements (which you can also pass different parameters into)
+- `CallableStatement` interface: used to execute stored procedures (user defined functions)
+- `ResultSet` interface: represents data returned from the database
 
-4. What is the difference between Statement and PreparedStatement?
+
+## What is a stored procedure and how would you call it in Java?
+- Stored Procedure is a user define function in the database
+- To call it in Java, we use CallableStatement instead of PreparedStatement or Statement
+```java
+con = DriverManager.getConnection(dburl, dbuser, dbpass);
+csmt=(CallableStatement)con.prepareCall("{call InsertProc(?,?)}");
+csmt.setString(1, "Intel i7 Processor");
+     csmt.setString(2, "27000");
+     csmt.execute();
+```
+
+## What is the difference between Statement and PreparedStatement?
+- Statement takes th whole sql string
+- PrepareStament take each value that need to be filled which marked as ?, and setValue to them. It is more sercure from SQL injection attack because it esacpe spacial characters
 
 ## Steps to executing an SQL query using JDBC?
 - Create an sql string
@@ -506,8 +548,16 @@ Method[] method = cls.getMethods();
 - If it's a select or have a returning clause, executeUpdate() the Prepare Statement and and save the result in a ResultSet obj, then use if statement with resultObj.next() to get each value in each column. If there's an array of result, use while statement with result object.next()
 
 ## How to execute stored procedures using JDBC?
+- Use CallableStatement instead of PrepareStament or Statement
+stored procedures | user define functions
+------- | --------
+may or maynot return a value | have to return something (ex: if use a delete stament, return null, update: return new when use with Trigger)
+can call a function | unable to call a procedure
+support try catch block | not support
+cannot be used in join clause as a result set | can be use in join clause
 
-7. Which interface is responsible for transaction management?
+## Which interface is responsible for transaction management?
+- The Connection interface maintains a session with the database. It can be used for transaction management. It provides factory methods that returns the instance of Statement, PreparedStatement, CallableStatement and DatabaseMetaData.
 
 
 
@@ -609,33 +659,41 @@ reportsLog.debug("reports debug message");
 ``` 
 
 # Maven
-1. What is Maven?
+## What is Maven?
+- Maven is a dependency manager and build automation tool for Java programs. Maven project configuration and dependencies are handled using the Project Object Model, which is defined in a file called the `pom.xml` file
 
-2. What is the default Maven build lifecycle?
+## What is the default Maven build lifecycle?
 
-3. Where / when does Maven retrieve dependencies from? Where are they stored locally?
+## Where / when does Maven retrieve dependencies from? Where are they stored locally?
 
-4. What is the POM and what is the pom.xml?
+## What is the POM and what is the pom.xml?
+- POM is short for Project Object Model. It is the representation of a Maven project held in a file named pom.xml
+- pom.xml is an XML file that contains information about the project and configuration details used by Maven to build the project
 
-5. What defines Maven project coordinates?
-
-
+## What defines Maven project coordinates?
+- groupId, artifactId, version, packaging, (classifier)
 
 # Advanced
-1. What are functional interfaces? List some that come with the JRE for Java 8
+## What are functional interfaces? List some that come with the JRE for Java 8
 
 2. What are lambdas?
 
-3. What is try-with-resources? What interface must the resource implement to use this
-feature?
+## What is try-with-resources? What interface must the resource implement to use this feature?
+- Generally finally block is used to close all the resources (viz., file, database connection, socket or anything that should be closed after its task is done) to prevent any leaks.
+- There is a possibility of the close method throwing an exception and hence it has to be surrounded in a try catch block.
+- The try-with-resources statement makes sure that every opened resource is closed at the end of the statement. So a try-with-resources statement is nothing but a try statement that declares one or more resources. A resource is said to be any object that implements java.lang.AutoCloseable interface
 
 4. How to make numbers in your code more readable?
 
-5. Which collections cannot hold null values?
+## Which collections cannot hold null values?
+- HashTable, implements from Map collections, because its key required to be serialize and have to be able to use .equals
+- TreeSet, which needs Comparble and Comparator interface
+- TreeMap's key, because its keys need to be sorted 
 
-6. If 2 interfaces have default methods and you implement both, what happens?
+## If 2 interfaces have default methods and you implement both, what happens?
+- Only 1 unimplemented method show up. And if we write that method, both interface satisfy
 
-7. If 2 interfaces have the same variable names and you implement both, what happens?
+## If 2 interfaces have the same variable names and you implement both, what happens?
 
 ## Why does HashTable not take null key?
 - Because HashTable serilize the key, if it takes null, it'll throw a null pointer exception
@@ -644,7 +702,15 @@ feature?
 
 10. Is there an interactive REPL tool for Java like there is for languages like Python?
 
-11. What are collection factory methods?
+## What are collection factory methods?
+- They are a new features in Java 9, they allow for easy initialization of immutable collections.
+- These factory methods are only available for List, Set, Map
+```java
+List ilist = List.of();
+Map<Integer, String> map = Map.of(1,"A", 2,"B", 3,"C");
+```
+- Note that They are structurally immutable. Elements cannot be added, removed, or replaced. Calling any mutator method will always cause UnsupportedOperationException to be thrown. However, if the contained elements are themselves mutable, this may cause the contents to appear to change.
+- They disallow null elements
 
 ## SQL
 1. Explain what SQL is. What are some SQL databases?
@@ -1082,6 +1148,11 @@ command line?
 23. How would you describe AWS? What is “the cloud” or “cloud computing” and why is it so popular now?
 
 24. Define Infrastructure, Platform, and Software as a Service
+- IaaS: Infrastructure as a service - it delivers cloud computing infrastructures like servers, network, operating systems, and storage. Clients are responsible for managing applications, runtime, middleware. The provider manages servers, hard drives, networking, virtualization, storage. Ex: AWS, Microsoft Azure, DigitalOcean
+
+- PaaS: Platform as a service - a complete deployment and development environment in the cloud. It include infrastructure, middleware, database management system Client building the software. Provider manages the operating system, updates. Ex: AWS ElasticBeanstalk, Heroku, Window Azure
+
+- SaaS: Software as a Service - allow users to connect to and use cloud-based, pay-as-you-go apps Ex: Dropbox, Salesforce
 
 25. What’s the difference between a Region and an Availability Zone (AZ)?
 
@@ -1118,9 +1189,13 @@ you need to specify?
 31. What’s the difference between scalability, elasticity, and resiliency? What is autoscaling?
 
 # Hibernate
-1. What is Hibernate? What is JPA?
+## What is Hibernate? What is JPA?
+- Hibernate is a framework which provides some abstraction layer, meaning that the programmer does not have to worry about the implementations, Hibernate does the implementations for you internally like Establishing a connection with the database, writing query to perform CRUD operations etc.
+-JPA is just a specification that make it easy for object-relational mapping to manage relational data in Java applications. It provides a platform to work directly with objects instead of using SQL statements.
 
-2. What is the benefit of using Hibernate over JDBC?
+## What is the benefit of using Hibernate over JDBC?
+- Too much boiler code in JDBC
+- Have to convert data from each column while JPA helps us to return object
 
 3. Tell me about some of the JPA annotations you have worked with? What do they do?
 How do you specify multiplicity relationships with JPA annotations?
@@ -1315,39 +1390,68 @@ scenes?
 
 # Web Services
 HTTP
-1. What is a “web service”? What’s the advantage of distributing software as a web
-service?
+## What is a “web service”? What’s the advantage of distributing software as a web service?
+- Web service is a standardized medium to propagate communication between the client and server applications on the World Wide Web
 
-2. What’s the difference between REST and SOAP services?
+## What’s the difference between REST and SOAP services?
+REST | SOAP
+---- | ----
+Representational State Transfer | Simple Object Access Protocol 
+faster | slower
+lighter | heavier
+an architectural pattern | a protocol
+works with plain text, html, xml, json | works only with XML
+can make use of SOAP | cannot make use of REST
 
-3. What does HTTP stand for?
+## What does HTTP stand for?
+- Hyper Text Transfter Protocol
 
-4. What are the components inside of an HTTP request? What about an HTTP response?
+## What are the components inside of an HTTP request? What about an HTTP response?
+- Http request: verb, URI, HTTP version, Request header, request body
+- Http response: Status, HTTP version, Response Header, Response Body
 
-5. What are the important HTTP verbs / methods and what do they do?
+## What are the important HTTP verbs / methods and what do they do?
 
-a. Which are idempotent?
+- Which are idempotent? GET, PUT, DELETE, HEAD (check the server information, like check a file size)
 
-b. Which are safe?
+- Which are safe? GET, HEAD
 
 6. List the levels of HTTP status codes and what they mean
 
 7. What are some specific HTTP status codes that are commonly used?
 
-8. What is service-oriented architecture (SOA)?
+## What is service-oriented architecture (SOA)?
+-  An SOA architecture recognizes that within an application these components are required, and creates a structure where the components themselves can exist independent of each other
+- Service-oriented architecture (SOA) is an architectural pattern as well as a collection of design principles that support loose coupling and reusability of different components
+- loose couping is the key concept of SOA
+- Common used tech to archieve SOA: WSDL, SOAP, REST
+- SOA provides access to reusable components (i.e. Web services) over a Network
+- Service-oriented architecture is often compared to microservices as both share the same fundamentals. Microservices, which are more recently developed than SOA, are even considered to be a type of SOA
+SOA | Web service
+---- | ----
+creat reusable service | continuous interation and delivery is key
+older | new
+access common data store | each microservice has its own data repository (self-contained)
 
-9. How can you achieve loose coupling with SOA?
+## How can you achieve loose coupling with SOA?
+- Enterprise Service Bus
+- Business Process Management
+- Service Oriented Intergration
 
-10. What is an Enterprise Service Bus (ESB)?
+## What is an Enterprise Service Bus (ESB)?
+- Enterprised Service bus is used to comunicate between services, ensure delivery and response of messages, as well as monitoring the flow of communication
 
-11. What are some best practices when creating web services?
+## What are some best practices when creating web services?
 
 
 
 # SOAP
-12. What does the acronym SOAP stand for?
+## What does the acronym SOAP stand for?
+- Simple Object Access Protocol
 
-13. What protocols and data format do SOAP services use?
+## What protocols and data format do SOAP services use?
+- SOAP itself is a protocol Simple Object Access Protocol
+- Data format: XML file with  header element<?xml?>, Envelope element (<soap:Envelope>), body element<soap:Body>, fault element
 
 14. What is the “contract” for a SOAP service?
 
@@ -1356,6 +1460,7 @@ b. Which are safe?
 16. What are the SOAP messaging modes? Messaging Exchange Patterns?
 
 17. Are SOAP messages delivered with GET or POST requests?
+- yes, it can if it binds to Http protocol
 
 
 
@@ -1364,16 +1469,23 @@ b. Which are safe?
 
 # REST
 18. What does the acronym REST stand for? What makes a service “RESTful”?
+- REST stands for Representational State Transfer. It’s an architectural pattern for creating web services
+- RESTful service implements REST pattern. It is considered restful when it had all architecture coinstain of REST aside for the optional code on demand one 
 
 19. What protocols and data format do REST services use?
+- Html
+- Xml, Json, Plain text
 
-20. What are the architectural constraints of REST?
+## What are the architectural constraints of REST?
+ Uniform interface (consistent namespace), Client server (front & back seperate), Stateless (server not stored http request), Cachable, Layer System (deploy on server A, authenticate request on server C, store data on server B), Code on demand
 
 21. Explain the levels of the Richardson Maturity Model
 
 22. Explain the HATEOAS concept
 
-23. What is a “resource” in a REST service?
+## What is a “resource” in a REST service?
+- Rest treat everthing as a resource. 
+- It uses various representations to represent a resource like Text, JSON, XML
 
 24. What does the “uniform interface” constraint mean? Give an example of some RESTful
 endpoints you would create for an API. Should the URLs contain nouns, verbs, or
@@ -1384,57 +1496,164 @@ maintaining statelessness?
 
 
 # Microservices
-1. Compare the microservice and monolithic architectures. What are the advantages /
-disadvantages of each?
+## Compare the microservice and monolithic architectures. What are the advantages / disadvantages of each?
+### Monoliths: 
+- Single codebase, Single process Single host, Single database, Consistent technology
+- **Benefit**: 
+	- Simple, one codebase- easy to find, for deployment, there's only 1 application to update. 
+	- It Works well for small app, with a small dev team (2-3 members), work together for a few months, moderate visitors
+- **Problem**: its scale. 
+	- When codebase become big, it is very difficute to deploy: Even one small change requires downtime and break the code
+	- Really difficult to scale: unable to scale horizontally and vertical scalling are expensive. Plus, the entire application have to be scalled together
+	- Hard to get away from legacy code since we have to move the entire application to a new framework
+### Microservices:
+- Benefit:
+	- Contains small services that can be owned by small development team. A rule of thumb is it should be small enough to be throw away and rewritten in a different way
+	- Able to adopt new technology without the need to update anything in one go. We can choose the right tool for the job
+- Ability to deploy them individually which minimize downtime and reduce risk enable frequent updates
+	- Scaling: scale the services individually
+	- The services can be reuse
+- Challenges:
+	- Complex interaction 
 
-2. Can a Java microservice communicate with a Node.js microservice? Why or why not?
 
-3. What’s the difference between horizontal and vertical scalability? Which way do
-monoliths and microservices typically scale?
+## Can a Java microservice communicate with a Node.js microservice? Why or why not?
+- Yes. Beacause each service is independent to each other. The only thing we need is to send or received data from the REST API
 
-4. What are some best practices for building microservices?
+## What’s the difference between horizontal and vertical scalability? Which way do monoliths and microservices typically scale?
+- Vertical scaling/ Scale up: upgrade/ add more RAM, processor (like add more seat to your car). It cost a lot of money and we are stuck with a particular vendor
+- Horizontal Scalling:  adding more machines. It reduces price, easier to maintain, less downtime
 
-5. What is a messaging queue and how is using one different from calling service APIs
-directly?
+## What are some best practices for building microservices?
+- Centralize logging is the first and most importnt rule of micro service logging. We can use a centralize logging system like Loggly, Splunk, Stackify
+- Need to implement fault torelent by break the circuit if there is no response
+
+## What is a messaging queue and how is using one different from calling service APIs directly?
+- Once we've shattered our monolith, how do we put it back together into a larger system that still makes sense? That is when static load balancing, Messaging queue, API Gateway and Service Mesh come to place
+- A message queue is a form of asynchronous service-to-service communication used in microservices architectures
+- Different :
+	- Message queues are asynchronous and can retry a number of times if delivery fails. 
+	- When calling service API directly, if the server fails, the client handles the error. When server restart, client resend
+	
 
 6. What is a “replica”?
 
-7. Explain the Netflix OSS stack for microservices (Eureka, Zuul, Hystrix)
+## Explain the Netflix OSS stack for microservices (Eureka, Zuul, Hystrix)
+- **Netflix OSS** is a tool in the **Container Tools category** of a tech stack. It provides 5 important componants to overcome some microservies drawback which is hard to manage when there are hundreds of services
+- **Netflix Eureka** : Service registration (for producer) and service discovery (for consumer). It's like a Naming server, other service lookup to consume other service
+- **Netflix Ribbon** : Dynamic Routing and Load Balancer. It is an admin of multiple instances of a service. If one collapse, call the other
+- ''Netflix Feign Client**: Communication among micro services
+- **Netflix Zuul** : Edge/ proxy/ Gateway Server. Client gets a registered service in Eureka Registry Server using Zuul server. It's a client side load balancing
+- **Netflix Hystrix** : Circuit Breaker (fault tolerance, default response when things break)
+## How would you setup and configure Eureka? Zuul? Hystrix?
+- ''Eureka** : 
+	- Create a new Spring Boot project for Eureka, choose Eureka server dependency. Set register with Eureka and fetch-registry = false for that registry service in application.yml. For other services depend on it. Add Eureka For Client dependency, set to true for both properties
+	- @EnableEurekaServer for producer, @EnableEurekaDiscovery(for consumer)
+	- In application.yml of services, set default zone of service-url to Eureka register project url and its hostname will be localhost. Set application name too
+	- Now, if run 2 services and eureka, information will appeared in erureka register project localhost. Should use that name with rest template to do http get, post request for department (if there's no API gateway)
+- **Zuul**: 
+	- Create a new project, add Erureaka Client, Gateway, Acculator. @EnableEurekaClient
+	- Application ->name, cloud ->gateway ->routes with id = register name, uri = lb://register-name, predicates -> path: /user/** so every path with /user will gor to User service registered in Eureka server
+	- So now when we make a http request, all request should go to Zuul gateway. /user will interact with user service 
+- **Hystrix**: 
+	- Get Hystrix dependency and add in Zuul Gateway.
+	- @EnableEurekaServer, @EnableHystrix in Main
+	- Create a controller name FallBack/Fail Controller. Use @RestController annotation, on method, use @GetMapping("userFailMethod"), create a method that return a string said please try again later
+	- In application.yml, under predicates where the http path is, add filters -> name: CircuitBreaker, args -> name: register name, fallbackuri: userFailMethod (from @GetMapping)
+	- Able to set timeout too. If user doesn't get a response in 4000 mili second, it'll http get to fallback path and send the fail message. hystrix->command->fallbackcmd->execution->isolation->thread->timeoutInMilliseconds
 
-8. How would you setup and configure Eureka? Zuul? Hystrix?
-
-9. What is the purpose of an API gateway and how does Zuul perform this?
+## What is the purpose of an API gateway and how does Zuul perform this?
 
 10. What is service discovery and how does Eureka do this?
 
-11. What is the circuit breaker pattern and how does Hystrix implement it? What are the
-different circuit states?
+11. What is the circuit breaker pattern and how does Hystrix implement it? What are the different circuit states?
 
 12. Is there any order in which you need to spin up these services?
 
-13. One of my microservices is throwing a TransportException! What might be the problem?
+## One of my microservices is throwing a TransportException! What might be the problem?
+- Basically, this happens due to the wrong configuration in application.properties or application.yml.
+- Either spelling mistakes, or wrong registerWithEureka and fetchRegistry value. (eureka server should set them t false, services that registry to Eureka should set to true)
 
 
 
 # Docker
-14. What is containerization?
+- Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers.
+- JVM is a Application level virtualization btw
 
-15. How are containers different from virtual machines?
+## What is containerization?
+- Also called operating-system-virtualization
+- A way to ship the code from 1 computer environment to other
+- It ship everything we needed. Code, runtime, system tools, system libraries, settings, OS-level virtualization into 1 package and it's very lightweight
+- Multiple cointainers can share the same runtime, system libraries, settings, OS level virtualization 
 
-16. What is a Docker image? Container?
+##OS level virtualization
+- It like a permanent loaded on the local device
+- The physical server and single instance of the operating system is virtualized into multiple isolated partitions, where each partition replicates a real server
 
-17. List the steps to create a Docker image and spin up a container
+## How are containers different from virtual machines?
+- Containers are often compared to Virtual Machines (VMs), since both of them allow multiple types of software to be run in contained environments
+Container | Virtual machine
+----- | -----
+abstraction of application layer | abstraction of hardware layer
+containers are lightweight because they do not require an extra load of a hypervisor. They run directly within the host’s machine. Nospace needed for virtualization | Each VM is a guess OS
+Faster | Requires entire OS to be loaded before starting
+more secure | less sercure
+complex usage mechanism | simplier to work with
 
-18. What is the relevance of the Dockerfile to this process? List some keywords in the
-Dockerfile
+## What is a Docker image? Container?
+```
+docker pull <image name>, 
+docker images -f "dangling=false" (filter by not associate with any container), 
+docker images -a (list), 
+docker run <image-name> (save to a container)
+```
+- Docker images are templates used to create a docker cointainer
+- When running a container, it uses an isolated filesystem. This custom filesystem is provided by a container image
+- An image is a static representation of the app or service and its configuration and dependencies.
 
-19. What is the benefit to an image being built in Layers?
 
-20. What are some other Docker commands?
+## List the steps to create a Docker image and spin up a container
+- Create a working directory
+- Create a file name DockerFile, add some info like FROM scratch/ibuntu/php:7.1
+```touch DockerFile```
+- Build an image
+```docker build -t random-name ```
+``` docker run --name container-name -p 80:80 image-name ```
 
-21. What is a container registry? How would you retrieve and upload images to DockerHub?
+## What is the relevance of the Dockerfile to this process? List some keywords in the Dockerfile
+-  Docker file uses to build a Docker image. It is a The Docker file is a text-based script
+```docker
+FROM --platform=<platform> <image-name>
+RUN apt-get update
+```
+
+## What is the benefit to an image being built in Layers?
+- We can commit our changes. Docker Layer works like a version cotrol system
+
+## What are some other Docker commands?
+- docker commit -m""
+- exit
+- docker push localhost:5000/ubuntu
+- // local host:5000/ubuntu is a tag
+- docker tag image-name tag-name
+- docker image ls
+
+## What is a container registry? How would you retrieve and upload images to DockerHub?
+- The registry is like a bookshelf where images are stored and available to be pulled
+- docker image pull image-name:tag-name, docker pull tag-name 
+- docker image push [tag-name]
 
 22. What is Docker compose and why is it useful?
+- Compose is a tool for defining and running multi-container Docker applications as a single service. With Compose, you use a DockerCompose.yml file to configure your application’s services
+- Benefits: Single host deployment, easy to use, reduce times
+```
+#start all service
+Docker Compose up
+#Stop all
+Docker compose down
+#Scall a service
+Docker Compose up -d -scale
+```
 
 23. If you want to store state for a container, how does Docker recommend doing that?
 
@@ -1481,22 +1700,31 @@ would you set?
 9. How would you go back in your commit history if you make a mistake?
 
 # SDLC
-1. What are the steps in the software development lifecycle?
+## What are the steps in the software development lifecycle?
+- requirement gathering + data analysis -> Design -> code -> testing -> deploy -> maintenance
 
-2. What is the difference between Waterfall and Agile methodologies? Explain the benefits
+## What is the difference between Waterfall and Agile methodologies? Explain the benefits
 and drawbacks of each
+- Waterfall is rigid. There is only 1 way to go. Good when little to no client involement. Bad when direction always change
+- Agile is flexible. Opposit
 
 3. List some of the principles declared in the Agile manifesto
 
-4. What specific Agile frameworks exist? What are the main features of each?
+## What specific Agile frameworks exist? What are the main features of each?
+- Scum: stresses teamwork in project management. 2 primary roles: Scum master, product owner
+- Lean Software Development: highly flexible. Rely on rapid feedback between programmers and customers
+- Kanban Software Development: build upon lean software. 3 base principles: Visualization, limit the ammount of working progress, Enhance flow
+- Feature Driven Development (FDD): its benchmark is: Developing the overl model, build a feature list, plan on list begin, design, implement
 
 5. What is the Scrum process? Explain each of the Scrum ceremonies
 
-6. How long is a typical sprint?
+
+## How long is a typical sprint?
+- Sprint are fixed length events of one month or less to create consistency
 
 7. What is a “standup” and what should you report about your work?
 
-8. What is the role of a “Scrum master” in a project? What about the “Product owner”?
+## What is the role of a “Scrum master” in a project? What about the “Product owner”?
 
 9. Explain the following metrics/charts: sprint velocity, burndown chart
 

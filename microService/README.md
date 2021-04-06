@@ -34,6 +34,7 @@
 - So better understand micro services very well before creating them or we could end up in a world of pain
 
 ##  How do you solve the different problems inherent to microservices?
+- If not careful, a microservice can become a distribute monolith which consist of all disadvantage from both
 
 ##  What are the difference between a MSA and a SOA?
 

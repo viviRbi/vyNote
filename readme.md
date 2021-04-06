@@ -124,7 +124,7 @@ use new keyword or = sign to create | new keyword to create an obj only| new key
 
 15. What are the non-access modifiers in Java?
 
-16. ‘What is the difference between static and final variables?
+16. Â‘What is the difference between static and final variables?
 
 ## What are the default values for all data types in Java?
 - Boolean
@@ -172,7 +172,7 @@ use new keyword or = sign to create | new keyword to create an obj only| new key
 - for loop use index
 - with forEach, it loop through each value without the use of index
 
-## What are the 3 usages of “super” keyword?
+## What are the 3 usages of Â“superÂ” keyword?
 - Use to get parent constructor
 - Use to get parent value
 - super can be use to assign value to the parent
@@ -183,7 +183,7 @@ use new keyword or = sign to create | new keyword to create an obj only| new key
 ## How would you perform constructor chaining?
 - Constructor chaining is the process of calling one constructor from another constructor
 	
-34. What happens if you don’t define a constructor for a class? Can you still instantiate it?
+34. What happens if you donÂ’t define a constructor for a class? Can you still instantiate it?
 
 # OOP
 ## What are the 4 pillars of OOP? Explain each and give examples of you implement them
@@ -489,7 +489,7 @@ System.out.println(
 Method[] method = cls.getMethods();
 ```
 	
-## What can you do with the Reflections API that you can’t do in normal code?
+## What can you do with the Reflections API that you canÂ’t do in normal code?
 - Check if a class had a certain method. IDE like Eclipse able to giving us a list of methods in a class, auto complete the field because of the reflection API
 - Dependency injection in Java depend heavily on reflection
 
@@ -731,7 +731,7 @@ Map<Integer, String> map = Map.of(1,"A", 2,"B", 3,"C");
 
 9. List the integrity constraints
 
-10. Define the word “schema”
+10. Define the word Â“schemaÂ”
 
 11. What is a candidate key? What about a surrogate key?
 
@@ -755,7 +755,7 @@ Map<Integer, String> map = Map.of(1,"A", 2,"B", 3,"C");
 
 21. What is the purpose of a view? What about an index?
 
-22. What’s the difference between a clustered and non-clustered index?
+22. WhatÂ’s the difference between a clustered and non-clustered index?
 
 23. What is a trigger? Give the syntax for creating a trigger.
 
@@ -764,7 +764,7 @@ statement?
 
 25. What is the difference between scalar and aggregate functions? Give examples of each
 
-26. What’s the difference between implicit and explicit cursors?
+26. WhatÂ’s the difference between implicit and explicit cursors?
 
 # HTML/CSS
 # HTML
@@ -782,19 +782,19 @@ statement?
 
 7. Do all tags come in a pair? List a self-closing tag.
 
-8. What’s the difference between an element and an attribute? List some global attributes.
+8. WhatÂ’s the difference between an element and an attribute? List some global attributes.
 
 9. What is the syntax for a comment in HTML?
 
 10. What tags would you use to create a table? A navbar? What about a form?
 
-11. What’s the difference between a class and id?
+11. WhatÂ’s the difference between a class and id?
 
 12. How would you include CSS into an HTML document? What about JS?
 
 13. What is a semantic tag? What about formatting tags/elements?
 
-14. What’s the difference between a block and an inline element?
+14. WhatÂ’s the difference between a block and an inline element?
 
 
 
@@ -889,7 +889,7 @@ about repeatedly?
 
 20. List some array methods and explain how they work
 
-21. Explain what “strict mode” does
+21. Explain what Â“strict modeÂ” does
 
 22. Explain how inheritance works in JS
 
@@ -909,7 +909,7 @@ about repeatedly?
 
 29. Give the syntax for template literals / string interpolation
 
-30. What’s the difference between a normal function declaration and an arrow function?
+30. WhatÂ’s the difference between a normal function declaration and an arrow function?
 
 31. Does JS have classes? If so, when were they introduced?
 
@@ -919,12 +919,12 @@ about repeatedly?
 
 34. What is the difference between for-of and for-in loops?
 
-35. What’s the benefit of computed property names?
+35. WhatÂ’s the benefit of computed property names?
 
 36. Explain the async/await keywords. Why is it preferred to use this instead of .then()
 methods?
 
-37. What is a generator function? What’s the point of the yield keyword?
+37. What is a generator function? WhatÂ’s the point of the yield keyword?
 
 38. What built-in data structures does JavaScript provide?
 
@@ -1005,7 +1005,7 @@ servlet?
 
 
 # Angular
-1. What makes a “single page application” (SPA) different from a normal web page?
+1. What makes a Â“single page applicationÂ” (SPA) different from a normal web page?
 
 2. Explain the difference between server-side and client-side rendering
  
@@ -1021,7 +1021,7 @@ JavaScript?
 7. What is a component? How would you create one? List some other commands using the
 Angular CLI
 
-8. What files make up a component? What is the “spec” file used for?
+8. What files make up a component? What is the Â“specÂ” file used for?
 
 9. Explain the relevance of npm to Angular projects. Which file does npm use to track
 dependencies?
@@ -1047,7 +1047,7 @@ property binding to the class attribute?
 
 
 
-18. What’s the difference between a JavaScript module and Angular module? What are
+18. WhatÂ’s the difference between a JavaScript module and Angular module? What are
 some common Angular modules?
 
 19. How would you lazy load a module?
@@ -1055,7 +1055,7 @@ some common Angular modules?
 20. How have you used the HttpClient? What methods does it have and what do they
 return?
 
-21. What is an Observable? What’s the difference between it and a Promise?
+21. What is an Observable? WhatÂ’s the difference between it and a Promise?
 
 22. What forms of data binding does Angular support? Explain the syntax for each
 
@@ -1065,7 +1065,7 @@ return?
 
 25. What is an EventEmitter and when would you use one?
 
-26. What’s the difference between using reactive and template-driven forms? How would
+26. WhatÂ’s the difference between using reactive and template-driven forms? How would
 you setup each?
 
 27. How would you run your unit tests for an Angular project?
@@ -1078,13 +1078,13 @@ you setup each?
 
 2. Explain CI/CD. What is the difference between Continuous Deployment and Continuous Delivery?
 
-3. What tools have you used to achieve CI/CD? Explain how you’ve setup and used them
+3. What tools have you used to achieve CI/CD? Explain how youÂ’ve setup and used them
 
 4. What is a DevOps pipeline? Explain the steps to setting one up
 
 5. What is SonarQube / SonarCloud? Explain some of the features of it
 
-6. What is a “build”? What is the end result of a build? What is the build tool you’ve used for
+6. What is a Â“buildÂ”? What is the end result of a build? What is the build tool youÂ’ve used for
 Java projects?
 
 7. What are the Maven lifecycles? List the steps in the build lifecycle
@@ -1096,7 +1096,7 @@ Java projects?
 
 
 # Linux
-8. What is Unix? Linux? How are Linux OS’s different from other OS’s?
+8. What is Unix? Linux? How are Linux OSÂ’s different from other OSÂ’s?
 
 9. List some Linux distributions
 
@@ -1127,14 +1127,14 @@ e. Edit a file from the terminal
 
 18. What is a package manager? What are some common Linux package managers?
 
-19. What does “I/O redirection” mean?
+19. What does Â“I/O redirectionÂ” mean?
 
 20. Explain the following bash commands:
 a. cat actors.txt | grep Tom Cruise
 
 b. echo hello world > myfile.txt
 
-21. You run a command but get an error message saying you don’t have enough
+21. You run a command but get an error message saying you donÂ’t have enough
 permissions. What could you try to resolve this?
 
 22. You spin up a web server that listens for web traffic on port 80, but you forget the name
@@ -1145,7 +1145,7 @@ command line?
 
 
 # AWS
-23. How would you describe AWS? What is “the cloud” or “cloud computing” and why is it so popular now?
+23. How would you describe AWS? What is Â“the cloudÂ” or Â“cloud computingÂ” and why is it so popular now?
 
 24. Define Infrastructure, Platform, and Software as a Service
 - IaaS: Infrastructure as a service - it delivers cloud computing infrastructures like servers, network, operating systems, and storage. Clients are responsible for managing applications, runtime, middleware. The provider manages servers, hard drives, networking, virtualization, storage. Ex: AWS, Microsoft Azure, DigitalOcean
@@ -1154,7 +1154,7 @@ command line?
 
 - SaaS: Software as a Service - allow users to connect to and use cloud-based, pay-as-you-go apps Ex: Dropbox, Salesforce
 
-25. What’s the difference between a Region and an Availability Zone (AZ)?
+25. WhatÂ’s the difference between a Region and an Availability Zone (AZ)?
 
 26. How are you charged for using AWS services?
 
@@ -1186,7 +1186,7 @@ j. ELB
 30. What are Security Groups? When defining a rule for a security group, what 3 things do
 you need to specify?
 
-31. What’s the difference between scalability, elasticity, and resiliency? What is autoscaling?
+31. WhatÂ’s the difference between scalability, elasticity, and resiliency? What is autoscaling?
 
 # Hibernate
 ## What is Hibernate? What is JPA?
@@ -1297,7 +1297,7 @@ difference between $ and # in @value expressions?
 
 17. List some stereotype annotations. What are the differences between these?
 
-18. How would you declare which HTTP requests you’d like a controller to process?
+18. How would you declare which HTTP requests youÂ’d like a controller to process?
 
 19. What is the difference between @RequestMapping and @GetMapping?
 
@@ -1314,7 +1314,7 @@ controller?
 24. How would you specify HTTP status codes to return from your controller?
 
 25. How do you handle exceptions thrown in your code from your controller? What happens
-if you don’t set up any exception handling?
+if you donÂ’t set up any exception handling?
 
 26. How would you consume an external web service using Spring?
 
@@ -1323,7 +1323,7 @@ if you don’t set up any exception handling?
 
 
 # Spring AOP
-28. What is “aspect-oriented programming”? Define an aspect.
+28. What is Â“aspect-oriented programmingÂ”? Define an aspect.
 
 29. Give an example of a cross-cutting concern you could use AOP to address
 
@@ -1366,14 +1366,14 @@ is the ProceedingJoinPoint used?
 
 # Spring Boot
 44. How is Spring Boot different from legacy Spring applications? What does it mean that it
-is “opinionated”?
+is Â“opinionatedÂ”?
 
-45. What does “convention over configuration” mean?
+45. What does Â“convention over configurationÂ” mean?
 
 46. What annotation would you use for Spring Boot apps? What does it do behind the
 scenes?
 
-47. How does Boot’s autoconfiguration work?
+47. How does BootÂ’s autoconfiguration work?
 
 48. What is the advantage of having an embedded Tomcat server?
 
@@ -1390,10 +1390,10 @@ scenes?
 
 # Web Services
 HTTP
-## What is a “web service”? What’s the advantage of distributing software as a web service?
+## What is a Â“web serviceÂ”? WhatÂ’s the advantage of distributing software as a web service?
 - Web service is a standardized medium to propagate communication between the client and server applications on the World Wide Web
 
-## What’s the difference between REST and SOAP services?
+## WhatÂ’s the difference between REST and SOAP services?
 REST | SOAP
 ---- | ----
 Representational State Transfer | Simple Object Access Protocol 
@@ -1453,9 +1453,9 @@ access common data store | each microservice has its own data repository (self-c
 - SOAP itself is a protocol Simple Object Access Protocol
 - Data format: XML file with  header element<?xml?>, Envelope element (<soap:Envelope>), body element<soap:Body>, fault element
 
-14. What is the “contract” for a SOAP service?
+14. What is the Â“contractÂ” for a SOAP service?
 
-15. What’s the structure of a SOAP message?
+15. WhatÂ’s the structure of a SOAP message?
 
 16. What are the SOAP messaging modes? Messaging Exchange Patterns?
 
@@ -1468,11 +1468,15 @@ access common data store | each microservice has its own data repository (self-c
 
 
 # REST
-18. What does the acronym REST stand for? What makes a service “RESTful”?
-- REST stands for Representational State Transfer. It’s an architectural pattern for creating web services
+
+## Http
+- HTTP protocol is a staeless protocol used for fetching resources on the internet
+
+## What does the acronym REST stand for? What makes a service Â“RESTfulÂ”?
+- REST stands for Representational State Transfer. ItÂ’s an architectural pattern for creating web services
 - RESTful service implements REST pattern. It is considered restful when it had all architecture coinstain of REST aside for the optional code on demand one 
 
-19. What protocols and data format do REST services use?
+## What protocols and data format do REST services use?
 - Html
 - Xml, Json, Plain text
 
@@ -1483,11 +1487,11 @@ access common data store | each microservice has its own data repository (self-c
 
 22. Explain the HATEOAS concept
 
-## What is a “resource” in a REST service?
+## What is a Â“resourceÂ” in a REST service?
 - Rest treat everthing as a resource. 
 - It uses various representations to represent a resource like Text, JSON, XML
 
-24. What does the “uniform interface” constraint mean? Give an example of some RESTful
+24. What does the Â“uniform interfaceÂ” constraint mean? Give an example of some RESTful
 endpoints you would create for an API. Should the URLs contain nouns, verbs, or
 adjectives?
 
@@ -1520,7 +1524,7 @@ maintaining statelessness?
 ## Can a Java microservice communicate with a Node.js microservice? Why or why not?
 - Yes. Beacause each service is independent to each other. The only thing we need is to send or received data from the REST API
 
-## What’s the difference between horizontal and vertical scalability? Which way do monoliths and microservices typically scale?
+## WhatÂ’s the difference between horizontal and vertical scalability? Which way do monoliths and microservices typically scale?
 - Vertical scaling/ Scale up: upgrade/ add more RAM, processor (like add more seat to your car). It cost a lot of money and we are stuck with a particular vendor
 - Horizontal Scalling:  adding more machines. It reduces price, easier to maintain, less downtime
 
@@ -1536,7 +1540,7 @@ maintaining statelessness?
 	- When calling service API directly, if the server fails, the client handles the error. When server restart, client resend
 	
 
-6. What is a “replica”?
+6. What is a Â“replicaÂ”?
 
 ## Explain the Netflix OSS stack for microservices (Eureka, Zuul, Hystrix)
 - **Netflix OSS** is a tool in the **Container Tools category** of a tech stack. It provides 5 important componants to overcome some microservies drawback which is hard to manage when there are hundreds of services
@@ -1595,7 +1599,7 @@ maintaining statelessness?
 Container | Virtual machine
 ----- | -----
 abstraction of application layer | abstraction of hardware layer
-containers are lightweight because they do not require an extra load of a hypervisor. They run directly within the host’s machine. Nospace needed for virtualization | Each VM is a guess OS
+containers are lightweight because they do not require an extra load of a hypervisor. They run directly within the hostÂ’s machine. Nospace needed for virtualization | Each VM is a guess OS
 Faster | Requires entire OS to be loaded before starting
 more secure | less sercure
 complex usage mechanism | simplier to work with
@@ -1644,7 +1648,7 @@ RUN apt-get update
 - docker image push [tag-name]
 
 22. What is Docker compose and why is it useful?
-- Compose is a tool for defining and running multi-container Docker applications as a single service. With Compose, you use a DockerCompose.yml file to configure your application’s services
+- Compose is a tool for defining and running multi-container Docker applications as a single service. With Compose, you use a DockerCompose.yml file to configure your applicationÂ’s services
 - Benefits: Single host deployment, easy to use, reduce times
 ```
 #start all service
@@ -1722,11 +1726,11 @@ and drawbacks of each
 ## How long is a typical sprint?
 - Sprint are fixed length events of one month or less to create consistency
 
-7. What is a “standup” and what should you report about your work?
+7. What is a Â“standupÂ” and what should you report about your work?
 
-## What is the role of a “Scrum master” in a project? What about the “Product owner”?
+## What is the role of a Â“Scrum masterÂ” in a project? What about the Â“Product ownerÂ”?
 
 9. Explain the following metrics/charts: sprint velocity, burndown chart
 
-10. What is a Scrum board? Have you used any software tools for your team’s Scrum
+10. What is a Scrum board? Have you used any software tools for your teamÂ’s Scrum
 board?

@@ -419,8 +419,14 @@ public class SpringRestClient {
 - The key unit of modularity in OOP is the class, whereas in AOP the unit of modularity is the aspect.
 - Aspects can be a normal class configured through Spring XML configuration or @Aspect annotation.
 - An aspect is a class that implements enterprise application concerns that cut across multiple classes, such as transaction management
+ ```java
+ @Before("execution(public void com.journaldev.spring.model..set*(*))")
+	public void loggingAdvice(JoinPoint joinPoint){
+		System.out.println("Before running loggingAdvice on method="+joinPoint.toString());
+ ```
     
-##  Give an example of a cross-cutting concern you could use AOP to address. We need to log before and after a method run
+##  Give an example of a cross-cutting concern you could use AOP to address. 
+- We need to log before and after a method run
     
 ##  Define the following:
     

@@ -80,7 +80,8 @@ class GuruThread2 implements Runnable {..}
 
 ## What are annotations?
 - Provide the extra information of a method source code
-- Ex: @override
+- Java Annotation is a tag that represents the metadata, it attached with class, interface, methods or fields to indicate some additional information which can be used by java compiler and JVM.
+- Ex: @override, @deprecate, @suppress
 
 ## What is a POJO vs a bean?
 - Plain old Java Object: ordinary Java obj 
@@ -88,7 +89,7 @@ class GuruThread2 implements Runnable {..}
 
 ## Can you force garbage collection in Java? When is an object eligible for GC?
 - System.gc() Runtime.gc() but should be avoid since there is no way to predict when garbage collectior will occur at runtime (non-deterministic)
-- Force garbage collector best practice is to set flags on the JVM, a flag can adjust when a garbage collector will be use like set the initial and maximum size of the heap, the size of the heap sections (Young genration, old generation - younf one that lives long enough) (set flag using the CMD -command prompt)
+- Force garbage collector best practice is to set flags on the JVM, a flag can adjust when a garbage collector, like set the initial and maximum size of the heap, the size of the heap sections (Young genration, old generation - younf one that lives long enough) (set flag using the CMD -command prompt)
 
 ## Why are strings immutable in java? How would you make your own objects immutable?
 - Because String class was made final. 

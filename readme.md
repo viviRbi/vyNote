@@ -373,10 +373,12 @@ There are 2 ways of create a thread in Java:
 - Thread class: getName (name of thread), start, run, sleep, yield, join, isAlive
 ## Explain the lifecycle of a thread
 - A thread, acording to Sun, have 4 states: new, runable, non-runable, terminated
-5. What is deadlock?
-6. What is the synchronized keyword?
+## What is deadlock?
+## What is the synchronized keyword?
 
-
+## Compile time and Runtime 
+- compile time is a phase wherein the java compiler converts the java program into java bytecode
+- the java compiler can't compile the code, often because of syntax errors
 
 
 # IO / Serialization
@@ -445,8 +447,11 @@ try(BufferedReader br = new BufferedReader(new FileReader("test.txt"))) {
 
 # Exceptions
 ## What is the difference between final, .finalize(), and finally?
-- final 
-- finally is a block of code that goes together with the try block. It'll executed despite of exception is catch or not
+- final : cannot change a variable value anymore. Compile time error. It is a keyword
+- finally is a block of code that goes together with the try block. It'll executed despite of exception is catch or not. It is a block
+- Finalize is used to perform clean up processing just before object is garbage collected. It is also use to release resources used by objects before they're removed from the memory. The time hen finalizer called are out of our control. It is a method
+- If a finalizer throws an exception, the finalization process stops, leaving the object in a corrupted state without any notification
+- Finalizer had ugly side effects at runtime. Deprecate since Java 9, will soon be remove
 
 ## Explain throw vs throws vs Throwable
 - throws used to throw multiple exceptions at the method level to the calling method. It is used to force programmer handle it
@@ -457,13 +462,25 @@ try(BufferedReader br = new BufferedReader(new FileReader("test.txt"))) {
 - Able to catch multiple block
 - The order of a catch block is whatever matches first, gets executed 
 
-4. What is base class of all exceptions? What interface do they all implement?
+## Compiler vs Runtime
+- Compile time is a phase wherein the java compiler converts the java program into java bytecode. In other words java source code get's converted in to .class file
+- In runtime, the java virtual machine loads the .class file in memory and executes that to generate the output
+
+## Compiler error an runtime error
+- Compile time error - the java compiler can't compile the code, often because of syntax errors
+- the code did compile, can be executed but crashes at some point, like you have a division by zero
+
+## What is base class of all exceptions? What interface do they all implement?
 - Throwable is the base class of all exceptions (Exception, Error class extends from it) (RuntimeException and OtherException extends from it)
 - They all implements Serializable interface (so that we can serialize the exception object and save it into a file?)
 
 ## List some checked and unchecked exceptions?
+- All the exceptions occur at runtime but checked exceptions are detected by the compiler at compile time so it becomes mandatory to handle them
 - Checked exception (java.lang.Exception) forces programmer to handle it. Until it is handled, the compiler won't allow to run. Some of the Checked exceptions are: FileNotFoundException, SQLException, ClassNotFoundException, FileNotFoundException, et
 - Unchecked exceptions are part of RuntimeException 
+## Error
+- Error is irrecoverable e.g. OutOfMemoryError, VirtualMachineError, AssertionError
+- Programmer cannot do anything about it
 
 ## Multi-catch block - can you catch more than one exception in a single catch block?
 - Yes, from Java 7 to newer, we can by using or | symbol
@@ -502,7 +519,10 @@ JDBC API uses Java Reflection API to achieve loose coupling between java program
 	
 
 # Design patterns
-1. What are Singleton / Factory design patterns?
+## What are Singleton / Factory design patterns?
+- Creational category, revolve around the creation of objects
+- A singleton pattern ensures that you always get back the same instance of whatever type you are retrieving, 
+- whereas the factory pattern generally gives you a different instance of each type. Basically Factory pattern is when a method returns one of several super class that share a common super class. Use when don' know what class u'll need. Like a random enemy base on user input
 
 2. How would you create a Singleton?
 

@@ -101,9 +101,23 @@
     
 4.  What is a Docker image? Container?
     
-5.  How is a Docker image different from a Docker container? How are the read/write layers different?
+  How is a Docker image different from a Docker container? How are the read/write layers different?
+- A Docker image is a read-only, inert template that comes with instructions for deploying containers. A Docker image is made up of multiple layers.
+-  Docker image as a recipe and a container as the cake baker from that recipe
+Docker Image | Docker Container
+------ | ------
+Container blueprint | Image instance
+immutable | Writable
+Can exist without a cointainer | Must run an image to exist
+Can be shared | It's already running, no need to share
+Create only one | Can create multiple cointainer from the same image
     
 6.  List the steps to start Docker, create a Docker image, and spin up a container.
+- Create a Docker File at the root
+```
+FROM ubuntu:20.04
+RUN apt update
+```
     
 7.  What is the relevance of the Dockerfile to this process? List some keywords in the Dockerfile.
     
@@ -116,6 +130,8 @@
 11.  What is Docker compose and why is it useful?
     
 12.  If you want to store state for a container, how does Docker recommend doing that?
+```docker run -v <volume_name>:<container_directory> <image_name>```
+
 
 <br>
 

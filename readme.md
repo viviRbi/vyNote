@@ -472,7 +472,7 @@ try(BufferedReader br = new BufferedReader(new FileReader("test.txt"))) {
 
 ## Compiler error an runtime error
 - Compile time error - the java compiler can't compile the code, often because of syntax errors
-- the code did compile, can be executed but crashes at some point, like you have a division by zero
+- Runtime error: he code did compile, can be executed but crashes at some point, like you have a division by zero
 
 ## What is base class of all exceptions? What interface do they all implement?
 - Throwable is the base class of all exceptions (Exception, Error class extends from it) (RuntimeException and OtherException extends from it)
@@ -480,14 +480,14 @@ try(BufferedReader br = new BufferedReader(new FileReader("test.txt"))) {
 
 ## List some checked and unchecked exceptions?
 - All the exceptions occur at runtime but checked exceptions are detected by the compiler at compile time so it becomes mandatory to handle them
-- Checked exception (java.lang.Exception) forces programmer to handle it. Until it is handled, the compiler won't allow to run. Some of the Checked exceptions are: FileNotFoundException, SQLException, ClassNotFoundException, FileNotFoundException, et
-- Unchecked exceptions are part of RuntimeException 
+- Checked exception (java.lang.Exception) forces programmer to handle it. Until it is handled, the compiler won't allow to run. Some of the Checked exceptions are: FileNotFoundException, SQLException, ClassNotFoundException, FileNotFoundException, et. Have to use try/catch or throws to force programmer handle error
+- Unchecked exceptions are part of RuntimeException doesn't need to handle error
 ## Error
 - Error is irrecoverable e.g. OutOfMemoryError, VirtualMachineError, AssertionError
 - Programmer cannot do anything about it
 
 ## Multi-catch block - can you catch more than one exception in a single catch block?
-- Yes, from Java 7 to newer, we can by using or | symbol
+- Yes, from Java 7 to newer, we can by using or ( | symbol)
 
 
 

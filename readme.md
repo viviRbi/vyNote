@@ -80,8 +80,7 @@ class GuruThread2 implements Runnable {..}
 
 ## What are annotations?
 - Provide the extra information of a method source code
-- Java Annotation is a tag that represents the metadata, it attached with class, interface, methods or fields to indicate some additional information which can be used by java compiler and JVM.
-- Ex: @override, @deprecate, @suppress
+- Ex: @override
 
 ## What is a POJO vs a bean?
 - Plain old Java Object: ordinary Java obj 
@@ -89,7 +88,7 @@ class GuruThread2 implements Runnable {..}
 
 ## Can you force garbage collection in Java? When is an object eligible for GC?
 - System.gc() Runtime.gc() but should be avoid since there is no way to predict when garbage collectior will occur at runtime (non-deterministic)
-- Force garbage collector best practice is to set flags on the JVM, a flag can adjust when a garbage collector, like set the initial and maximum size of the heap, the size of the heap sections (Young genration, old generation - younf one that lives long enough) (set flag using the CMD -command prompt)
+- Force garbage collector best practice is to set flags on the JVM, a flag can adjust when a garbage collector will be use like set the initial and maximum size of the heap, the size of the heap sections (Young genration, old generation - younf one that lives long enough) (set flag using the CMD -command prompt)
 
 ## Why are strings immutable in java? How would you make your own objects immutable?
 - Because String class was made final. 
@@ -121,14 +120,11 @@ use new keyword or = sign to create | new keyword to create an obj only| new key
 
 
 ## What are the access modifiers in Java? Explain them.
-- public, protected (same package + subclass), default (same package), private (only in the class itself)
+- 
 
-## What are the non-access modifiers in Java?
-- Static, finale
+15. What are the non-access modifiers in Java?
 
-## What is the difference between static and final variables?
-- Static = belong to the class, only static method can call a static method and variable
-- Finale = method or field is immutable. IF try to change will cause uncheck error
+16. What is the difference between static and final variables?
 
 ## What are the default values for all data types in Java?
 - Boolean
@@ -378,7 +374,21 @@ There are 2 ways of create a thread in Java:
 ## Explain the lifecycle of a thread
 - A thread, acording to Sun, have 4 states: new, runable, non-runable, terminated
 ## What is deadlock?
+- Deadlock in Java is a condition where two or more threads are blocked forever, waiting for each other.
+- To avoid: avoid giving locks to multiple thread to not have nested lock, avoid unnecessary locks, using thread join
 ## What is the synchronized keyword?
+- A piece of logic marked with synchronized becomes a synchronized block, allowing only one thread to execute at any given time
+```
+public void performSynchronisedTask() {
+    synchronized (this) {
+        setCount(getCount()+1);
+    }
+}
+
+public synchronized void synchronisedCalculate() {
+    setSum(getSum() + 1);
+}
+```
 
 ## Compile time and Runtime 
 - compile time is a phase wherein the java compiler converts the java program into java bytecode
@@ -472,7 +482,7 @@ try(BufferedReader br = new BufferedReader(new FileReader("test.txt"))) {
 
 ## Compiler error an runtime error
 - Compile time error - the java compiler can't compile the code, often because of syntax errors
-- Runtime error: he code did compile, can be executed but crashes at some point, like you have a division by zero
+- the code did compile, can be executed but crashes at some point, like you have a division by zero
 
 ## What is base class of all exceptions? What interface do they all implement?
 - Throwable is the base class of all exceptions (Exception, Error class extends from it) (RuntimeException and OtherException extends from it)
@@ -480,14 +490,14 @@ try(BufferedReader br = new BufferedReader(new FileReader("test.txt"))) {
 
 ## List some checked and unchecked exceptions?
 - All the exceptions occur at runtime but checked exceptions are detected by the compiler at compile time so it becomes mandatory to handle them
-- Checked exception (java.lang.Exception) forces programmer to handle it. Until it is handled, the compiler won't allow to run. Some of the Checked exceptions are: FileNotFoundException, SQLException, ClassNotFoundException, FileNotFoundException, et. Have to use try/catch or throws to force programmer handle error
-- Unchecked exceptions are part of RuntimeException doesn't need to handle error
+- Checked exception (java.lang.Exception) forces programmer to handle it. Until it is handled, the compiler won't allow to run. Some of the Checked exceptions are: FileNotFoundException, SQLException, ClassNotFoundException, FileNotFoundException, et
+- Unchecked exceptions are part of RuntimeException 
 ## Error
 - Error is irrecoverable e.g. OutOfMemoryError, VirtualMachineError, AssertionError
 - Programmer cannot do anything about it
 
 ## Multi-catch block - can you catch more than one exception in a single catch block?
-- Yes, from Java 7 to newer, we can by using or ( | symbol)
+- Yes, from Java 7 to newer, we can by using or | symbol
 
 
 
@@ -528,9 +538,14 @@ JDBC API uses Java Reflection API to achieve loose coupling between java program
 - A singleton pattern ensures that you always get back the same instance of whatever type you are retrieving, 
 - whereas the factory pattern generally gives you a different instance of each type. Basically Factory pattern is when a method returns one of several super class that share a common super class. Use when don' know what class u'll need. Like a random enemy base on user input
 
-2. How would you create a Singleton?
+## How would you create a Singleton?
+- Create a public static getInstance method inside the singeton class. If the private static Singeton instance is null, create a new one. Then return the instance
+- Use SingletonClass.getInstance to get the instance
 
-3. Explain the DAO design pattern
+## Explain the DAO design pattern
+- The model which is transferred from one layer to the other.
+- The interfaces which provides a flexible design.
+- The interface implementation which is a concrete implementation of the persistence logic.
 
 
 

@@ -696,7 +696,30 @@ reportsLog.debug("reports debug message");
 # Advanced
 ## What are functional interfaces? List some that come with the JRE for Java 8
 
-2. What are lambdas?
+## What are lambdas?
+- A Lambda expression (or function) is an anonymous function with arrow syntax using a Functional interface (An interface with only single abstract method ). It help us to achive fewer code
+```
+public interface FunctionalInterface{
+	data();
+}
+
+public class Test{
+	public static void main(String args[]){
+		FunctionalInterface f = System.out.println("Lamba");
+	}
+	
+}
+```
+- Without using Lambda expression, we used the anonymous inner class to implement the only abstract method of functional interface.
+```
+ b.addActionListener(new ActionListener(){  
+          public void actionPerformed(ActionEvent e){  
+    	     System.out.println("Hello World!"); 
+          }  
+       });  
+```
+- With lamba. Instead of creating anonymous inner class, we can create a lambda expression like this
+```b.addActionListener(e -> System.out.println("Hello World!"));```
 
 ## What is try-with-resources? What interface must the resource implement to use this feature?
 - Generally finally block is used to close all the resources (viz., file, database connection, socket or anything that should be closed after its task is done) to prevent any leaks.
@@ -714,13 +737,17 @@ reportsLog.debug("reports debug message");
 - Only 1 unimplemented method show up. And if we write that method, both interface satisfy
 
 ## If 2 interfaces have the same variable names and you implement both, what happens?
+- If you try to use that variable, it'll throw a exception- doesn't know which one to use. If not use, it's fine
 
 ## Why does HashTable not take null key?
 - Because HashTable serilize the key, if it takes null, it'll throw a null pointer exception
 
 9. What new syntax for creating variables was introduced with Java 10?
+- var keyword to declare variables ```var bos = new ByteArrayOutputStream();```
+- var keyword of Java 10 is similar to the auto keyword. But its immutable equivalent haven't been support
 
-10. Is there an interactive REPL tool for Java like there is for languages like Python?
+## Is there an interactive REPL tool for Java like there is for languages like Python? 
+JSHELL
 
 ## What are collection factory methods?
 - They are a new features in Java 9, they allow for easy initialization of immutable collections.
@@ -737,7 +764,12 @@ Map<Integer, String> map = Map.of(1,"A", 2,"B", 3,"C");
 
 2. Draw a simple ERD for modelling Students and Classes
 
-3. What are the 5 sublanguages of SQL? Which commands correspond to them?
+3. What are the 5 sublanguages of SQL? Which commands correspond to them? 
+- DDL (Create, Drop)
+- DML (SELECT, UPDATE)
+- DCL (GRANT, REVOKE)
+- DQL (FROM, WHERE)
+- DTS (ROLLBACK TRANSACTION, BEGIN TRANSACTION, COMMIT TRANSACTION)
 
 4. What is the difference between DELETE, DROP, and TRUNCATE commands?
 
@@ -974,21 +1006,79 @@ different ways of setting event listeners?
 
 
 # AJAX
-46. What is AJAX? why do we use it?
+## What is AJAX? why do we use it?
+- generic term for any client-side process which fetches data from a server and updates the DOM dynamically without a full-page refresh
+- Ajax is a core technique for most web applications and Single-Page Apps
+## What are the benefits of using AJAX?
+- Improve user experience: data can be update without reloading the whole page like server side rendering
+- Fast: doesn't reloading the whole page just for some particular data
+- Reduce server load 
+- Compability: it can be used with any backend
+- Asynchronus: improve performent
 
-a. What are the benefits of using AJAX?
 
-b. Are there any downsides of using AJAX?
+## Are there any downsides of using AJAX?
+- Insercure
+- It depend on Javascript so it required browser need to support it
+- Not good for SEO
 
-47. Explain why it is important that AJAX is asynchronous
+## Explain why it is important that AJAX is asynchronous
+-  it will wait to get the data instead of return to data as a null
+- AJAX does not refresh or reload the whole page
 
 48. List the steps to sending an AJAX request
+- url, method, header, body (if the request is not safe: put post delete)
 
-49. What are steps to sending an AJAX request?
+## What are steps to sending an AJAX request?
+- Use fetch, $.ajax (jquery Ajax wrapper functions ), XMLHttpRequest obj
+```
+$.ajax('http://domain/service')
+  .done(data => console.log(data))
+  .fail((xhr, status) => console.log('error:', status));
+```
+- fetch (url,{option: method, header, body(for post, put)}).then => parse json => .then : do something => .catch err
+```javascript
+// create XMLHttpRequest obj
+let xhr = new XMLHttpRequest();
+xhr.open(method, URL, [async, user, password])
+xhr.responseType = 'json';
+// async – if explicitly set to false, then the request is synchronous
+// Send the body
+xhr.send([body])
+// Listen to event. Aside from these, can use onReadyStateChange event which is a combination of these + more
+xhr.onload = function(){
+	if (xhr.status != 200) { // analyze HTTP status of the response
+    	alert(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
+  } else { // show the result
+    	alert(`Done, got ${xhr.response.length} bytes`); // response is the server response
+  }
+}
+```
 
-50. List the different ready states of the XmlHttpRequest object
+## List the different ready states of the XmlHttpRequest object
+```
+UNSENT = 0; // initial state
+OPENED = 1; // open called
+HEADERS_RECEIVED = 2; // response headers received
+LOADING = 3; // response is loading (a data packet is received)
+DONE = 4; // request complete
 
-51. How does the fetch API differ from the XHR object?
+xhr.onreadystatechange = function() {
+  if (xhr.readyState == 3) {
+    // loading
+  }
+  if (xhr.readyState == 4) {
+    // request finished
+  }
+};
+```
+
+## How does the fetch API differ from the XHR object?
+fetch | XHR
+---- | -----
+modern alternative | old
+clean, simple | lots of code, harder to understand
+not a full replacement for XHR yet | lots of  options, events, and response properties
 
 
 # Servlets
@@ -1010,14 +1100,80 @@ class or interface?
 
 8. What is the difference between the ServletConfig and ServletContext objects? How do
 you retrieve these in your servlet?
+- There is one context per "web application" per Java Virtual Machine.
+- information shared by ServletConfig is for a specific servlet, while information shared by ServletContext is available for all servlets in the web application.
+```
+String email
+            = getServletConfig()
+                  .getInitParameter("Email");
+String website
+            = getServletContext()
+                  .getInitParameter("Website-name");
+PrintWriter out = response.getWriter();
 
-9. What is the purpose of the RequestDispatcher?
+System.out.println("<center><h1>" + website
+                    + "</h1></center><br><p>Contact us:"
+                    + email);
+```
+```xml
+</web-app>
 
-10. Explain the difference between RequestDispatcher.forward() and
+<!-- Config  -->
+ <servlet>
+    <servlet-name>applicant</servlet-name>
+    <servlet-class>Applicant</servlet-class>
+    <init-param>
+      <param-name>Email</param-name>
+      <param-value>forApplicant@xyz.com</param-value>
+    </init-param>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>applicant</servlet-name>
+    <url-pattern>/servlet2</url-pattern>
+  </servlet-mapping>
+  
+<!-- Context  -->
+  <context-param>
+    <param-name>Website-name</param-name>
+    <param-value>NewWebsite.tg</param-value>
+  </context-param>
+  
+</web-app>
+```
+
+## What is the purpose of the RequestDispatcher?
+- Receive data from client and Dispatch that request + the response data to HTML, other servlet, or JSP.
+
+```
+response.setContentType("text/html");      
+       PrintWriter pwriter = response.getWriter();                
+       String name=request.getParameter("uname");      
+       String pass=request.getParameter("upass");                
+       if(name.equals("Chaitanya") && 
+          pass.equals("beginnersbook"))
+       {          
+          RequestDispatcher dis=request.getRequestDispatcher("welcome");          
+          dis.forward(request, response);      
+       }     
+```
+
+## Explain the difference between RequestDispatcher.forward() and
 HttpServletResponse.sendRedirect()
+- Foward: if it send the response to Servlet2, client get response from servlet2
+```
+request.setAttribute("book", book);
+request.setAttribute("booktags", booktags);
+
+request.getRequestDispatcher("bookDetails.jsp").forward(request, response);
+```
+- Send redirect: reload page to that new url
 
 11. What are some different ways of tracking a session with servlets?
-
+```
+HttpSession session = req.getSession();
+session.setAttribute("username", username);
+```
 12. What is object mapping? Any Java libraries for this?
 
 13. How would you send text or objects back in the body of the HTTP response from a

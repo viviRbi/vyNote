@@ -80,7 +80,8 @@ class GuruThread2 implements Runnable {..}
 
 ## What are annotations?
 - Provide the extra information of a method source code
-- Ex: @override
+- Java Annotation is a tag that represents the metadata, it attached with class, interface, methods or fields to indicate some additional information which can be used by java compiler and JVM.
+- Ex: @override, @deprecate, @suppress
 
 ## What is a POJO vs a bean?
 - Plain old Java Object: ordinary Java obj 
@@ -88,7 +89,7 @@ class GuruThread2 implements Runnable {..}
 
 ## Can you force garbage collection in Java? When is an object eligible for GC?
 - System.gc() Runtime.gc() but should be avoid since there is no way to predict when garbage collectior will occur at runtime (non-deterministic)
-- Force garbage collector best practice is to set flags on the JVM, a flag can adjust when a garbage collector will be use like set the initial and maximum size of the heap, the size of the heap sections (Young genration, old generation - younf one that lives long enough) (set flag using the CMD -command prompt)
+- Force garbage collector best practice is to set flags on the JVM, a flag can adjust when a garbage collector, like set the initial and maximum size of the heap, the size of the heap sections (Young genration, old generation - younf one that lives long enough) (set flag using the CMD -command prompt)
 
 ## Why are strings immutable in java? How would you make your own objects immutable?
 - Because String class was made final. 
@@ -120,11 +121,14 @@ use new keyword or = sign to create | new keyword to create an obj only| new key
 
 
 ## What are the access modifiers in Java? Explain them.
-- 
+- public, protected (same package + subclass), default (same package), private (only in the class itself)
 
-15. What are the non-access modifiers in Java?
+## What are the non-access modifiers in Java?
+- Static, finale
 
-16. What is the difference between static and final variables?
+## What is the difference between static and final variables?
+- Static = belong to the class, only static method can call a static method and variable
+- Finale = method or field is immutable. IF try to change will cause uncheck error
 
 ## What are the default values for all data types in Java?
 - Boolean
@@ -468,7 +472,7 @@ try(BufferedReader br = new BufferedReader(new FileReader("test.txt"))) {
 
 ## Compiler error an runtime error
 - Compile time error - the java compiler can't compile the code, often because of syntax errors
-- the code did compile, can be executed but crashes at some point, like you have a division by zero
+- Runtime error: he code did compile, can be executed but crashes at some point, like you have a division by zero
 
 ## What is base class of all exceptions? What interface do they all implement?
 - Throwable is the base class of all exceptions (Exception, Error class extends from it) (RuntimeException and OtherException extends from it)
@@ -476,14 +480,14 @@ try(BufferedReader br = new BufferedReader(new FileReader("test.txt"))) {
 
 ## List some checked and unchecked exceptions?
 - All the exceptions occur at runtime but checked exceptions are detected by the compiler at compile time so it becomes mandatory to handle them
-- Checked exception (java.lang.Exception) forces programmer to handle it. Until it is handled, the compiler won't allow to run. Some of the Checked exceptions are: FileNotFoundException, SQLException, ClassNotFoundException, FileNotFoundException, et
-- Unchecked exceptions are part of RuntimeException 
+- Checked exception (java.lang.Exception) forces programmer to handle it. Until it is handled, the compiler won't allow to run. Some of the Checked exceptions are: FileNotFoundException, SQLException, ClassNotFoundException, FileNotFoundException, et. Have to use try/catch or throws to force programmer handle error
+- Unchecked exceptions are part of RuntimeException doesn't need to handle error
 ## Error
 - Error is irrecoverable e.g. OutOfMemoryError, VirtualMachineError, AssertionError
 - Programmer cannot do anything about it
 
 ## Multi-catch block - can you catch more than one exception in a single catch block?
-- Yes, from Java 7 to newer, we can by using or | symbol
+- Yes, from Java 7 to newer, we can by using or ( | symbol)
 
 
 

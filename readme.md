@@ -121,11 +121,14 @@ use new keyword or = sign to create | new keyword to create an obj only| new key
 
 
 ## What are the access modifiers in Java? Explain them.
-- 
+- public, protected (same package + subclass), default (same package), private (only in the class itself)
 
-15. What are the non-access modifiers in Java?
+## What are the non-access modifiers in Java?
+- Static, finale
 
-16. What is the difference between static and final variables?
+## What is the difference between static and final variables?
+- Static = belong to the class, only static method can call a static method and variable
+- Finale = method or field is immutable. IF try to change will cause uncheck error
 
 ## What are the default values for all data types in Java?
 - Boolean

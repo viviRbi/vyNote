@@ -120,14 +120,21 @@ use new keyword or = sign to create | new keyword to create an obj only| new key
 
 
 ## What are the access modifiers in Java? Explain them.
-- 
+- The access modifiers in Java specifies the accessibility of a field, method, constructor or class
+public | protected | default | private
+| ---- | ---- | ---- | ---- |
+everywhere | within package + sub class | within package | within its own class
 
-15. What are the non-access modifiers in Java?
+## What are the non-access modifiers in Java?
+- static, final, abstract, synchronized
+static | final | abstract | synchronized
+| ---- | ---- | ---- | ---- |
+exist independently from class instances. It belong to the class | cannot re-assign value | declare a class or a method abstrct. An abstract method have to be declare inside an abstract class or else compiler error will throw | synchronized keyword used to indicate that a method can be accessed by only 1 thread at a time
 
-16. What is the difference between static and final variables?
+16. What is the difference between static and final variables?
 
 ## What are the default values for all data types in Java?
-- Boolean
+- Boolean: false
 
 ## What is a wrapper class? List them.
 - Wrapper class 
@@ -140,7 +147,6 @@ use new keyword or = sign to create | new keyword to create an obj only| new key
 
 ## What makes a class immutable?
 - Makes its field final
-- 
 
 ## If two objects are equal, do they have the same hashcode? If not equal?
 - If 2 objects are equal, they have the same hashed. 
@@ -148,8 +154,6 @@ use new keyword or = sign to create | new keyword to create an obj only| new key
 
 ## What data types are supported in switch statements?
 - Int, Short, Char, Boolean and String
-
-## List all non-access modifiers
 
 ## How to pass multiple values with a single parameter into a method? 
 - String[], int[], datatype + square bracket
@@ -183,7 +187,7 @@ use new keyword or = sign to create | new keyword to create an obj only| new key
 ## How would you perform constructor chaining?
 - Constructor chaining is the process of calling one constructor from another constructor
 	
-34. What happens if you dont define a constructor for a class? Can you still instantiate it?
+34. What happens if you don�t define a constructor for a class? Can you still instantiate it?
 
 # OOP
 ## What are the 4 pillars of OOP? Explain each and give examples of you implement them
@@ -211,10 +215,51 @@ methods?
 
 10. When do you use extends or implements keywords?
 
-11. What are enumerations (enums)?
+## What are enumerations (enums)?
+- An enum type is a special data type that enables for a variable to be a set of predefined constants
+- Should use enum types any time we need to represent a fixed set of constants
+```java
+class EnumExample5{  
 
-12. What are the implicit modifiers for interface variables / methods?
+	enum Day{ SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY}  
 
+	public static void main(String args[]){  
+		Day day=Day.MONDAY;  
+  
+	switch(day){  
+		case SUNDAY:   
+ 			System.out.println("sunday");  
+ 		break;  
+		case MONDAY:   
+ 			System.out.println("monday");  
+ 		break;  
+		default:  
+			System.out.println("other day");  
+		}  
+	}
+}
+// monday
+
+class EnumExample4{  
+	enum Season{   
+		WINTER(5), SPRING(10), SUMMER(15), FALL(20);   
+  
+		private int value;  
+		private Season(int value){  
+			this.value=value;  
+		}  
+	}  
+	public static void main(String args[]){  
+		for (Season s : Season.values())  
+			System.out.println(s+" "+s.value);  
+  
+	}
+}  
+```
+
+## What are the implicit modifiers for interface variables / methods?
+- All the fields of an interface are public static final by default.
+- All the methods in an interface are public and abstract 
 
 # Collections / Generics
 ## Look at if it's a class or an interface first, then look at which interface it implements from
@@ -364,18 +409,41 @@ pair2.printValue()
 # Threads
 ## What is multi-threading?
 - Multi threading means there will be 2 to more task running at the same time. It makes our app faster and smarter. Faster is always smore preferable in the market. When in a multithread, we cannot identify which thread comming first and last
+
 ## In what ways can you create a thread?
 There are 2 ways of create a thread in Java: 
 - Extending java.lang.Thread class (which already implement Runnable interface)
 - Implement java.lang.Runnable
+```java
+public class ExampleClass implements Runnable {  
+  
+    @Override  
+    public void run() {  
+        System.out.println("==--Thread has ended");  
+    }  
+   
+    public static void main(String[] args) {  
+        ExampleClass ex = new ExampleClass();  
+        Thread t1= new Thread(ex);  
+        t1.start();  
+        System.out.println("Hi");  
+    }  
+}  
+
+// Hi
+// ==--Thread had ended
+```
 ## List the methods in the Thread class and Runnable interface
 - Runnable interface: run
 - Thread class: getName (name of thread), start, run, sleep, yield, join, isAlive
+
 ## Explain the lifecycle of a thread
 - A thread, acording to Sun, have 4 states: new, runable, non-runable, terminated
+
 ## What is deadlock?
 - Deadlock in Java is a condition where two or more threads are blocked forever, waiting for each other.
 - To avoid: avoid giving locks to multiple thread to not have nested lock, avoid unnecessary locks, using thread join
+
 ## What is the synchronized keyword?
 - A piece of logic marked with synchronized becomes a synchronized block, allowing only one thread to execute at any given time
 ```
@@ -704,6 +772,9 @@ reportsLog.debug("reports debug message");
 ## What is the default Maven build lifecycle?
 
 ## Where / when does Maven retrieve dependencies from? Where are they stored locally?
+- Maven retrieve its dependencies from a Maven repository
+- 3 type of Maven repositories: Local, Central, Remote
+- They are stored locally
 
 ## What is the POM and what is the pom.xml?
 - POM is short for Project Object Model. It is the representation of a Maven project held in a file named pom.xml
@@ -1275,8 +1346,15 @@ you setup each?
 # DevOps + Linux + AWS
 # DevOps
 1. What is DevOps? What is the goal of various DevOps processes?
+- DevOps is a set of practices that combines software development and IT operations.
+- It aims to shorten the systems development life cycle and provide continuous delivery 
 
 2. Explain CI/CD. What is the difference between Continuous Deployment and Continuous Delivery?
+- continuous integration/ continuous deployment
+- Continuous Integration is the automation of builds. 3 pillars: the builds be repeatable, consistent, and available
+- COntinuos Deployment: the deployment; the actual installation and distribution
+- Continuous Delivery is the automation of steps to safely get changes into production. 
+- Where Continuous Deployment focuses on the actual deployment, Continuous Delivery focuses on the release and release strategy
 
 3. What tools have you used to achieve CI/CD? Explain how youve setup and used them
 
@@ -1284,11 +1362,15 @@ you setup each?
 
 5. What is SonarQube / SonarCloud? Explain some of the features of it
 
-6. What is a build? What is the end result of a build? What is the build tool youve used for
+## What is a build? What is the end result of a build? What is the build tool youve used for
 Java projects?
+- The "Build" is a process that covers all the steps required to create a "deliverable" of your software.
+- a generic term describes the overall process which includes compiling.
+- "Compiling" is turning .java files into .class files
 
-7. What are the Maven lifecycles? List the steps in the build lifecycle
-
+## What are the Maven lifecycles? List the steps in the build lifecycle
+- Each building pharse repesent a stage in Maven lifecycles
+- process resouces, compile, test, package, verify, install, deploy
 
 
 
@@ -1301,8 +1383,20 @@ Java projects?
 9. List some Linux distributions
 
 10. Explain the terms terminal, shell, console, command-line?
+- shell = terminal command line interpreter. After writing our commands on the terminal, when we press the Enter key, the terminal passes those commands to another program to figure out what the user wants to do, and in most cases, that program is the Shell
+- terminal = text input/output environment
+- console = physical terminal
+
+- command line = our input
 
 11. What is the bash shell? How would you write a bash script?
+- Unix shell command language
+```
+nano test.sh
+#!/bin/bash
+echo "Hello"
+bash test.sh
+```
 
 12. What is the shebang syntax and purpose?
 

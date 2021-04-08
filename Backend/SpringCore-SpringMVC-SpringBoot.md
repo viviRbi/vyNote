@@ -427,6 +427,8 @@ public class SpringRestClient {
     
 ##  Give an example of a cross-cutting concern you could use AOP to address. 
 - We need to log before and after a method run
+- Security
+- Validation
     
 ##  Define the following:
     
@@ -435,22 +437,34 @@ public class SpringRestClient {
     
 -  Pointcut: an expression language that matched a join point
 ```java
-@Before("execution(public String getName())")
+@Pointcut("execution(public **(..))") // applied on all public method
+@Pointcut("execution(* Operation.*(..))") // applied on all the methods of Operation class
+//------------------------------------
+@Aspect
+public class EmployeeAOP{
+@Pointcut("execution(public Employee.set*(..))")// applied on all public setter method of employee
+public employeePointCut(){} // method of poincut annotation
 
+@Before("employeePointCut()")
+public void BeforeEmployeeSetter (Jointpoint jp){
+	System.out.println("before each setter methods of Employee class---")
+	logger.log("Class name is " + jp.getSignature())
+}
+}
+
+// xml AOP
 <aop:config>
     <aop:pointcut id="anyDaoMethod" 
       expression="@target(org.springframework.stereotype.Repository)"/>
 </aop:config>
-
-whatever you specify inside @Before or @After is a pointcut expression. This can be extracted out into a separate method using @Pointcut annotation
  @Pointcut("@annotation(org.springframework.web.bind.annotation.RequestMapping)")
-    public void requestMapping() {}
+public void requestMapping() {}
 
-    @Pointcut("within(blah.blah.controller.*) || within(blah.blah.aspect.*)")
-    public void myController() {}
+@Pointcut("within(blah.blah.controller.*) || within(blah.blah.aspect.*)")
+public void myController() {}
 
-    @Around("requestMapping() && myController()")
-    public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
+@Around("requestMapping() && myController()")
+public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
       ...............
    } 
 ```

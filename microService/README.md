@@ -133,9 +133,8 @@ RUN apt update
 ```docker run -v <volume_name>:<container_directory> <image_name>```
 
 
-<br>
-
-<hr>
-  
-<br>  
+![Happy Christmas](API-gateway.jpg)
+![Happy Christmas](cloud-config1.jpg)
+![Happy Christmas](cloud-config2.jpg)
+![Happy Christmas](cloud-config3.jpg)  
 

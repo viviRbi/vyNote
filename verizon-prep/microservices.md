@@ -65,7 +65,36 @@ access common data store | each microservice has its own data repository (self-c
 	- Async API calls: request achknowelege using callback 
 ## API architechture style recommended
 - Pragmatic REST (extended unoffical version of Rest, not all about CRUD, ation/task based endpoints)
-- HATEOS (true REST)
+- HATEOAS (true REST) 
+	- When get a REST call, not only get the data but also the action link the the user can take. We can create those link dynamicly in Spring Boot and Spring using Hateoas project to implement it
+	Ex: withdraw -200, send a deposit link
+```java
+@GetMapping("/account/{id}")
+public ResponseEntity<?> getAccountDetail(@PathVariable Long id){
+	ResponseEnitity<?> responseEntity = accountService.findOne(id);
+	SuccessResponse success = (SuccessResponse) responseEntity.getBody();
+	Account account = (Account) success.getObject();
+
+	EntityModel<Account> resource = EntityModel.of(account)
+	resource.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).deposit(new Account())).withRel("deposit))
+	return new ResponseEntity<>(resource, HttpStatus.OK)
+}
+@PutMapping("/deposit")
+public ResponseEntity<?> deposit(@RequestBody Account account){
+	return accountService.depositToAccount(account);
+}
+```
+```java
+Link link = linkTo(CustomerController.class).withSelfRel();
+CollectionModel<Customer> result = CollectionModel.of(allCustomers, link)
+return result;
+
+// http://localhost:8080/spring-security-rest/api/customers
+
+linkTo(CustomerController.class).slash(customer.getCustomerId()).withSelfRel();
+
+// http://localhost:8080/spring-security-rest/api/customers/30C
+```
 - RPC
 - SOAP
 

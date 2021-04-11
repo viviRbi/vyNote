@@ -568,8 +568,16 @@ Collection<User> findAllActiveUsersNative();
 <br>
 
 # Spring Boot
+- Spring Boot is one of the most popular framework to develop microservices today. Spring Boot makes it easy to develop applications quickly
 ## Boot?
 - Come from Bootstrap, means self-starting
+
+## What's in SpringBoot
+- SpringBoot is an extension of Spring Framework
+- Automatic configuration
+- Starter dependency
+- CLI
+- Actuator
 
 ##  How is Spring Boot different from legacy Spring applications? What does it mean that it is opinionated?
 - **Spring Boot** is an extension of the Spring framework, which eliminates the boilerplate configurations required for setting up a Spring application
@@ -577,21 +585,26 @@ Collection<User> findAllActiveUsersNative();
 - **Unlike Spring**, Spring Boot requires only 1 dependency to get a web application running. That is the spring-boot-starter-web from org.springframework.boot
 - **Spring Boot opinionate** because it follows the opinionated default configuration that reduces developer efforts to configure the application
     
-##  What does convention over configuration¬ù mean?
+##  What does convention over configurationù mean?
 - Convention over configuration is a software design paradigm which is used by many modern software frameworks that attempts to decrease the number of decisions that a developer can made without necessarily losing flexibility
 - It takes a lot of burden away from developers
     
 ##  What annotation would you use for Spring Boot apps? What does it do behind the scenes?
 - For all Spring Core Spring MVC Spring Boot annotation: https://www.javatpoint.com/spring-boot-annotations
 - **@SpringBootApplication**: It is the combination of 3 annotation: @EnableAutoConfiguration, @ComponentScan and @Configuration
-- @Configuration: not specific to Spring Boot. It tags the class a the source bean
+- @SpringBootConfiguration: replace @Configuration and annotate the class as a SpringBoot configuration
 - @EnableAutoConfiguration: a Spring Boot Annotation, enable the application to add the beans using classpath definitions. You can tell Spring to disable certain auto-configuration classes.  (i.e.  ```@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})``` )
 @ComponentScan: This annotation tells the spring to look for oter components, configurations and services in the specified path
 - When using Spring MVC, we have to configure these ourself: component scan, dispatcher servlet, view resolver, web jars, others
     
+## SpringBoot Properties:
+- Server, logging, aop, cached, session properties
+```https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html```
+
 ##  How does Boot autoconfiguration work?
-- Spring Boot looks at Frameworks available on classpath, existing configuration for the application. Base on these, Spring Boot provide basic configuration needed to configure the aplication with these frameworks which called Auto Configuration
-- Ex: As soon as we added SpringBoot Starter Web as a dependency, Spring Boot Autoconfiguration sees that Spring MVC is on the classpath. It autoconfigures dispatcherServlet, a default error page and webjars
+- At the start of SpringBoot POM file, there's a spring boot starter parent dependency. When we add dependency in SpringBoot, we don't have to specify the version because the parent POM do that for us.
+- Spring Boot Starter parent had its own parent, it's the spring-boot-dependencies pom. It is the ultimate parent where all relevant transitive dependencies stayed. It was these dependencies that Maven download from its repository (it'll check local, central, then remote repository to download) (base on xsi:schemaLocation attribute - which locates schemas for elements and attributes that are in a specified namespace) ```https://www.javaguides.net/2018/06/guide-to-maven-repository.html```
+- Ex: As soon as we added SpringBoot Starter Web as a dependency, Spring Boot Automatically configure Spring MVC, REST, Tomcat, JsontoJavaObjectMapping
 - If we add Spring Boot Data JPA Starter, the auto configuration will auto configure a datasource and an Entity Manager
     
 ##  What is the advantage of having an embedded Tomcat server?
@@ -643,3 +656,60 @@ application-prod.properties
 application.properties
 ```
 To set the environment we are in, in application.properties, add spring.profiles.active=prod. In VM Arguments, -Dspring.profiles.active=qa
+
+## Mockitoís @Mock vs Spring bootís @MockBean
+@Mock | @MockBean
+----- | -----
+used to write a test that doesnít need any dependencies from the Spring Boot container | used when the test rely on the Spring Boot or when mock one of SpringBoot component beans
+fast and favors the isolation of the tested component | slower
+
+- Should test Mockito on Service layer
+
+```java
+// The real UserService class should have the same name repo name as the mock:
+
+// Real UserService class
+@Autowired
+private UserRepository repo;
+
+// Mock Test
+import com...dao.UserRepository;
+...
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class SpringBootMockTest{
+	
+	@Autowire
+	private UserService service;
+
+	@MockBean
+	private UserRepository repo;
+
+	@Test
+	public void getUserTest(){
+		when (repo.findAll()).thenReturn(Stream.of(new User(1,"dsd","d"), new User(2,"a","a")).colect(Collectors.toList()));
+	assertEquals(2, service.getUsers().size());
+	}
+@Test
+public void deleteUserTest(){
+	User user = new User (1,"sd","ds");
+	service.deleteUser(user);
+	verify((repo, times(1)).delete(user))
+} 
+
+}
+```
+- Test to see the times the method was called
+```java
+@Test
+    public void shouldAddItemsToList() {
+        mock.add("one");
+        mock.add("two");
+
+        Mockito.verify(mock, times(2))
+               .add(anyString()); // method was called exactly 2 times
+
+        Mockito.verify(mock, atLeast(2))
+               .add(anyString()); // method was called at least 2 times
+    }
+```

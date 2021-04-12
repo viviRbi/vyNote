@@ -148,10 +148,9 @@ Stream multiple events from the same API | Handle a signle event
 - 2 way binding: [(ngModel)]="aComponentField"
 
 ## What does Webpack do for your ng project?
-- Webpack is a Javascript module bundler. Angular cli uses it to pack and build the Angular app.
-- It was embedding into Angular CLI. All of it complexicity was hidden. We can switch to native approach using ng eject to look at the webpack config file. But there's no way back
-- A bundle is a JavaScript file that incorporates assets that belong together and should be served to the client in a response to a single file request. A bundle can include JavaScript, CSS, HTML, and almost any other kind of file.
-
+- Handles the import of 3rd parties library (npm install)
+- Recognize changes in the project (BrowserLink), refresh the browser
+- Minifies JavaScript files
 ## How would you implement routing in your project?
 - Import RouterModule, Routes from @angluar/router
 - Create a variable with Routes type, the minimum each object in the array must have is a path and a pointer to specify which component linked to that path

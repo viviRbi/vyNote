@@ -6,7 +6,8 @@
 - Microservices areautomous, independently, deployable services collaborate together to form a broader application
 
 ## Why we need microservices
-- 
+- Horizontal scale
+- Spererate services that easier to update, manage
 
 ##  Compare the microservice and monolithic architectures. What are the advantages / disadvantages of each?
 ## Monoliths: 
@@ -368,6 +369,9 @@ RUN apt update
 https://anoni.sh/jenkins-pipeline
 - Jenkin gets the latest code from github, build Artifacts (web, app), run tests, publish Output to live server, know if there's any error
 
+## What is Jenkin
+- Jenkins is a free automation server written in Java. It helps automate the parts of software development related to building, testing, and deploying, for us to achive continuous integration and continuous delivery. It is a server-based system that runs in servlet containers such as Apache Tomcat
+
 ## Freestyle Jobs vs Scripted Pipeline
 Freestyle Jobs | Scripted Pip
 ------ | -------
@@ -401,12 +405,122 @@ Creating and configuring is manual | Creating and configuring is automatically g
 ## Setup Jenkin pipeline
 - Github -> Profile -> Developer settings -> personal access token -> generate a new token : Jenkin -> check: repo, admin:repo_hook -> generate token (save it)
 - Go to Jenkin -> manage Jenkin -> add Github server -> Credentials -> GitHub Connection -> add -> Jenkin -> Kind: Secret Text -> Secret: our git token , ID: random name -> Add
-- Jenkin -> install Pipeline plugin (A suit of pipeline tht lets you orchestrate automation, simple or complex)
+- Jenkin -> install Pipeline plugin (A suit of pipeline that lets you orchestrate automation, simple or complex)
 - Create a Scripted **pipeline (Jenkinsfile)** (1 stage fail, others won't run):
 	- Create new jobs (main page) -> write a name -> choose Pipeline
 	- Definition: Pipeline -> hello world demo. Left -> blue circle -> console output (option 1)
 
 	- Create new jobs (main page) -> write a name -> choose Pipeline name it-> In the new pipeline, General -> Github project: github url that had Jenkinsfile
 	- Definition: choose Pipeline script from SCM -> SCM : Git -> repository: git url -> branch: */master
+
+## Setup Jenkin pipelin
+- Create a Jenin token in Github
+- Type the token in Jenkin when create a new project
+- Install scripted pipeline plugin
+- Create a new job, link to a Github repo. Choose to create Pipeline from Script or create in the textarea
+
+## Multibranch Pipeline
+- Create a new job, choose Multibranch pipeline instead of Pipeline. In multibranch, it had all the branches in Github
+
+## Jenkin Unit Tests
+pwsh = power shell script
+```jenkin
+pipeline {
+	agent any
+	stages {
+		stage ('Verify Branch'){
+			steps {
+				echo "$GIT_BRANCH"
+			}
+		}
+		stage ('Docker Build'){
+			steps {
+				pwsh(script: 'docker images -a')
+				pwsh("""
+					cd azure-vote/
+					docker images -a
+					docker build -t jenkins-pipeline .
+					cd ..
+				""")
+			}
+		}
+		stage ('Start test app'){
+			steps {
+				pwsh(script: """
+					docker-compose up -d
+					./scripts/test_container.ps1
+				""")
+			}
+			# This is Post step
+			post {
+				success {	
+					echo "App started successfully";
+				}
+				failure {
+					echo "App failed to start"
+				}
+			}
+		}
+		stage ('Run Tests') {
+			steps {
+				pwsh(script: """ 
+					pytest ./tests/test_sample.py
+				""")
+			}
+		}
+		stage ('Stop test app'){
+			steps {
+				pwsh(scripts:""" 
+					docker-compose down
+				""")
+			}
+		}
+
+		# --- Add branches
+		stage ('Runs on master'){
+			when {branch 'master'}
+			steps {
+				echo 'Hello World'
+			}
+		}
+
+		# --- Input step, Install Azure Container. Google Kubernetes plugin
+		# Click on project name -> Pipeline syntax 
+		# Create Azure service to fill in the Pipeline syntax form. Config file **/*.yaml
+		
+		stage('Run Trivy') {
+			steps { sleep (time:30, unit:'SECONDS')}
+		}
+		stage('Deploy to QA'){
+			environment { ENVIRONMENT = 'qa'}
+			steps {
+				echo "Deploting to ${ENVIRONMWNT}"
+				acsDeploy(
+					azureCredentalsId: "azure-jenkins-app",
+					configFilePaths: "**/*.yaml",
+					containerServie: "${ENVIRONMENT}-demo-cluster | AKS",
+					resourceGroupName: "${ENVIRONMENT}-demo",
+					sshVredentialsId: ""
+				)
+			}
+		}
+		stage ('Approve PROD Deploy'){
+			when {
+				branch 'master'
+			}
+			options { timeout(time:1, unit: 'HOURS')}
+			steps {
+				input message: "Deploy?"
+			}
+			post {
+				success {echo "Production Deploy Approved"}
+				aborted {echo "Production Deploy Denied"}
+			}
+		}
+	}
+}
+
+# Hit Build Now
+```
 
 

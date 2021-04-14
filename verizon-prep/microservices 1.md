@@ -1,0 +1,2 @@
+## Microservices architecture
+- It is the approach to build a server application as a set of small services. Each service runs in it own process and communicate with other processes using protocol such as HTTP/HTTPS, AMQP (Advance Message Queuing Protocol)

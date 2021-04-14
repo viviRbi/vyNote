@@ -117,7 +117,7 @@ The name of the special internal database where the query optimizer finds inform
    REFERENCES parent_table (parent_col1, parent_col2, ... parent_col_n)ON DELETE CASCADE;
 ```
 
-### Types of Variable: Local, Global
+## Types of Variable: Local, Global
 | Local Variable | Global Variable |
 | :------------ |:--------------- | 
 | A user declares the local variable | The system maintains the global variable. A user cannot declare them |
@@ -133,3 +133,13 @@ SET @COURSE_NAME = "ABC";
 SET @COURSE_NAME = (SELECT courseName from Student where id = 2);
 SELECT @COURSE_NAME = "ABC"; (select is similar to set, use to assign the value)
 SELECT @COURSE_ID = 5, @COURSE_NAME = 'UNIX' (Unlike Set, Select can be used to assign to multiple variables, separate by the comma)
+
+## Cluster vs Non cluster indexes
+Postgresql doesn't have definition of cluster index at all. All indexes are non-cluster indexes
+Cluster | Non-cluser
+------ | ------
+used to order rows in the table | enchance performent of queries that doesn't use primary keyy
+Created automatically when a primary key was defined | User can create it using NONCLUSTER INDEX or defined a unique key
+When there is no cluster indexes, dat stored at the heap | Non-cluster indexes creates a pointer points to data at the heap 
+One table only have one | One table can have multiple
+Faster | Slower than Cluster index

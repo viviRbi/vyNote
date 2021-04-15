@@ -260,7 +260,8 @@ String rate;
 - # is use for Spring Expresion language
 - $ is use to map with a value in application.properties
 <br>
-
+# Spring Cloud
+Spring Cloud framework provides tools for developers to build a robust cloud application quickly.
 # Spring MVC
 ## What is Spring MVC
 - I is a request-driven, designed around a central Servlet that dispatches requests to controllers and offers other functionality
@@ -414,7 +415,7 @@ public class SpringRestClient {
 
 # Spring AOP
 
-##  What is aspect-oriented programming¬ù? Define an aspect.
+##  What is aspect-oriented programming√Ç¬ù? Define an aspect.
 - **Aspect Oriented Programming** is a programming paradigm that used for **separating crosscutting concerns** (like logging) into **single units** called **aspects**
 - The key unit of modularity in OOP is the class, whereas in AOP the unit of modularity is the aspect.
 - Aspects can be a normal class configured through Spring XML configuration or @Aspect annotation.
@@ -585,7 +586,7 @@ Collection<User> findAllActiveUsersNative();
 - **Unlike Spring**, Spring Boot requires only 1 dependency to get a web application running. That is the spring-boot-starter-web from org.springframework.boot
 - **Spring Boot opinionate** because it follows the opinionated default configuration that reduces developer efforts to configure the application
     
-##  What does convention over configurationù mean?
+##  What does convention over configuration¬ù mean?
 - Convention over configuration is a software design paradigm which is used by many modern software frameworks that attempts to decrease the number of decisions that a developer can made without necessarily losing flexibility
 - It takes a lot of burden away from developers
     
@@ -657,10 +658,10 @@ application.properties
 ```
 To set the environment we are in, in application.properties, add spring.profiles.active=prod. In VM Arguments, -Dspring.profiles.active=qa
 
-## Mockitoís @Mock vs Spring bootís @MockBean
+## Mockito¬ís @Mock vs Spring boot¬ís @MockBean
 @Mock | @MockBean
 ----- | -----
-used to write a test that doesnít need any dependencies from the Spring Boot container | used when the test rely on the Spring Boot or when mock one of SpringBoot component beans
+used to write a test that doesn¬ít need any dependencies from the Spring Boot container | used when the test rely on the Spring Boot or when mock one of SpringBoot component beans
 fast and favors the isolation of the tested component | slower
 
 - Should test Mockito on Service layer

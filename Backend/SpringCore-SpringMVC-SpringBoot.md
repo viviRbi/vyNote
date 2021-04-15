@@ -488,7 +488,7 @@ public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
 
 ##  What is Spring ORM and Spring Data?
 - Spring ORM: an umbrella module that covers many persistence technologies for Hibernate, JPA, MyBatis...easily integrates Spring by injecting DataSource and for each of these technologies, Spring provides integration classes : SessionFactory for Hibernate, EntityManagerFactory for JPA, SqlSessionFactory for MyBatis 
-- if you plan to use an ORM like JPA or Hibernate, you will not need spring-jdbc, but only this module
+- if you plan to use an ORM (object relational mapping) tool like JPA or Hibernate, you will not need spring-jdbc, but only this module
 
 - Spring data create common Abstraction to store and retrieve data. It is a specification for Object Relational Mapping and it reduce a lot of duplicate code. We implement it by extends CrudRepository<Model, data-type-of-Id>
 - The methods we get after extends CrudRepository are: save(), findById(id), findBy...(a class property like title, name), existsById(id), findAll(), findAll(Sort sorting), findAll(Pageable pagination) deleteById(id), count() and other

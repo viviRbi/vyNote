@@ -1,7 +1,11 @@
 Java Full Stack Review Questions
 Java
+
 Basics
+- When uses interface (or a parent class) like List a = new LinkedList(), only method from List interface was there. LinkedList own method like addFirst, addLast was not there
 ### Java is pass by value. A variable that holds an object will be stored in the stack, with a pointer to that object in the heap
+## equals and hashCode
+- Equals compare values. When compare both objects, it'll compare the object's attributes
 ## What is Java? / Explain some features of Java
 Java:
 - Java is a high-level, compiled, strongly typed object-oriented programming (OOP) language.
@@ -268,12 +272,17 @@ class EnumExample4{
 - A wide variable type of collection, each have their own specialize
 - All collections are dynamic, resizable, accepts only object, Iterable, the root interface of all collection (except Map) is Collection
 
+## What is collection framework
+- Collection = a group of object. A single entity represents multiple objects. In Java, in order to represent a collection, we need some classes and interfaces. Collection framework provide them
+
 ## Some method of the Collection interface
 - contains, containsAll (return true if contain all member of other collection)
 - remove, removeAll (remove all elements contain on other collection)
 - retainAll (remove all elements contain NOT on other collection)
 - size(), clear(), isEmpty(), add(), addAll()
 
+## What is Collections
+- Collections is a class that used to perform certain method from Collection Interface obj. Ex: Collections.sort(arrList)
 
 ## What are the interfaces in the Collections API?
 - List, Map, Set, Queue, etc
@@ -313,14 +322,19 @@ newer | older
 TreeSet | HashedSet
 ------ | ------
 implements Set, SortedSet, NavigableSet | implements Set
-
 maintain data in sorted order. Compare them by implement Comparable interface inside the object class and use compareTo method. If it's just Integer or String, asc by default. It had decendingSet and decendingIterator method to reverse the sort | un-order
-
 no null allow (since it use a Comparator, If something compare to null, a NullPointException will be throw) | allow one null (since hashedSet use hashedMap internally and null value added as a key with a dummy empty value, hashedMap check for null key and doesn't hashed the null key)
 not thread safe | not thread safe
 slower | faster
-internally use TreeMap to stored alement. | internally use HashMap to store element. It instatiate HashMap in the constructor, pass it to a variable name map. When we use hashSet.add("123"), internally, it call map.("123",with a dummy value call PRESENT) and then added to the HashMap instance. The dummy PRESENT is just a ```public static final Object PRESENT = new Object();```
+best to use to compare key | best to use for search
+internally use TreeMap to stored alement | internally use HashMap to store element. It instatiate HashMap in the constructor, pass it to a variable name map. When we use hashSet.add("123"), internally, it call map.("123",with a dummy value call PRESENT) and then added to the HashMap instance. The dummy PRESENT is just a ```public static final Object PRESENT = new Object();```
 
+## Shortcut
+- Tree: use comparable, comparator to order elements, no null allow or NullPointerException throw
+- Hashed: store element by hashing
+- Linked: maintain order of insertion
+- Thread safe (synchronize): old classes like Hashtable, Vector, Stack
+- Comparable implemented by the original class, use for 1 type of sort. Compator implement by a make up class, able to have lots of sorting way by create multiple comparators class.
 
 ## What is the difference between HashTable and HashMap?
 HashMap and HashTable both implement Map. They stored key/value pairs in a hashTable. When use, we specify a key and value object. The key is then hashed and that hash code then used as index of the value
@@ -369,7 +383,7 @@ doesn't maintain order of insertion | doesn't maintain order of insertion but ha
 
 ## What is the difference between the Comparable and Comparator interfaces?
 - Java provide 2 interfaces to sort objects using data members of the class: Camparable and Comparator
-- Comparable implemented by a class. It had a compareTo(Obj obj2) method. Used when there is only 1 way to sort the object
+- It had a compareTo(Obj obj2) method. Used when there is only 1 way to sort the object
 - Comparator doesn't afftect the original class. It is compare() method. Used when you want to sort the objects in multiple ways
 ```java
 class Sortbyroll implements Comparator<Student> {
@@ -1516,9 +1530,13 @@ and load methods? Update vs merge methods?
 13. What is the Criteria API? Can you perform all DDL and DML commands with it? How do
 Restrictions and Projections work within this API?
 
-14. What is caching? What is the difference between L1 and L2 cache?
+## What is caching? What is the difference between L1 and L2 cache?
+- **Caching**: it used for performance optimization. It sits between your application and the database to avoid the number of database hits as many as possible to give a better performance
+- **First level cache**: Session cache
+- **Second level cache**: Session factory level cache - available across all sessions in an application or in different application on the same database
 
-15. How do you enable second level caching?
+## How do you enable second level caching?
+- In hibernate configuration file, set property name "cache.use_second_level_cache">true</property> and set property name "cache.provider_class" to org.hibernate,cache.EhCacheProvider
 
 16. Tell me about NamedQueries.
 
@@ -1659,35 +1677,40 @@ is the ProceedingJoinPoint used?
 
 
 # Spring Boot
-44. How is Spring Boot different from legacy Spring applications? What does it mean that it
-is Â“opinionatedÂ”?
+## How is Spring Boot different from legacy Spring applications? What does it mean that it is “opinionated”?
 
-45. What does Â“convention over configurationÂ” mean?
+4## What does “convention over configuration” mean?
+- It means the options will be made for developer so the developer doesn't have to spend time making decision. It doesn't mean the developer cannot change the choice later on
 
-46. What annotation would you use for Spring Boot apps? What does it do behind the
-scenes?
+## What annotation would you use for Spring Boot apps? What does it do behind the scenes?
+- @SpringBootApplication
 
-47. How does BootÂ’s autoconfiguration work?
+## How does Boot’s autoconfiguration work?
 
-48. What is the advantage of having an embedded Tomcat server?
+## What is the advantage of having an embedded Tomcat server?
+- Isolation
 
 49. What is the significance of the Spring Boot starter POM?
 
-50. What is the Spring Boot actuator? What information can it give you?
+## What is the Spring Boot actuator? What information can it give you?
+- It gives some end point that provide our application info
+- Information it gives: evironment variable, application health, memory usage
 
-51. What files would you use to configure Spring Boot applications?
+## What files would you use to configure Spring Boot applications?
+application.properties
 
-52. What is the benefit of using Spring Boot profiles?
+## What is the benefit of using Spring Boot profiles?
+- different configuration for different enviroments like: dev, qa, test
 
 
 
 
 # Web Services
 HTTP
-## What is a Â“web serviceÂ”? WhatÂ’s the advantage of distributing software as a web service?
+## What is a “web service”? What’s the advantage of distributing software as a web service?
 - Web service is a standardized medium to propagate communication between the client and server applications on the World Wide Web
 
-## WhatÂ’s the difference between REST and SOAP services?
+## What’s the difference between REST and SOAP services?
 REST | SOAP
 ---- | ----
 Representational State Transfer | Simple Object Access Protocol 
@@ -1820,7 +1843,7 @@ maintaining statelessness?
 ## Can a Java microservice communicate with a Node.js microservice? Why or why not?
 - Yes. Beacause each service is independent to each other. The only thing we need is to send or received data from the REST API
 
-## WhatÂ’s the difference between horizontal and vertical scalability? Which way do monoliths and microservices typically scale?
+## What’s the difference between horizontal and vertical scalability? Which way do monoliths and microservices typically scale?
 - Vertical scaling/ Scale up: upgrade/ add more RAM, processor (like add more seat to your car). It cost a lot of money and we are stuck with a particular vendor
 - Horizontal Scalling:  adding more machines. It reduces price, easier to maintain, less downtime
 
@@ -1836,7 +1859,7 @@ maintaining statelessness?
 	- When calling service API directly, if the server fails, the client handles the error. When server restart, client resend
 	
 
-6. What is a Â“replicaÂ”?
+6. What is a “replica”?
 
 ## Explain the Netflix OSS stack for microservices (Eureka, Zuul, Hystrix)
 - **Netflix OSS** is a tool in the **Container Tools category** of a tech stack. It provides 5 important componants to overcome some microservies drawback which is hard to manage when there are hundreds of services
@@ -1845,16 +1868,19 @@ maintaining statelessness?
 - ''Netflix Feign Client**: Communication among micro services
 - **Netflix Zuul** : Edge/ proxy/ Gateway Server. Client gets a registered service in Eureka Registry Server using Zuul server. It's a client side load balancing
 - **Netflix Hystrix** : Circuit Breaker (fault tolerance, default response when things break)
+
 ## How would you setup and configure Eureka? Zuul? Hystrix?
-- ''Eureka** : 
+- **Eureka** : 
 	- Create a new Spring Boot project for Eureka, choose Eureka server dependency. Set register with Eureka and fetch-registry = false for that registry service in application.yml. For other services depend on it. Add Eureka For Client dependency, set to true for both properties
 	- @EnableEurekaServer for producer, @EnableEurekaDiscovery(for consumer)
 	- In application.yml of services, set default zone of service-url to Eureka register project url and its hostname will be localhost. Set application name too
 	- Now, if run 2 services and eureka, information will appeared in erureka register project localhost. Should use that name with rest template to do http get, post request for department (if there's no API gateway)
+
 - **Zuul**: 
-	- Create a new project, add Erureaka Client, Gateway, Acculator. @EnableEurekaClient
-	- Application ->name, cloud ->gateway ->routes with id = register name, uri = lb://register-name, predicates -> path: /user/** so every path with /user will gor to User service registered in Eureka server
-	- So now when we make a http request, all request should go to Zuul gateway. /user will interact with user service 
+	- Create a new project, add Eureka Client, Gateway, Acculator. @EnableEurekaClient
+	- yml file: Application ->name, cloud ->gateway ->routes with id = register name, uri = lb://register-name, predicates -> path: /user/** so every path with /user will go to User service registered in Eureka server
+	- So now when we make a http request, all requests should go to Zuul gateway. /user will interact with user service 
+
 - **Hystrix**: 
 	- Get Hystrix dependency and add in Zuul Gateway.
 	- @EnableEurekaServer, @EnableHystrix in Main
@@ -1889,6 +1915,13 @@ maintaining statelessness?
 ##OS level virtualization
 - It like a permanent loaded on the local device
 - The physical server and single instance of the operating system is virtualized into multiple isolated partitions, where each partition replicates a real server
+
+## Run Linux container on Window/Mac
+- Applications that run on docker are limited to applications that are natively supported by the host operating system so they can share the same OS kernel (Ubuntu)
+- Window and Ubuntu are different OS kernel
+- When window, mac runs a Linux container on Window, it actually runs a Linux container on a Linux virtual machine under the hook
+- Inside of this Linux virtual machine is where all these containers are going to be created. The Linux virtual machine kernel will host the running process of container
+- We can also use Window SubSystem for Linux WSL. It not use a virual machine but runs a compatibility layer at the system level
 
 ## How are containers different from virtual machines?
 Containers are often compared to Virtual Machines (VMs), since both of them allow multiple types of software to be run in contained environments

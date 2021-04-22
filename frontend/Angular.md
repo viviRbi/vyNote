@@ -49,9 +49,93 @@ ng generate component componentName
 ng g c componentName
 ng g c componentName --flat
 ```
+## Boostraping in Angular
+- <app-root> in index.html
+-
+## Subject vs Behavior Subject vs Replay Subject
+- They are used for cross component communications.
+- They are a special type of Observable in RxJs Library in which we can send our data to other components or services. They are both an Observable and Observer (aka an observable that can multicast to share value between subscribers)
+- Observer had 3 method: next(value), error(e), complete()
+- Next() was used to pass data to subject. 
+- They are a great way to pass data back forth between a large number of components. The two main methods are subscribe , for listening to new values, and next , for setting new values
+- Subject on subscription doesn't provide any initial value while BehaviorSubject provides initialize value on subscription. Ex: if there is no user avatar image, get the default image
+```Javascript
+//in Service.ts
+SharingData = new Subject();  
+
+// Component 1
+
+/*
+input name="comp3" #comp3 type="text" />  
+<button (click)="onSubmit(comp3)">Submit</button>
+*/  
+
+constructor(private dataSharingService: DataSharingService) {  
+    this.dataSharingService.SharingData.subscribe((res: any) => {  
+      this.Component3Data = res;  
+    })  
+}
+
+onSubmit(data) {  
+    this.dataSharingService.SharingData.next(data.value);  
+} 
+
+// Component 2 same
+// Component 3 same
+
+  constructor(private DataSharing: DataSharingService) {  
+    this.dataSharingService.SharingData.subscribe((res: any) => {  
+      this.Component3Data = res;  
+    })  
+  }  
+  
+  onSubmit(data) {  
+    this.dataSharingService.SharingData.next(data.value);  
+  }
+  
+```
+- Replay Subject: The subscriber can see the NEW data in the stream and also the PAST values in the stream. Emits when there's a new value
+```Javascript
+	console.log('ReplaySubject:');
+     let subject4 = new ReplaySubject<number>();
+     subject4.next(1);
+     subject4.next(2);
+ 
+     let subscription41 = subject4.subscribe( var  => {
+      console.log('subscription41 /'+var +'/');
+     });
+     console.log('-----------------------------------');
+     subject4.next(3);
+ 
+     console.log('===================================');
+
+/*
+Replay Subject:
+subscription41 /1/
+subscription41 /2/
+-------------------------------
+subscription41 /3/
+===============================
+*/
+```
+- AsyncSubject:  only the last value of the Observable execution is sent to its observers, and only send after the execution completes.
+```Javascript
+const asyncSubj = new Rx.AsyncSubject();
+
+asyncSubj.subscribe({
+	next: (x) => console.log("Last one: " + x);
+})
+
+asyncSubj.next(1);
+asyncSubj.next(2);
+asyncSubj.next("Last data");
+
+asyncSubj.complete(); // Last one: Last data
 
 
-## What files make up a component? What is the “spec” file used for?
+```
+
+## What files make up a component? What is the spec�file used for?
 - A component make up of .html, .css, .ts, .spect.ts and they have to be declared in a module to be used
 - spec file use for testing
 
@@ -151,13 +235,19 @@ Stream multiple events from the same API | Handle a signle event
 - Handles the import of 3rd parties library (npm install)
 - Recognize changes in the project (BrowserLink), refresh the browser
 - Minifies JavaScript files
+
 ## How would you implement routing in your project?
 - Import RouterModule, Routes from @angluar/router
 - Create a variable with Routes type, the minimum each object in the array must have is a path and a pointer to specify which component linked to that path
 - In the import array in ngModule directive, add RouterModule.forRoot or forChild
 
+## Implement lazy loading in Angular
+```{path: 'game', loadChildren: () => import('../layout/game/game.module').then(m=>m.GameModule)}```
+
+- Use loadChildren() instead of component, then create an arrow function that import the module file the get the Module class inside that file
+
 ## What is an EventEmitter and when would you use one?
-EventEmitter used for a child to comunicate with its parent. It used with output decorative
+EventEmitter used for a child to comunicate with its parent or sibling(). It used with output decorative
 ```java
 // child Component
 @Output() propertyChange = new EventEmitter()
@@ -197,3 +287,7 @@ login(data){console.log(data)}
 - In html template, set [formGroup]="formName", formControlName="inputFieldName"
 ## How would you run your unit tests for an Angular project?
 ng test
+
+## ng-container
+
+## Subject and behaviorl subject

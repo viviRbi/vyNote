@@ -157,7 +157,26 @@ spring:
 
 9.  Explain the Netflix OSS stack for microservices (Eureka, Zuul, Hystrix)
 
-10.  How would you setup and configure Eureka? Zuul? Hystrix?
+## Hytrix
+- If one service break, it can cause other services that directly or indirectly depend on it break
+
+##  How would you setup and configure Eureka? Zuul? Hystrix?
+- ''Eureka** : 
+	- Create a new Spring Boot project for Eureka, choose Eureka server dependency. Set register with Eureka and fetch-registry = false for that registry service in application.yml. For other services depend on it. Add Eureka For Client dependency, set to true for both properties
+	- @EnableEurekaServer for producer, @EnableEurekaDiscovery(for consumer)
+	- In application.yml of services, set default zone of service-url to Eureka register project url and its hostname will be localhost. Set application name too
+	- Now, if run 2 services and eureka, information will appeared in erureka register project localhost. Should use that name with rest template to do http get, post request for department (if there's no API gateway)
+- **Zuul**: 
+	- Create a new project, add Eureka Client, Gateway, Acculator. @EnableEurekaClient
+	- Application ->name, cloud ->gateway ->routes with id = register name, uri = lb://register-name, predicates -> path: /user/** so every path with /user will go to User service registered in Eureka server
+	- So now when we make a http request, all requests should go to Zuul gateway. /user will interact with user service 
+- **Hystrix**: 
+	- Get Hystrix dependency and add in Zuul Gateway.
+	- @EnableEurekaServer, @EnableHystrix in Main
+	- Create a controller name FallBack/Fail Controller. Use @RestController annotation, on method, use @GetMapping("userFailMethod"), create a method that return a string said please try again later
+	- In application.yml, under predicates where the http path is, add filters -> name: CircuitBreaker, args -> name: register name, fallbackuri: userFailMethod (from @GetMapping)
+	- Able to set timeout too. If user doesn't get a response in 4000 mili second, it'll http get to fallback path and send the fail message. hystrix->command->fallbackcmd->execution->isolation->thread->timeoutInMilliseconds
+
 
 ##  What is the purpose of an API gateway and how does Zuul perform this?
 - Minimize API surface that we exposing publicly and gives us a single point of entry to protect
@@ -416,8 +435,12 @@ Creating and configuring is manual | Creating and configuring is automatically g
 ## Setup Jenkin pipelin
 - Create a Jenin token in Github
 - Type the token in Jenkin when create a new project
-- Install scripted pipeline plugin
+- Install scripted pipeline plugin (go to manage -> plugin)
 - Create a new job, link to a Github repo. Choose to create Pipeline from Script or create in the textarea
+
+## Add Jenkin pipeline
+- Download pipeline plugin: Manage -> plugin -> build pipeline
+- Add pipeline view: Daskboard -> at the table header -> + 
 
 ## Multibranch Pipeline
 - Create a new job, choose Multibranch pipeline instead of Pipeline. In multibranch, it had all the branches in Github

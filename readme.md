@@ -283,9 +283,35 @@ class EnumExample4{
 
 ## What is Collections
 - Collections is a class that used to perform certain method from Collection Interface obj. Ex: Collections.sort(arrList)
+- Some methods:
+	- Collections.addAll(arrList, "Fruits","Bat");
+	- Collections.sort(arrList, Collections.reverseOrder())
+	- Collections.binarySearch(arrList, "Bat");
+	- Collections.copy(newList, arrList);
+	- Collections.max(arrList, comparatorImplClass)
+	- Collections.swap(arrList, index1, index2)
+	- Collections.synchronizedCollections(arrList)
 
 ## What are the interfaces in the Collections API?
 - List, Map, Set, Queue, etc
+
+## Queue
+- I: Deque, BlockingQueue, BlockingDeque Interface
+- Class: PriorityQueue, LinkedList (Queue, Dequeue + list i)
+- Use when: Prior to proccessing. Send message to a group of number, one after another. Not accept heterogenios data (mix data type)
+- a queue is open at both its ends. One end is always used to insert data (enqueue) and the other is used to remove data (dequeue)aka Fisrt In First Out (= last in last out)
+- Method: 
+	- add(v): success -> return true, if queue is full, or the datatype not match with the previous, throws exception. Internally uses offer
+	- offer(v):  success -> true, if queue is full, or the datatype not match with the previous, throws null (ex: set default size in BlockingQueue)
+	- element(): return the head element. If queue empty-> Exception
+	- peek(): return the head element. If queue empty-> Null
+	- remove() return header element then remove it. If empty -> Exception
+	- poll() return header element then remove it. If empty -> null
+- Classes: PriorityQueue, LinkList
+- Same: same method
+- Different: 
+	- PriorityQueue accepts no mix data type while LinkList does
+	- PriorityQueue doesn't need to be ordered
 
 ## What is the difference between a Set and a List?
 Set | List
@@ -299,7 +325,14 @@ Set implemented by HashSet, LinkedHashSet, TreeSet | List implemented in ArrayLi
 Set is unindexed (no position of element) | List is indexed. It had position for all the value
 Memory by default 16 allocations and load factor is .75  | Memory decide by its implemented class
 
-
+## HashSet vs LinkHashSet
+Set implementation have a load factor,default 0.75
+When reach 75%, it'll create a clone with a new size. The old one got clean up later by garbage collector
+HashSet | LinkHashSet
+------ | -------
+internally using HashMap (alow 1 null key) | internally using HashMap and LinkList (read in java.util.LinkHashSet)
+no insertion order | keep insertion order
+ 
 ## What is the difference between an Array and an ArrayList?
 Array | ArrayList
 basic functionality of Java | Part of the collection framework
@@ -332,17 +365,18 @@ internally use TreeMap to stored alement | internally use HashMap to store eleme
 ## Shortcut
 - Tree: use comparable, comparator to order elements, no null allow or NullPointerException throw
 - Hashed: store element by hashing
-- Linked: maintain order of insertion
+- Linked: maintain order of insertion, doublie link node point to prev and next address = not contigous
 - Thread safe (synchronize): old classes like Hashtable, Vector, Stack
 - Comparable implemented by the original class, use for 1 type of sort. Compator implement by a make up class, able to have lots of sorting way by create multiple comparators class.
 
 ## What is the difference between HashTable and HashMap?
 HashMap and HashTable both implement Map. They stored key/value pairs in a hashTable. When use, we specify a key and value object. The key is then hashed and that hash code then used as index of the value
+If add same key, new value replace to old value of that same key
 HashTable | HashMap
 ----- | ------
 Thread safe, synchronized | Not thread safe, not synchronized
 Doesn't allow null key or value (since the key obj had to implement hashcode method and equals, and if the value null then the put method'll throw NullPointerException)| allow one null key and multiple null value
-old | advance version of HashTable
+old | underlaying data structure is HashTable
 doesn't maintain order of insertion | doesn't maintain order of insertion but have a subclass HashLinkedList which is ordered
 
 ``` Everthing named Listed is either have index or mantain order. List interface had indexes. Other mantains value```

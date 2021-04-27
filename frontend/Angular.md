@@ -1,6 +1,15 @@
 # Angular
 
-## What makes a “single page application” (SPA) different from a normal web page?
+## View Encapsulation
+- Determines how Angular hides the styles of a component from bleeding over to the other parts of the application
+- 3 way: 
+	- ViewEncapsulation.Emulated (default, the style not bleed to other component), 
+	- ViewEncapsulation.None (the style of that component will become global style)
+	- ViewEncapsulation.ShadowDOM: 
+		ShadowDOM is a scoped sub-tree that attacted to the shadow host of the main DOM. Rendering of the Shadow dom and main dom happens separately.
+	- True encapsulation. Not all browser supports
+
+## What makes a single page application� (SPA) different from a normal web page?
 - **Single Page Application** means there is only 1 true html file (usually index.html), and all components live there. We manage the layout(aka which component got displayed) by routing which copy html file style url 
 - **Normal web page** in the other hand have multiple html file and each url represent 1 html file. 
 - For first time load, normal webpage is faster but from the second time, single page application is faster

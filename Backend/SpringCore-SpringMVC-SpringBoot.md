@@ -272,6 +272,23 @@ String rate;
 - It had a Front Controller which calles Servlet Dispatcher
 - How http process: At first, a http request will be read by RequestDispatcher. Then, it'll passes the request to the corresponding controller based on url mapping. The controller performs the task and return model and view. Dispatcher servlet maps the view to coresponsing jsp or html using view resolver. The view renders the model and display it
 
+## Setup Dispatcher Servlet
+- In web.xml, use a servlet tag with Dispatcher Servlet name and class location. 
+- Use servlet mapping to set servlet url
+- Web.xml this time will find ABC-servlet.xml
+```java
+<servlet>
+	<servlet-name>ABC</servlet-name>
+	<servlet-class>org.springframework.web.servlet.Dispatcher</servlet-class>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>ABC</servlet-name>
+	<url-pattern>/home.com/*</url-pattern>
+</servlet-mapping>
+```
+- Create ABC-servlet.xml next to web.xml by right click WEB-INF new -> other -> search: spring Bean Config file -> ABC-servlet -> next -> beans, context, mvc -> finished and run server
+
 ## Step to create Spring MVC
 - In web.xml, tell where is the application context and Dispatcher Servlet is and add ContextLoaderListener
 - Dispatcher servlet can contain index.xml

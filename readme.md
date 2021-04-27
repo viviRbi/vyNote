@@ -928,7 +928,7 @@ class Test {
 - Supplier
 - They are in java.util.function
 
-## Predicate
+## Predicate <Parameter Type>
 - method: test -> {return boolean value}
 ```java
 public static void main(String[] args){
@@ -957,7 +957,7 @@ public static void main(String[] args){
 }
 ```
 
-## Function pre-define interface
+## Function<Parameter Type, Return Type>
 - Take any type of paramenter, apply() is the method, return a value
 - Function<type, return type> {public R aply(T)}
 ```java
@@ -974,6 +974,57 @@ Function<Employee, Integer> fn = e -> {
 		return (sal * 30/100);
 	else return (sal*40/100);
 }
+
+Function<Integer,Integer> f1=n->n*2;
+Function<Integer, Integer> f2=n->n*n*n;
+
+// f1 first, then send result to f2 and execute
+f1.andThen(f2).apply(2); // 4 64
+
+// f2 first, send result to f1
+f1.compose(f2).apply(2); // 8 16
+```
+
+## Consumer<Parameter Type> - accept()
+- Except 1 value, but doesn't return anything
+```java
+Function<Employee, Integer> f = emp -> (emp.salary*10)/100;
+
+Predicate<Integer> p = bonus -> bonus >=5000;
+
+Consumer<Employee> c = emp ->
+	System.out.printlm(emp.ename + " " + e.salary);
+
+for (Employee e: empList){
+	int bount = f.apply(e);
+	if(p.test(bonus)) 
+		c.accept(e)
+}
+```
+
+## Supplier<Return type> - get()
+- Doesn't take any input but return something
+```java
+Supplier<Date> s = () -> new Date();
+
+System.out.println(s.get());
+```
+
+## Streams
+- Provide number of methods to process data from collections
+- .filter() and .map(): 2 mechanism to process data from collections
+- Filter: base on condition, store filtered data in other collection 
+- Map: do some operations in each element, store results in other collection
+- Other methods: sorted(), count()
+```java
+
+List<Integer> numberList = Arrays.asList(10,25,26,30);
+List<Integer> evenNumbersList = new ArrayList<>();
+
+numbersList.stream().filter(n -> n%2 == 0);
+
+List<String> result = words.stream().filter(w -> w!= null).collect(Collectors.toLists());
+
 ```
 
 ## What is try-with-resources? What interface must the resource implement to use this feature?

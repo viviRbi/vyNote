@@ -259,16 +259,19 @@ String rate;
 - We can reference to other beans, properties, static content in .properties files
 - # is use for Spring Expresion language
 - $ is use to map with a value in application.properties
-<br>
+
 # Spring Cloud
-Spring Cloud framework provides tools for developers to build a robust cloud application quickly.
+- Spring Cloud framework provides tools for developers to build a robust cloud application quickly.
+
 # Spring MVC
 ## What is Spring MVC
 - I is a request-driven, designed around a central Servlet that dispatches requests to controllers and offers other functionality
+
 ##  Explain the MVC architecture and how HTTP requests are processed in the architecture
 - Spring MVC follows the Model-View-Controller design patterns
 - It had a Front Controller which calles Servlet Dispatcher
 - How http process: At first, a http request will be read by RequestDispatcher. Then, it'll passes the request to the corresponding controller based on url mapping. The controller performs the task and return model and view. Dispatcher servlet maps the view to coresponsing jsp or html using view resolver. The view renders the model and display it
+
 ## Step to create Spring MVC
 - In web.xml, tell where is the application context and Dispatcher Servlet is and add ContextLoaderListener
 - Dispatcher servlet can contain index.xml

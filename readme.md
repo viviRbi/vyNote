@@ -290,7 +290,11 @@ class EnumExample4{
 	- Collections.copy(newList, arrList);
 	- Collections.max(arrList, comparatorImplClass)
 	- Collections.swap(arrList, index1, index2)
-	- Collections.synchronizedCollections(arrList)
+	- Collections.synchronizedCollections(arrList) return Collection
+	- Collection.synchronizedList/Map/NavigableMap, NavigableSet,Set,SortedMap,SortedSet
+	- Collections.reverse(List<?> list)
+	- Collections.reverseOrder (returns a comparator)
+	- Collections.shuffle(List<?> list)
 
 ## What are the interfaces in the Collections API?
 - List, Map, Set, Queue, etc
@@ -330,7 +334,7 @@ Set implementation have a load factor,default 0.75
 When reach 75%, it'll create a clone with a new size. The old one got clean up later by garbage collector
 HashSet | LinkHashSet
 ------ | -------
-internally using HashMap (alow 1 null key) | internally using HashMap and LinkList (read in java.util.LinkHashSet)
+internally using HashMap (alow 1 null key) | internally using HashMap and LinkList (actually, it's LinkedHashMap,because of the 3rd dummy boolean param when called super constructor (which called to its parent HashSet), it created the LinkHashMap instead of HashMap)
 no insertion order | keep insertion order
  
 ## What is the difference between an Array and an ArrayList?
@@ -372,17 +376,30 @@ internally use TreeMap to stored alement | internally use HashMap to store eleme
 ## What is the difference between HashTable and HashMap?
 HashMap and HashTable both implement Map. They stored key/value pairs in a hashTable. When use, we specify a key and value object. The key is then hashed and that hash code then used as index of the value
 If add same key, new value replace to old value of that same key
+Used hashMap when have more m=number of search operations
 HashTable | HashMap
 ----- | ------
 Thread safe, synchronized | Not thread safe, not synchronized
 Doesn't allow null key or value (since the key obj had to implement hashcode method and equals, and if the value null then the put method'll throw NullPointerException)| allow one null key and multiple null value
 old | underlaying data structure is HashTable
 doesn't maintain order of insertion | doesn't maintain order of insertion but have a subclass HashLinkedList which is ordered
+slower (1 thread a time) | faster
 
-``` Everthing named Listed is either have index or mantain order. List interface had indexes. Other mantains value```
+## HashMap methods
+- m.keyset() -> return all the keys from the map as set
+- m.values() -> return all values in the map as collection
+- m.entryset() -> return type is set of key value
+- m.put(k, v)
+- m.putAll(map)
+- m.get(k), m.remove(k)
+- m.containsKey(key)
+- m.containsValue(v)
+- m.isEmpty()
+- m.size(), m.clear()
+
 ## LinkedHashMap<K,V> class
 - Its child of HashMap, so it gets all the props of Map and HashMap.
-- Only difference is it maintains the order of insertion.
+- Only difference is it maintains the order of insertion. LinkHashSet uses it internally
 
 ## LinkedHashSet<E> class
 - It is a subclass of HashSet
@@ -858,6 +875,106 @@ public class Test{
 ```
 - With lamba. Instead of creating anonymous inner class, we can create a lambda expression like this
 ```b.addActionListener(e -> System.out.println("Hello World!"));```
+
+## Why Java create Lambda
+- Support functional Programming
+- Code optimization/ consize code
+
+## Lambda
+- Anonymous function: nameless deosn't have a return type no access modifier
+- No need to specify type of paramenter. Java compiler define the  type it automatically
+- No curry bracess -> no return , curry bracess after arrow 0> {return a}. Else, not valid
+- Lamdba can only be invoke using funtional interface
+```
+@FunctonalInterface
+interface Cab{
+	public void bookCab();
+	default void random() {...};
+}
+class Ola implements Cab{
+	()-> System.out.println("Ola cab is booked ...");
+}
+class Test {
+	Cab cab =()-> System.out.println("Ola cab is booked ...");
+	cab.bookCab();
+}
+```
+
+```
+@FunctonalInterface
+interface Cab{
+	public String bookCab(String source, String destination);
+}
+class Test {
+	Cab cab =(source, destination)-> {
+		System.out.println("Booked from "+ source+ " to "+destination);
+		return "Price: 500 Rs";
+	}
+	cab.bookCab("Dallas","Houston");
+}
+```
+
+
+## Funtional Interface
+- Single abstract method
+- From Java 7 onward, can create default + static method
+- Ex: Runnable -> run, Callable -> call, Comparable -> compareTo, ActionListener -> actionPerform
+- Lambda can only be invoke using Functional Interface 
+
+## Java 8 predifine Functional Interfaces
+- Predicate
+- Function
+- Consumer
+- Supplier
+- They are in java.util.function
+
+## Predicate
+- method: test -> {return boolean value}
+```java
+public static void main(String[] args){
+	Predicate<Integer> p = i -> (i > 10);
+	Predicate<String> i  = Predicate.isEqual("asdf");
+
+// Main advantage of lambda. Write multiple condition in lambda and call it later to validate
+
+	Predicate<Employee> pr =e->(e.salary>30000 && e.exp>3);	
+
+	for (Employee e: allEmp){
+		if (pr.test(e))
+			System.out.println(e.name + " "+ e.salary);
+	}
+
+	Predicate<Integer> p1 = i-> i%2 == 0;
+	Predicate<Integer> p1 = i-> i > 50;
+
+	for (int n:a){
+		if(p1.and(p2).test(n)) System.out.println(n);
+		if(p1.or(p2).test(n)) System.out.println("Or" +n);
+		// opposite
+		if(p1.negate().test(n)) System.out.println("Opposite, odd " + n)
+		if(p1.negate().and(p2.negate()).test(n))
+	}
+}
+```
+
+## Function pre-define interface
+- Take any type of paramenter, apply() is the method, return a value
+- Function<type, return type> {public R aply(T)}
+```java
+Function<Integer,Integer> f = n -> n * n;
+
+System.out.println(f.apply(5)); // 25
+
+Function<Employee, Integer> fn = e -> {
+	int sal = e.salary;
+
+	if(sal >= 10000 && sal <= 20000)
+		return (sal *10/100);
+	else if ( sal >= 20000 && sal <= 50000)
+		return (sal * 30/100);
+	else return (sal*40/100);
+}
+```
 
 ## What is try-with-resources? What interface must the resource implement to use this feature?
 - Generally finally block is used to close all the resources (viz., file, database connection, socket or anything that should be closed after its task is done) to prevent any leaks.

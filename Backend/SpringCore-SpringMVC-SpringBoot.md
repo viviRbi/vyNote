@@ -441,9 +441,26 @@ public class SpringRestClient {
 - Aspects can be a normal class configured through Spring XML configuration or @Aspect annotation.
 - An aspect is a class that implements enterprise application concerns that cut across multiple classes, such as transaction management
  ```java
- @Before("execution(public void com.journaldev.spring.model..set*(*))")
+ @Before("execution(public void com.journaldev.spring.model.A.set*(*))")
 	public void loggingAdvice(JoinPoint joinPoint){
 		System.out.println("Before running loggingAdvice on method="+joinPoint.toString());
+
+Logger log = LoggerFactory.getLogger(className.class);
+
+@Pointcut(value="execution(* com.j.spring.api.*.*(..))")
+public void myPoincut() {}
+
+@Around("myPointcut()")
+public Object applicationLogger(ProceedingJoinPoint){
+	String methodName = pjp.getSignature().getName();
+	String className = pjp.getTarget().getClass().toString();
+	Object[] arr = pjp.getArgs();
+	log.info("method " + className + " : " + methodName + "()"
+	+ " arguments : " + array);
+	Object obj = pjp.proceed();
+	log.info("Response: " + obj.toString())
+	return onj
+}
  ```
     
 ##  Give an example of a cross-cutting concern you could use AOP to address. 
@@ -463,14 +480,14 @@ public class SpringRestClient {
 //------------------------------------
 @Aspect
 public class EmployeeAOP{
-@Pointcut("execution(public Employee.set*(..))")// applied on all public setter method of employee
+	@Pointcut("execution(public Employee.set*(..))")// applied on all public setter method of employee
 public employeePointCut(){} // method of poincut annotation
 
-@Before("employeePointCut()")
+	@Before("employeePointCut()")
 public void BeforeEmployeeSetter (Jointpoint jp){
-	System.out.println("before each setter methods of Employee class---")
-	logger.log("Class name is " + jp.getSignature())
-}
+		System.out.println("before each setter methods of Employee class---")
+		logger.log("Class name is " + jp.getSignature())
+	}
 }
 
 // xml AOP
@@ -505,6 +522,10 @@ public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
 <br>    
 
 # Spring Data
+
+## Spring ORM vs Spring Data
+- Spring ORM : cover many persistence technologies (Hibernate)
+- Spring Data: uses an ORM to create automate DAO layer. So that DAO class just need to extends CrudRepository and we can use their build-in method like findOne
 
 ##  What is Spring ORM and Spring Data?
 - Spring ORM: an umbrella module that covers many persistence technologies for Hibernate, JPA, MyBatis...easily integrates Spring by injecting DataSource and for each of these technologies, Spring provides integration classes : SessionFactory for Hibernate, EntityManagerFactory for JPA, SqlSessionFactory for MyBatis 
@@ -736,3 +757,34 @@ public void deleteUserTest(){
                .add(anyString()); // method was called at least 2 times
     }
 ```
+
+## Start SpringBoot
+- 2 way to bundle SpringBoot app : jar (java archive), war (web archive)
+- if use Jar packaging (with embeded Tomcat server): contains a group of .class file
+```java
+@SpringBootApplication
+class SpringbootApplication{
+	public static void main (String[] args){
+		SpringApplication.run(SpringbootApplication.class, args)
+	}
+}
+```
+- If use war packaging (deploy on any external server)
+```java
+@SpringBootApplication
+class SpringbootApplication extends SpringBootServletInitializer{
+	public static void main (String[] args){
+		SpringApplication.run(SpringbootApplication.class, args)
+	}
+}
+
+```
+
+## Module inside Spring Boot
+- spring-boot-starter: provides basic runtime infrastructure along with some core features
+- jackson
+- spring-core
+- spring-mvc
+- spring-boot-starter-tomcat
+
+

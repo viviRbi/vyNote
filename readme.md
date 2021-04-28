@@ -1,6 +1,14 @@
 Java Full Stack Review Questions
 Java
 
+### CSS
+- Conditional classes with html
+```<!--[if lte IE 7]> <html class="ie7"> <![endif]-->```
+```css
+.ie7 .element {
+  margin-bottom: 10px;
+}
+```
 Basics
 - When uses interface (or a parent class) like List a = new LinkedList(), only method from List interface was there. LinkedList own method like addFirst, addLast was not there
 ### Java is pass by value. A variable that holds an object will be stored in the stack, with a pointer to that object in the heap
@@ -100,6 +108,18 @@ class GuruThread2 implements Runnable {..}
 - Security: It will impact security for ex: dabase username and password are pass as String. If it were mutable, hacker could change the reference to cause security issues
 - Multithread: String are safe for multithread because it's immutable
 - To made our own object immutable, we declared our class as final
+
+# Multithreads
+## Volatile
+- Solved visibility problems
+- Due to each thread use each local cache. After use volatile, the value is in a shared cache
+- Thread 1 update the value, but thread 2 doesn't see it. Use volatile
+## AtomicInteger
+```java
+AtomicInteger value = new AtomicInteger(1);
+value.increment();
+```
+- Used for Synchronization problems, like Compound Operations (i++)
 
 ## What is the difference between String, StringBuilder, and StringBuffer?
 String | String Buffer | String Buider
@@ -2107,6 +2127,46 @@ maintaining statelessness?
 # Docker
 - Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers.
 - JVM is a Application level virtualization btw
+
+## Images Cmd
+images
+
+```docker images``` : list all img in ur local computer
+
+```docker pull ubuntu```: download ubuntu image from docker hub
+
+```docker rmi <img id>```: remove image in ur system
+
+containers
+
+```docker ps```: container running on system
+
+```docker run <img name>```: run img available in the system. If img not there, pull it from DockerHub then run
+
+```docker run -it ubuntu```: create container -> go to ubuntu cmd line
+
+```docker stop <container id>```: stop container
+
+```CTRL + P/ CTRL + Q```: out of container without stop it
+
+system
+
+```docker system df```: see all info for number of img, container, volumn
+
+```docker system prune -f```: remove all stopped container 
+
+## Detail cmd
+```docker run -it --name -h ubuntu1 ubuntu```
+
+## Dockerfile
+- Contain instruction (no .exe, aka no extension). Use it to create an image
+- Build: create an image snapshot from Dockerfile (compile/package)
+- Image: VM Snapshot (.class/.jar)
+- Tag: version of image (jar version)
+- Container: Lightweight VM (instance/obj)
+- DockerHub: Image Repository (Maven Repository)
+
+## 
 
 ## What is containerization?
 - Also called operating-system-virtualization

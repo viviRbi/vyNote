@@ -19,6 +19,7 @@ Java
 - A method from object class
 - Call right when garbage collector about to collect the class. Can do anything including bring the obj back to life
 - However, main purpose is to clean up the resource
+- Not recommended. Dunno when garbage collector comes, no exception handle, may run out of resource before close, heavy since the Vm do lots of operations to perform
 ## Basics
 - When uses interface (or a parent class) like List a = new LinkedList(), only method from List interface was there. LinkedList own method like addFirst, addLast was not there
 ### Java is pass by value. A variable that holds an object will be stored in the stack, with a pointer to that object in the heap

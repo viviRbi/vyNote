@@ -12,6 +12,9 @@ Java
 ## equals vs hashcode
 - if 2 obj are equal, they must have the same hashcode
 - The reverse is not true
+## hashmap collison
+- HashMap uses HashCode to caculate and put the key and hashcode to a bucket. When the other uses that bucket, it creates an entry link list. When retrieve, it look for hashcode and key value.
+- Once grow out of size, the entry link list
 ## Basics
 - When uses interface (or a parent class) like List a = new LinkedList(), only method from List interface was there. LinkedList own method like addFirst, addLast was not there
 ### Java is pass by value. A variable that holds an object will be stored in the stack, with a pointer to that object in the heap

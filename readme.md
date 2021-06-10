@@ -24,7 +24,6 @@ Java:
 - Java code on the other hand is compiled into Java byte-code, which the Java Virtual Machine (JVM) will then interpret this byte-code and essentially run the program.
 - Strongly-typed: variables declared of a certain type can only have values assigned to it of that same type
 
-- Features:
 - Java is Platform Independent. WORA. It is also a compiled and interpreted language: 
 	- Unlike C which compile to binary and can only excute code for a particular machine, 
 	- Java convert code into Java Bytecode and sent to Java Virtual mechine which resides in the RAM of any operating system. JMV recognizes its platform and convert that bytecode into that platform native machine code 
@@ -68,6 +67,16 @@ class GuruThread2 implements Runnable {..}
 ## What are the primitive data types in Java?
 - Boolean, Integer, Byte, Short, Double, Float, Char
 - By default: 0 for int, 0 for byte, 0.0 for float
+
+## Java features
+- Stream
+- Lambda
+- Functional interface
+- Change from entry linked list from Red black tree for HashMap when bucket size max
+- Default method in InterfaceP
+
+## What happen if a class implements 2 interface with the same default method name?
+- Throw an error
 
 ## Where are Strings stored?
 - Strings are stored on the Heap area in a separate memory location known as String Constant pool
@@ -348,6 +357,11 @@ Implemented by HashedSet, LinkedHashedSet, TreeSet
 Set implemented by HashSet, LinkedHashSet, TreeSet | List implemented in ArrayList, LinkedList, Vector, Stack classes
 Set is unindexed (no position of element) | List is indexed. It had position for all the value
 Memory by default 16 allocations and load factor is .75  | Memory decide by its implemented class
+
+## HashMap collision
+- The same key stored in the same bucket (which bucket to stored in calculate by using hashcode)
+- Solved by Entry linkList
+- If it's growth out of size, in Java 8, uses Self Balancing Binary Search Tree (red black tree)
 
 ## HashSet vs LinkHashSet
 Set implementation have a load factor,default 0.75
@@ -1798,6 +1812,17 @@ different states?
 
 3. What is dependency injection and what are some of the benefits of using dependency
 injection?
+- Dependency injection is the process of instanciate an object when the application start and use that object to supply the depedency of other classes
+- 2 types in Spring: 
+	- constructor base ```public ClassName(ServiceA a)``` 
+	- setter base 
+```java 
+@Autowired
+public void setMyService(MyService myServ){
+	this.myService = myServ;
+}
+```
+	- field injection which is not a new type but Spring use reflectionAPI ```private ACService acService```
 
 4. What types of dependency injection does Spring support?
 

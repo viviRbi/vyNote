@@ -134,7 +134,13 @@ public class MotdServiceBean {
 	}	
 }
 ```
-    
+  
+## ApplicationContext
+- Extends from Bean Factory. 
+- They are the representation of IoC container
+- Responsible for instantiating, configuring, and assembling the beans
+- In SpringBoot, application context was abstracted away. We can get it by using field injection on ApplicationContext interface
+  
 ##  What is bean wiring? What about autowiring?
 - Bean wiring is the process of combining beans with Spring container. The required beans are to be informed to the container and how the container should use dependency injection to tie them together, at the time of wiring the beans.
 - Auto wiring: The Spring container can autowire relationships between collaborating beans without using ```<constructor-arg> ```and ```<property>``` elements, which helps cut down on the amount of XML configuration
